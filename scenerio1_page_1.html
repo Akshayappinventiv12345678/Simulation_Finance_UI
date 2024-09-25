@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Financial Simulation</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <style>
+    /* Reset and Base Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 1200px;
+      margin: 20px auto;
+      border: 2px solid #000;
+      padding: 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    /* Header Styles */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: bold;
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .header img {
+      position: absolute;
+      top: 0%;
+      right: 0;
+      transform: translateY(-50%);
+      width: 80px;
+      height: 80px;
+    }
+
+    /* Clock Styles */
+    .clock {
+      text-align: left;
+      font-size: 20px; /* Reduced font size */
+      margin-bottom: 10px;
+      color: #000; /* Removed bold color */
+    }
+
+    /* Content Layout */
+    .content {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    /* Vertical Divider */
+    .content::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100%;
+      width: 1px;
+      background-color: #000;
+    }
+
+    /* Left and Right Columns */
+    .left-column,
+    .right-column {
+      width: 48%;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    /* Section Styles */
+    .scenario {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .market-condition,
+    .options,
+    .investment,
+    .output {
+      margin-top: 20px;
+    }
+
+    .options ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .options ul li {
+      margin-bottom: 10px;
+    }
+
+    .options ul li::before {
+      content: "\2022";
+      color: black;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    /* Tables Styling */
+    .values table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    .values th,
+    .values td {
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .values th {
+      background-color: #4E67EB;
+      color: white;
+    }
+
+    .values td {
+      background-color: #E3F2FD;
+    }
+
+    /* Buttons Styling */
+    .buttons,
+    .footer-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .buttons .btn,
+    .footer-buttons .btn {
+      background-color: #4E67EB;
+      color: #fff;
+      padding: 12px 24px;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      min-width: 150px;
+      transition: background-color 0.3s ease;
+      margin: 0 10px;
+    }
+
+    .footer-buttons .btn {
+      background-color: #e97878;
+      color: #fff;
+      padding: 12px 24px;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      min-width: 150px;
+      transition: background-color 0.3s ease;
+      margin: 0 10px;
+    }
+
+    .btn-end {
+      background-color: #e97878;
+    }
+
+    .buttons .btn:hover,
+    .footer-buttons .btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Remove underline from buttons */
+    .buttons .btn,
+    .footer-buttons .btn {
+      text-decoration: none;
+    }
+
+    /* Updated Values Text */
+    .updated-values {
+      font-size: 14px;
+      font-style: italic;
+      text-align: left;
+      margin-bottom: 20px;
+      color: #000;
+      left: 50%;
+    }
+
+    /* Inner Button Container */
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .button {
+      background-color: #4E67EB;
+      color: #ffffff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      width: 50%;
+      border-radius: 5px;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+      }
+
+      .content {
+        flex-direction: column;
+      }
+
+      .content::before {
+        display: none;
+      }
+
+      .left-column,
+      .right-column {
+        width: 100%;
+        padding: 0;
+      }
+
+      .buttons,
+      .footer-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .clock {
+        text-align: center;
+      }
+
+      .header img {
+        position: static;
+        transform: none;
+        margin-bottom: 10px;
+      }
+
+      .header {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="clock"><i class="far fa-clock"></i> <span id="countdown-timer">20:00</span></div>
+    <div class="header">
+      Financial Simulation
+      <img alt="ZENLEARN Logo" src="logo.png" />
+    </div>
+    <div class="scenario">Scenario 1: Bidding for New Projects</div>
+
+    <div class="content">
+      <!-- Left column: Description and details -->
+      <div class="left-column">
+        <div class="market-condition">
+          <p><strong>Market Condition:</strong> The company identifies a major upcoming infrastructure project in its industry that requires industrial components similar to its offerings. Management sees this as an opportunity to secure a large, long-term contract, which could lead to consistent revenue streams over multiple years.</p>
+        </div>
+
+        <div class="options">
+          <p><strong>Options for Management:</strong></p>
+          <ul>
+            <li><strong>1. Prepare a Competitive Bid for the Project:</strong>
+              <ul>
+                <li>Pros: Potential for a long-term revenue stream.</li>
+                <li>Cons: High competition; bidding process is costly and time-consuming.</li>
+              </ul>
+            </li>
+            <li><strong>2. Collaborate with Another Firm to Bid Jointly:</strong>
+              <ul>
+                <li>Pros: Shares risks and costs.</li>
+                <li>Cons: Must share profits if the bid is successful.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="investment">
+          <p><strong>Investment Required:</strong></p>
+          <p>1. Bid Preparation Costs INR 1,50,000</p>
+          <p>2. Administrative Expenses for Joint Bid INR 75,000</p>
+        </div>
+
+        <div class="output">
+          <p><strong>Output Gained:</strong></p>
+          <p>1. Revenue from Successful Bid INR 50,00,000</p>
+          <p>2. INR 25,00,000 Shared revenue in a joint bid collaboration</p>
+        </div>
+
+        <div class="button-container">
+          <a href="scenerio1_page_2.html" class="button">Competitive Bid</a>
+          <a href="scenerio1_page_2.html" class="button">Joint Bid</a>
+        </div>
+      </div>
+
+      <!-- Right column: Tables -->
+      <div class="right-column">
+        <div class="updated-values">(Updated values post scenario 1)</div>
+        <div class="values">
+          <table>
+            <tr>
+              <th colspan="2">Balance Sheet</th>
+            </tr>
+            <tr><td>Assets</td><td>INR 10,00,000</td></tr>
+            <tr><td>Liabilities</td><td>INR 5,00,000</td></tr>
+            <tr><td>Equity</td><td>INR 5,00,000</td></tr>
+          </table>
+
+          <table>
+            <tr>
+              <th colspan="2">Profit and Loss Statement</th>
+            </tr>
+            <tr><td>Total Revenue</td><td>INR 20,00,000</td></tr>
+            <tr><td>Total Expenses</td><td>INR 15,00,000</td></tr>
+            <tr><td>Net Profit</td><td>INR 5,00,000</td></tr>
+          </table>
+
+          <table>
+            <tr>
+              <th colspan="2">Cash Flow Statement</th>
+            </tr>
+            <tr><td>Operating Activities</td><td>INR 4,00,000</td></tr>
+            <tr><td>Investing Activities</td><td>INR -1,00,000</td></tr>
+            <tr><td>Financing Activities</td><td>INR 1,50,000</td></tr>
+            <tr><td>Net Cash Flow</td><td>INR 4,50,000</td></tr>
+          </table>
+
+          <table>
+            <tr>
+              <th colspan="2">Ratios</th>
+            </tr>
+            <tr><td>Current Ratio</td><td>2.0</td></tr>
+            <tr><td>Debt to Equity Ratio</td><td>1.0</td></tr>
+            <tr><td>Return on Equity</td><td>10%</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="footer-buttons">
+      <a href="#" class="btn btn-end">End Simulation</a>
+    </div>
+  </div>
+
+  <!-- JavaScript for 20-minute countdown timer -->
+  <script>
+    // Set the countdown duration (20 minutes)
+    const countdownDuration = 20 * 60; // in seconds
+    let remainingTime = countdownDuration;
+
+    const timerElement = document.getElementById('countdown-timer');
+
+    function updateTimer() {
+      const minutes = Math.floor(remainingTime / 60);
+      const seconds = remainingTime % 60;
+      timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      if (remainingTime > 0) {
+        remainingTime--;
+      } else {
+        clearInterval(timerInterval);
+        // Optional: Add actions to take when timer ends
+        alert('Time is up! The simulation will now end.');
+        // Redirect or perform any other desired action
+        window.location.href = "#"; // Replace with desired URL or action
+      }
+    }
+
+    // Initialize the timer
+    updateTimer(); // Initial call to display the starting time
+    const timerInterval = setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>

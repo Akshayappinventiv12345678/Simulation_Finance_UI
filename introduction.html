@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Financial Simulation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 40px auto;
+            border: 2px solid #000;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        .header img {
+            position: absolute;
+            right: 0;
+            top: 0%;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 100px;
+        }
+        .timer {
+            text-align: left;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .content {
+            border: 2px solid #000;
+            padding: 20px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .content .icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .section-title h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .buttons { 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .button, .button-secondary {
+            background-color: #4E67EB;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            min-width: 150px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .button-secondary {
+            background-color: #e97878;
+        }
+        .button:hover, .button-secondary:hover {
+            opacity: 0.9;
+        }
+        /* Remove underline from links */
+        .button, .button-secondary {
+            text-decoration: none;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .header img {
+                position: static;
+                transform: none;
+                margin-bottom: 10px;
+            }
+            .buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .timer {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="timer"><i class="far fa-clock"></i> <span id="countdown-timer">20:00</span></div>
+        <div class="header">
+            Financial Simulation
+            <img alt="ZENLEARN Logo" src="logo.png" />
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <div class="section-title"><h2>Simulation Overview</h2></div>
+                <p>This simulation is designed to apply the concepts learned during the program effectively.</p>
+                <p><strong>Structure:</strong> Make informed decisions across 24 market scenarios that a CXO may encounter within an organization. Participants are encouraged to discuss the presented options and select a choice at the end of each scenario. The financial impact of the selected option will be reflected in updated financial statements after each scenario.</p>
+                <p><strong>Duration:</strong> Each scenario is expected to take approximately 10 minutes. Participants can proceed to the next scenario or end the simulation at any point. Please ensure to download your final financial statements upon completion of the simulation. Note that data may be available afterward, but reverting to previous scenarios or simulation briefs may not be possible.</p>
+            </div>
+            <div class="section">
+                <div class="section-title"><h2>Participant Brief</h2></div>
+                <p>As a CXO of an Indian MSME manufacturing organization,</p>
+                <p>The Board of Directors and shareholders expect the organization to increase its top line by 30% year-over-year and achieve a profit after tax of at least 20%.</p>
+                <p>Given the current market conditions, there are various opportunities and scenarios to increase sales, control costs, and improve cash flow. These opportunities may include commercial bidding, investing in new products, expanding into new markets, acquiring new capital equipment, or pursuing M&A opportunities.</p>
+                <p>Decisions will be based on the various scenarios presented continuously throughout the simulation.</p>
+            </div>
+        </div>
+
+        <div class="buttons"> 
+            <a href="#" class="button-secondary">End Simulation</a>
+            <a href="organization_brief.html" class="button">Next</a>
+        </div>
+    </div>
+
+    <!-- JavaScript for 20-minute countdown timer -->
+    <script>
+        // Set the countdown duration (20 minutes)
+        const countdownDuration = 20 * 60; // in seconds
+        let remainingTime = countdownDuration;
+
+        const timerElement = document.getElementById('countdown-timer');
+
+        function updateTimer() {
+            const minutes = Math.floor(remainingTime / 60);
+            const seconds = remainingTime % 60;
+            timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            if (remainingTime > 0) {
+                remainingTime--;
+            } else {
+                clearInterval(timerInterval);
+                // Optional: Add actions to take when timer ends
+                alert('Time is up! The simulation will now end.');
+                // Redirect or perform any other desired action
+                window.location.href = "#"; // Replace with desired URL or action
+            }
+        }
+
+        // Initialize the timer
+        updateTimer(); // Initial call to display the starting time
+        const timerInterval = setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>

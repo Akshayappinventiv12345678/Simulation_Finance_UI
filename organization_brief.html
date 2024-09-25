@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Financial Simulation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <style>
+        /* Reset and Base Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 20px auto;
+            border: 2px solid #000;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .header img {
+            position: absolute;
+            top: 0%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 100px;
+        }
+
+        /* Clock Styles */
+        .clock {
+            text-align: left;
+            font-size: 20px; /* Reduced font size */
+            margin-bottom: 10px;
+            color: #000; /* Removed bold color */
+        }
+
+        /* Content Layout */
+        .content {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 20px;
+            position: relative;
+        }
+
+        /* Vertical Divider */
+        .content::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            /* Adjusted to start below the header */
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+            width: 1px;
+            background-color: #000;
+        }
+
+        /* Left and Right Sections */
+        .left-section, .right-section {
+            width: 48%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* Section Titles */
+        .section-title1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            /* Removed font-weight: bold; */
+        }
+
+        .section-title2 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            /* Removed font-weight: bold; */
+        }
+
+        /* Section Content */
+        .section-content {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .section-content ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Tables Styling */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table th, .table td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #4E67EB; /* Changed to #4E67EB */
+            color: #fff;
+        }
+
+        /* Buttons Styling */
+        .buttons, .footer-buttons {
+            margin-top: 20px;
+        }
+
+        /* Adjusted buttons to be in separate rows */
+        .buttons .btn, .footer-buttons .btn {
+            display: block;
+            width: 30%;
+            background-color: #4E67EB; /* Default button color */
+            color: #fff;
+            padding: 12px 24px;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Specific Button Colors */
+        .btn-end {
+            background-color: #e97878 !important; /* End Simulation button color */
+        }
+
+        /* Hover Effects */
+        .buttons .btn:hover, .footer-buttons .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Remove underline from buttons */
+        .buttons .btn, .footer-buttons .btn {
+            text-decoration: none;
+        }
+
+        /* Footer Buttons Alignment */
+        .footer-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            .content {
+                flex-direction: column;
+            }
+
+            .content::before {
+                display: none;
+            }
+
+            .left-section, .right-section {
+                width: 100%;
+                padding: 0;
+            }
+
+            .footer-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .clock {
+                text-align: center;
+            }
+
+            .header img {
+                position: static;
+                transform: none;
+                margin-bottom: 10px;
+            }
+
+            .header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="clock"><i class="far fa-clock"></i> <span id="countdown-timer">20:00</span></div>
+        <div class="header">
+            Financial Simulation
+            <img alt="ZENLEARN Logo" src="logo.png" />
+        </div>
+        <div class="content">
+            <div class="left-section">
+                <div class="section-title1"><h2>Breakout Manufacturing Brief</h2></div>
+                <div class="section-content">
+                    <strong>Product Portfolio:</strong>
+                    <ul>
+                        <li>
+                            Breakout Manufacturing produces mid-range machinery components used in various industrial applications like automotive parts, consumer appliances, and agricultural tools.
+                        </li>
+                        <li>
+                            Core products: Engine components, precision tools, and sheet metal parts.
+                        </li>
+                        <li>
+                            Market segment: Small and mid-sized businesses in the Indian industrial sector.
+                        </li>
+                    </ul>
+                </div>
+                <div class="section-content">
+                    <strong>Market Condition:</strong>
+                    <ul>
+                        <li>
+                            The organization operates in a competitive and price-sensitive market, with demand influenced by global supply chain fluctuations, seasonal factors, and changes in domestic industrial growth.
+                        </li>
+                        <li>
+                            Key challenges: Fluctuating raw material prices, high import costs for specific components, and the need for operational efficiency due to tighter profit margins.
+                        </li>
+                    </ul>
+                </div>
+                <div class="section-content">
+                    <strong>Competitive Position:</strong>
+                    <ul>
+                        <li>
+                            The organization holds a mid-level competitive position in the Indian market, competing with larger players on pricing and product customization.
+                        </li>
+                        <li>
+                            Differentiation strategy: Quick turnaround time, focus on quality control, and customer-centric service.
+                        </li>
+                    </ul>
+                </div>
+                <div class="buttons">
+                    <center><a class="btn" href="#">Beginner</a>
+                        <a class="btn" href="#">Intermediate</a>
+                        <a class="btn" href="#">Expert</a></center>
+                </div>
+            </div>
+            <div class="right-section">
+                <div class="section-title2">(Values at the beginning of simulation)</div>
+                <!-- Balance Sheet Table -->
+                <table class="table">
+                    <tr>
+                        <th colspan="2">Balance Sheet</th>
+                    </tr>
+                    <tr>
+                        <td>Total Assets</td>
+                        <td>₹1,200,000</td>
+                    </tr>
+                    <tr>
+                        <td>Total Liabilities</td>
+                        <td>₹800,000</td>
+                    </tr>
+                    <tr>
+                        <td>Shareholder's Equity</td>
+                        <td>₹400,000</td>
+                    </tr>
+                </table>
+                <!-- Profit and Loss Statement Table -->
+                <table class="table">
+                    <tr>
+                        <th colspan="2">Profit and Loss Statement</th>
+                    </tr>
+                    <tr>
+                        <td>Total Revenue</td>
+                        <td>₹2,500,000</td>
+                    </tr>
+                    <tr>
+                        <td>Total Expenses</td>
+                        <td>₹2,000,000</td>
+                    </tr>
+                    <tr>
+                        <td>Net Profit</td>
+                        <td>₹500,000</td>
+                    </tr>
+                </table>
+                <!-- Cash Flow Statement Table -->
+                <table class="table">
+                    <tr>
+                        <th colspan="2">Cash Flow Statement</th>
+                    </tr>
+                    <tr>
+                        <td>Operating Activities</td>
+                        <td>₹300,000</td>
+                    </tr>
+                    <tr>
+                        <td>Investing Activities</td>
+                        <td>-₹150,000</td>
+                    </tr>
+                    <tr>
+                        <td>Financing Activities</td>
+                        <td>₹50,000</td>
+                    </tr>
+                </table>
+                <!-- Ratios Table -->
+                <table class="table">
+                    <tr>
+                        <th colspan="2">Ratios</th>
+                    </tr>
+                    <tr>
+                        <td>Current Ratio</td>
+                        <td>1.5</td>
+                    </tr>
+                    <tr>
+                        <td>Debt-to-Equity Ratio</td>
+                        <td>2.0</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="footer-buttons">
+            <a href="#" class="btn btn-end">End Simulation</a>
+            <a href="scenerio1_page_1.html" class="btn">Start Simulation</a>
+        </div>
+    </div>
+
+    <!-- JavaScript for 20-minute countdown timer -->
+    <script>
+        // Set the countdown duration (20 minutes)
+        const countdownDuration = 20 * 60; // in seconds
+        let remainingTime = countdownDuration;
+
+        const timerElement = document.getElementById('countdown-timer');
+
+        function updateTimer() {
+            const minutes = Math.floor(remainingTime / 60);
+            const seconds = remainingTime % 60;
+            timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            if (remainingTime > 0) {
+                remainingTime--;
+            } else {
+                clearInterval(timerInterval);
+                // Optional: Add actions to take when timer ends
+                alert('Time is up! The simulation will now end.');
+                // Redirect or perform any other desired action
+                window.location.href = "#"; // Replace with desired URL or action
+            }
+        }
+
+        // Initialize the timer
+        updateTimer(); // Initial call to display the starting time
+        const timerInterval = setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
