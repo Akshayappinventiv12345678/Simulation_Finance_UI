@@ -1,0 +1,244 @@
+<html>
+<head>
+    <title>Financial Simulation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            border: 2px solid #000000;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .header img {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+        }
+        .scenario {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .updated-values {
+            font-size: 14px;
+            font-style: italic;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+        }
+        .left-column {
+            width: 60%;
+        }
+        .right-column {
+            width: 35%;
+            border-left: 2px solid #000000;
+            padding-left: 20px;
+        }
+        .options, .investment, .output {
+            margin-bottom: 20px;
+        }
+        .options p, .investment p, .output p {
+            margin: 5px 0;
+        }
+        .options ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            align-items: center; /* This centers the buttons horizontally */
+            margin-left: auto;  /* Ensures it's centered with respect to its parent */
+            margin-right: auto; /* Ensures it's centered with respect to its parent */
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .button {
+            background-color: #8BC34A;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 10px;
+            width: 50%;
+        }
+        .button:hover {
+            background-color: #7CB342;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table-container th, .table-container td {
+            border: 1px solid #000000;
+            padding: 10px;
+            text-align: left;
+        }
+        .table-container th {
+            background-color: #1976D2;
+            color: #ffffff;
+        }
+        .table-container td {
+            background-color: #E3F2FD;
+        }
+        .clock {
+            text-align: right;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            Financial Simulation
+            <img alt="ZENLEARN Logo" height="50" src="image.png" width="100" />
+        </div>
+
+        
+        <div class="scenario">Scenario 1: Bidding for New Projects</div>
+        <div class="updated-values">(Updated values post scenario 1)</div>
+
+
+        <div class="content">
+            <div class="left-column">
+                <div class="options">
+                    <p>Market Condition: The company identifies a major upcoming infrastructure project in its industry that requires industrial components similar to its offerings. Management sees this as an opportunity to secure a large, long-term contract, which could lead to consistent revenue streams over multiple years.</p>
+                    <p>Options for Management:</p>
+                    <p>1. <strong>Prepare a Competitive Bid for the Project:</strong> The company could invest time and resources in preparing a highly competitive bid, focusing on pricing and quality to increase the chances of winning.</p>
+                    <ul>
+                        <li>Pros: Potential for a long-term revenue stream.</li>
+                        <li>Cons: High competition; bidding process is costly and time-consuming.</li>
+                    </ul>
+                    <p>2. <strong>Collaborate with Another Firm to Bid Jointly:</strong> The company could team up with another player to bid for the project, increasing its chance of success.</p>
+                    <ul>
+                        <li>Pros: Shares risks and costs.</li>
+                        <li>Cons: Must share profits if the bid is successful.</li>
+                    </ul>
+                </div>
+                <div class="investment">
+                    <p><strong>Investment Required:</strong></p>
+                    <p>1. Bid Preparation Costs INR 1,50,000</p>
+                    <p>2. Administrative Expenses for Joint Bid INR 75,000</p>
+                </div>
+                <div class="output">
+                    <p><strong>Output gained:</strong></p>
+                    <p>1. Revenue from Successful Bid INR 50,00,000</p>
+                    <p>2. INR 25,00,000 Shared revenue in a joint bid collaboration</p>
+                </div>
+                <div class="button-container">
+                    <button class="button">Competitive Bid</button>
+                </div>
+            </div>
+            <div class="right-column">
+                <div class="clock"><i class="far fa-clock"></i></div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Balance Sheet</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Profit and Loss Statement</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Cash Flow Statement</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Ratios</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="button">End Simulation</button>
+            <button class="button">Next Scenario</button>
+        </div>
+    </div>
+</body>
+</html>

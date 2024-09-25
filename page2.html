@@ -1,0 +1,280 @@
+<html>
+
+<head>
+    <title>Financial Simulation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            border: 2px solid #000;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .header img {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .left-section {
+            width: 55%;
+        }
+
+        .right-section {
+            width: 35%;
+        }
+
+        .section-title1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .section-title2 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .section-content {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .section-content ul li {
+            margin-bottom: 10px;
+        }
+
+        .table {
+            width: 95%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table td {
+            border: 1px solid #000;
+            padding: 10px;
+            
+        }
+
+        .table th {
+            background-color: #1976D2;
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .buttons .btn {
+            background-color: #8bc34a;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .buttons .btn:hover {
+            background-color: #7cb342;
+        }
+
+        .footer-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .footer-buttons .btn {
+            background-color: #8bc34a;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .footer-buttons .btn:hover {
+            background-color: #7cb342;
+        }
+
+        .icon {
+            float: right;
+            font-size: 24px;
+        }
+        .clock {
+            text-align: right;
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            Financial Simulation
+            <img alt="ZENLEARN Logo" height="50" src="image.png" width="100" />
+        </div>
+        <div class="content">
+            <div class="left-section">
+                <div class="section-title1">Breakout Manufacturing Brief</div>
+                <div class="section-content">
+                    <strong> Product Portfolio: </strong>
+                    <ul>
+                        <li>
+                            Breakout Manufacturing produces mid-range machinery components
+                            used in various industrial applications like automotive parts,
+                            consumer appliances, and agricultural tools.
+                        </li>
+                        <li>
+                            Core products: Engine components, precision tools, and sheet
+                            metal parts.
+                        </li>
+                        <li>
+                            Market segment: Small and mid-sized businesses in the Indian
+                            industrial sector.
+                        </li>
+                    </ul>
+                </div>
+                <div class="section-content">
+                    <strong> Market Condition: </strong>
+                    <ul>
+                        <li>
+                            The organization operates in a competitive and price-sensitive
+                            market, with demand influenced by global supply chain
+                            fluctuations, seasonal factors, and changes in domestic
+                            industrial growth.
+                        </li>
+                        <li>
+                            Key challenges: Fluctuating raw material prices, high import
+                            costs for specific components, and the need for operational
+                            efficiency due to tighter profit margins.
+                        </li>
+                    </ul>
+                </div>
+                <div class="section-content">
+                    <strong> Competitive Position: </strong>
+                    <ul>
+                        <li>
+                            The organization holds a mid-level competitive position in the
+                            Indian market, competing with larger players on pricing and
+                            product customization.
+                        </li>
+                        <li>
+                            Differentiation strategy: Quick turnaround time, focus on
+                            quality control, and customer-centric service.
+                        </li>
+                    </ul>
+                </div>
+                <div class="buttons">
+                    <a class="btn" href="#"> Beginner </a>
+                    <a class="btn" href="#"> Intermediate </a>
+                    <a class="btn" href="#"> Expert </a>
+                </div>
+            </div>
+            <div class="right-section">
+                <div class="section-title2">(Values at the beginning of simulation)
+                    <div class="clock"><i class="far fa-clock"></i></div>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th colspan="2">Balance Sheet</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <th colspan="2">Profit and Loss Statement</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <th colspan="2">Cash Flow Statement</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <th colspan="2">Ratios</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="footer-buttons">
+            <a href="" class="btn">End Simulation</a>
+            <a href="page3.html" class="btn">Next Scenario</a>
+        </div>
+    </div>
+</body>
+
+</html>
