@@ -1,374 +1,628 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Financial Simulation</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <style>
-        /* Reset and Base Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-        }
+  <meta charset="UTF-8">
+  <title>Financial Simulation</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <style>
+    /* Reset and Base Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+    }
 
-        .container {
-            width: 80%;
-            max-width: 1200px;
-            margin: 20px auto;
-            border: 2px solid #000;
-            padding: 20px;
-            box-sizing: border-box;
-            position: relative;
-        }
+    .container {
+      width: 80%;
+      max-width: 1200px;
+      margin: 20px auto;
+      border: 2px solid #000;
+      padding: 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
 
-        /* Header Styles */
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: bold;
-            position: relative;
-            padding-bottom: 20px;
-        }
+    /* Header Styles */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: bold;
+      position: relative;
+      padding-bottom: 20px;
+    }
 
-        .header img {
-            position: absolute;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-            width: 80px;
-            height: 80px;
-        }
+    .header img {
+      position: absolute;
+      top: 0%;
+      right: 0;
+      transform: translateY(-50%);
+      width: 80px;
+      height: 80px;
+    }
 
-        /* Clock Styles */
-        .clock {
-            text-align: left;
-            font-size: 20px; /* Reduced font size */
-            margin-bottom: 10px;
-            color: #000; /* Removed bold color */
-        }
+    /* Clock Styles */
+    .clock {
+      text-align: left;
+      font-size: 20px; /* Reduced font size */
+      margin-bottom: 10px;
+      color: #000; /* Removed bold color */
+    }
 
-        /* Content Layout */
-        .content {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            position: relative;
-        }
+    /* Scenario Title */
+    .scenario {
+      font-size: 26px;
+      margin-bottom: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
 
-        /* Vertical Divider */
-        .content::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 100%;
-            width: 1px;
-            background-color: #000;
-        }
+    /* Content Layout */
+    .content {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      position: relative;
+    }
 
-        /* Left and Right Columns */
-        .left-column,
-        .right-column {
-            width: 48%;
-            padding: 0 20px;
-            box-sizing: border-box;
-        }
+    /* Vertical Divider */
+    .content::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100%;
+      width: 1px;
+      background-color: #000;
+    }
 
-        /* Section Styles */
-        .scenario {
-            font-size: 26px;
-            margin-bottom: 10px;
-        }
+    /* Left and Right Columns */
+    .left-column,
+    .right-column {
+      width: 48%;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
 
-        .market-condition,
-        .options,
-        .investment,
-        .output {
-            margin-top: 20px;
-        }
+    /* Section Styles */
+    .market-condition,
+    .options,
+    .investment,
+    .output {
+      margin-top: 20px;
+    }
 
-        .options ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
+    .options ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
 
-        .options ul li {
-            margin-bottom: 10px;
-        }
+    .options ul li {
+      margin-bottom: 10px;
+    }
 
-        .options ul li::before {
-            content: "\2022";
-            color: black;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
+    .options ul li::before {
+      content: "\2022";
+      color: black;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
 
-        /* Tables Styling */
-        .values table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
+    /* Tables Styling */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
 
-        .values th,
-        .values td {
-            border: 1px solid #000;
-            padding: 10px;
-            text-align: left;
-        }
+    .table th,
+    .table td {
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: left; /* Default alignment */
+    }
 
-        .values th {
-            background-color: #4E67EB;
-            color: white;
-        }
+    /* Right-align the second column */
+    .table th:nth-child(2),
+    .table td:nth-child(2) {
+      text-align: right;
+    }
 
-        .values td {
-            background-color: #E3F2FD;
-        }
+    .table th {
+      background-color: #4E67EB;
+      color: white;
+    }
 
-        /* Buttons Styling */
-        .buttons,
-        .footer-buttons {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
+    /* Buttons Styling */
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Align buttons to the start (left) */
+      gap: 10px;
+      margin-top: 20px;
+    }
 
-        .button {
-            background-color: #4E67EB;
-            color: #ffffff;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            width: 50%;
-            border-radius: 5px;
-            text-decoration: none;
-            text-align: center;
-            margin-bottom: 10px;
-            transition: background-color 0.3s ease;
-        }
+    .button-container .button {
+      background-color: #4E67EB;
+      color: #ffffff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      max-width: 200px;
+      border-radius: 5px;
+      text-decoration: none;
+      text-align: center;
+      transition: opacity 0.3s ease;
+    }
 
-        .button:hover {
-            opacity: 0.9;
-        }
+    .button-container .button:hover {
+      opacity: 0.9;
+    }
 
-        .btn {
-            background-color: #4E67EB;
-            color: #fff;
-            padding: 12px 24px;
-            text-align: center;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            min-width: 150px;
-            transition: background-color 0.3s ease;
-            margin: 0 10px;
-        }
+    /* End Simulation Button Styling */
+    .end-button {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background-color: #e97878;
+      color: #fff;
+      padding: 12px 24px;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
 
-        .btn-end {
-            background-color: #e97878;
-        }
+    .end-button:hover {
+      opacity: 0.9;
+    }
 
-        .btn:hover {
-            opacity: 0.9;
-        }
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+      }
 
-        /* Remove underline from buttons */
-        .button,
-        .btn {
-            text-decoration: none;
-        }
+      .content {
+        flex-direction: column;
+      }
 
-        /* Updated Values Text */
-        .updated-values {
-            font-size: 14px;
-            font-style: italic;
-            text-align: left;
-            margin-bottom: 20px;
-            color: #000;
-        }
+      .content::before {
+        display: none;
+      }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                width: 90%;
-            }
+      .left-column,
+      .right-column {
+        width: 100%;
+        padding: 0;
+      }
 
-            .content {
-                flex-direction: column;
-            }
+      .clock {
+        text-align: center;
+      }
 
-            .content::before {
-                display: none;
-            }
+      .header img {
+        position: static;
+        transform: none;
+        margin-bottom: 10px;
+      }
 
-            .left-column,
-            .right-column {
-                width: 100%;
-                padding: 0;
-            }
+      .header {
+        flex-direction: column;
+      }
 
-            .buttons,
-            .footer-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .button {
-                width: 100%;
-            }
-
-            .clock {
-                text-align: center;
-            }
-
-            .header img {
-                position: static;
-                transform: none;
-                margin-bottom: 10px;
-            }
-
-            .header {
-                flex-direction: column;
-            }
-        }
-    </style>
+      .end-button {
+        position: static;
+        width: 100%;
+        max-width: none;
+        margin-top: 20px;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="clock"><i class="far fa-clock"></i> <span id="countdown-timer">20:00</span></div>
-        <div class="header">
-            Financial Simulation
-            <img alt="ZENLEARN Logo" src="logo.png" />
+  <div class="container">
+    <div class="clock"><i class="far fa-clock"></i> <span id="countdown-timer">20:00</span></div>
+    <div class="header">
+      Financial Simulation
+      <img alt="ZENLEARN Logo" src="logo.png" />
+    </div>
+    <div class="scenario">Beginner Scenario 2: Participating in Tenders</div>
+
+    <div class="content">
+      <!-- Left column: Description and details -->
+      <div class="left-column">
+        <div class="participant-brief">
+          <p><strong>Participant Brief</strong></p>
         </div>
-        <div class="scenario">Beginner Scenario 2: Participating in Tenders</div>
+        <div class="market-condition">
+          <p><strong>Market Condition:</strong> A government department has opened a tender for a supply contract related to the company’s products. Government tenders are highly regulated but often provide consistent and significant revenue if won.</p>
+        </div>
+        <div class="options">
+          <p><strong>Options for Management:</strong></p>
+          <ul>
+            
+              <strong>1. Submit Tender Application:</strong> The company could submit a tender application, focusing on compliance and offering competitive pricing.
 
-        <div class="content">
-            <!-- Left column: Description and details -->
-            <div class="left-column">
-                <div class="market-condition">
-                    <p><strong>Participant Brief</strong></p>
-                    <p><strong>Market Condition:</strong> A government department has opened a tender for a supply contract related to the company’s products. Government tenders are highly regulated but often provide consistent and significant revenue if won.</p>
-                </div>
+              <ul>
+                <li><strong>Pros:</strong> Secure, consistent revenue from government contracts.</li>
+                <li><strong>Cons:</strong> Stringent compliance and long approval processes.</li>
+              </ul>
 
-                <div class="options">
-                    <p><strong>Options for Management:</strong></p>
-                    <p><strong>1. Submit Tender Application:</strong> The company could submit a tender application, focusing on compliance and offering competitive pricing.</p>
-                    <ul>
-                        <li><strong>Pros:</strong> Secure, consistent revenue from government contracts.</li>
-                        <li><strong>Cons:</strong> Stringent compliance and long approval processes.</li>
-                    </ul>
-                    <p><strong>2. Focus on Private Sector Tenders:</strong> Instead of public tenders, the company can focus on private sector tenders, which may offer more flexibility and faster decisions.</p>
-                    <ul>
-                        <li><strong>Pros:</strong> Quicker decision-making processes.</li>
-                        <li><strong>Cons:</strong> Less secure than government contracts.</li>
-                    </ul>
-                </div>
 
-                <div class="investment">
-                    <p><strong>Investment Required:</strong></p>
-                    <p>1. INR 2,00,000 costs associated with preparing the tender application</p>
-                    <p>2. INR 1,00,000 sales, marketing, and bidding costs associated with private tender application</p>
-                </div>
+              <strong>2. Focus on Private Sector Tenders:</strong> Instead of public tenders, the company can focus on private sector tenders, which may offer more flexibility and faster decisions.
+              <ul>
+                <li><strong>Pros:</strong> Quicker decision-making processes.</li>
+                <li><strong>Cons:</strong> Less secure than government contracts.</li>
+              </ul>
 
-                <div class="output">
-                    <p><strong>Output Gained:</strong></p>
-                    <p>1. INR 60,00,000 Revenue from Winning the Tender</p>
-                    <p>2. INR 45,00,000 Revenue from Private Sector Tender</p>
-                </div>
-
-                <div class="buttons">
-                    <a href="scenario2_page_2.html" class="button">Submit Tender Application</a>
-                    <a href="scenario2_page_2.html" class="button">Private Sector Tenders</a>
-                </div>
-            </div>
-
-            <!-- Right column: Tables -->
-            <div class="right-column">
-                <div class="updated-values">(Values at the beginning of simulation)</div>
-                <div class="values">
-                    <table>
-                        <tr>
-                            <th colspan="2">Balance Sheet</th>
-                        </tr>
-                        <tr><td>Assets</td><td>INR 10,00,000</td></tr>
-                        <tr><td>Liabilities</td><td>INR 5,00,000</td></tr>
-                        <tr><td>Equity</td><td>INR 5,00,000</td></tr>
-                    </table>
-
-                    <table>
-                        <tr>
-                            <th colspan="2">Profit and Loss Statement</th>
-                        </tr>
-                        <tr><td>Total Revenue</td><td>INR 20,00,000</td></tr>
-                        <tr><td>Total Expenses</td><td>INR 15,00,000</td></tr>
-                        <tr><td>Net Profit</td><td>INR 5,00,000</td></tr>
-                    </table>
-
-                    <table>
-                        <tr>
-                            <th colspan="2">Cash Flow Statement</th>
-                        </tr>
-                        <tr><td>Operating Activities</td><td>INR 4,00,000</td></tr>
-                        <tr><td>Investing Activities</td><td>INR -1,00,000</td></tr>
-                        <tr><td>Financing Activities</td><td>INR 1,50,000</td></tr>
-                        <tr><td>Net Cash Flow</td><td>INR 4,50,000</td></tr>
-                    </table>
-
-                    <table>
-                        <tr>
-                            <th colspan="2">Ratios</th>
-                        </tr>
-                        <tr><td>Current Ratio</td><td>2.0</td></tr>
-                        <tr><td>Debt to Equity Ratio</td><td>1.0</td></tr>
-                        <tr><td>Return on Equity</td><td>10%</td></tr>
-                    </table>
-                </div>
-            </div>
+          </ul>
         </div>
 
-        <!-- Navigation Buttons -->
-        <div class="footer-buttons">
-            <a href="#" class="btn btn-end">End Simulation</a>
+
+
+        <div class="investment">
+          <p><strong>Investment Required:</strong></p>
+          <ul>
+            <li>INR 2,00,000 costs associated with preparing the tender application</li>
+            <li>INR 1,00,000 sales, marketing, and bidding costs associated with private tender application</li>
+          </ul>
         </div>
+        <div class="output">
+          <p><strong>Output Gained:</strong></p>
+          <ul>
+            <li>INR 60,00,000 Revenue from Winning the Tender</li>
+            <li>INR 45,00,000 Revenue from Private sector Tender</li>
+          </ul>
+        </div>
+        <div class="button-container">
+          <a href="scenario2_page_2.html" class="button">Submit Tender Application</a>
+          <a href="scenario2_page_2.html" class="button">Private Sector Tenders</a>
+        </div>
+      </div>
+
+      <!-- Right column: Tables -->
+      <div class="right-column">
+        <div class="updated-values">(Updated values post Scenario 1)</div>
+        <div class="values">
+          <!-- Balance Sheet Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Balance Sheet (End of Q4 2024)</th>
+              </tr>
+              <tr>
+                <th>Assets</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Current Assets</strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Cash and Cash Equivalents</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>Accounts Receivable</td>
+                <td>80</td>
+              </tr>
+              <tr>
+                <td>Inventory</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td><strong>Total Current Assets</strong></td>
+                <td>230</td>
+              </tr>
+              <tr>
+                <td><strong>Non-current Assets</strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Property, Plant & Equipment</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>Intangible Assets (Patents)</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td><strong>Total Non-current Assets</strong></td>
+                <td>520</td>
+              </tr>
+              <tr>
+                <td><strong>Total Assets</strong></td>
+                <td>750</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Liabilities & Equity Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Liabilities & Equity (End of Q4 2024)</th>
+              </tr>
+              <tr>
+                <th>Liabilities & Equity</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Current Liabilities</strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Accounts Payable</td>
+                <td>70</td>
+              </tr>
+              <tr>
+                <td>Short-term Debt</td>
+                <td>30</td>
+              </tr>
+              <tr>
+                <td><strong>Total Current Liabilities</strong></td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td><strong>Long-term Liabilities</strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Long-term Debt</td>
+                <td>150</td>
+              </tr>
+              <tr>
+                <td><strong>Total Liabilities</strong></td>
+                <td>250</td>
+              </tr>
+              <tr>
+                <td><strong>Equity</strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Shareholders’ Equity</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td><strong>Total Liabilities & Equity</strong></td>
+                <td>750</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Profit and Loss Statement Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Profit & Loss (Income) Statement (Q4 2024)</th>
+              </tr>
+              <tr>
+                <th>Line Item</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Revenue (Sales)</td>
+                <td>400</td>
+              </tr>
+              <tr>
+                <td>Cost of Goods Sold (COGS)</td>
+                <td>200</td>
+              </tr>
+              <tr>
+                <td>Gross Profit</td>
+                <td>200</td>
+              </tr>
+              <tr>
+                <td>Operating Expenses</td>
+                <td>120</td>
+              </tr>
+              <tr>
+                <td>Operating Income (EBIT)</td>
+                <td>80</td>
+              </tr>
+              <tr>
+                <td>Interest Expense</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>Income Before Tax</td>
+                <td>60</td>
+              </tr>
+              <tr>
+                <td>Tax</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>Net Income</td>
+                <td>45</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Cash Flow Statement Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Cash Flow Statement (Q4 2024)</th>
+              </tr>
+              <tr>
+                <th>Line Item</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cash from Operating Activities</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>Cash from Investing Activities</td>
+                <td>-100</td>
+              </tr>
+              <tr>
+                <td>Cash from Financing Activities</td>
+                <td>30</td>
+              </tr>
+              <tr>
+                <td><strong>Net Increase in Cash</strong></td>
+                <td>-20</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Ratios Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Ratios</th>
+              </tr>
+              <tr>
+                <th>Ratio</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Liquidity Ratios -->
+              <tr>
+                <td colspan="2"><strong>Liquidity Ratios</strong></td>
+              </tr>
+              <tr>
+                <td>1. Current Ratio</td>
+                <td>1.5</td>
+              </tr>
+              <tr>
+                <td>2. Quick Ratio (Acid Test)</td>
+                <td>1.2</td>
+              </tr>
+              <!-- Profitability Ratios -->
+              <tr>
+                <td colspan="2"><strong>Profitability Ratios</strong></td>
+              </tr>
+              <tr>
+                <td>3. Gross Profit Margin</td>
+                <td>50%</td>
+              </tr>
+              <tr>
+                <td>4. Net Profit Margin</td>
+                <td>11.25%</td>
+              </tr>
+              <tr>
+                <td>5. Return on Assets (ROA)</td>
+                <td>6%</td>
+              </tr>
+              <tr>
+                <td>6. Return on Equity (ROE)</td>
+                <td>9%</td>
+              </tr>
+              <!-- Efficiency Ratios -->
+              <tr>
+                <td colspan="2"><strong>Efficiency Ratios</strong></td>
+              </tr>
+              <tr>
+                <td>7. Inventory Turnover Ratio</td>
+                <td>2.5</td>
+              </tr>
+              <tr>
+                <td>8. Accounts Receivable Turnover Ratio</td>
+                <td>4.0</td>
+              </tr>
+              <tr>
+                <td>9. Asset Turnover Ratio</td>
+                <td>0.53</td>
+              </tr>
+              <!-- Leverage Ratios -->
+              <tr>
+                <td colspan="2"><strong>Leverage Ratios</strong></td>
+              </tr>
+              <tr>
+                <td>10. Debt-to-Equity Ratio</td>
+                <td>0.5</td>
+              </tr>
+              <tr>
+                <td>11. Interest Coverage Ratio</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>12. Debt Service Coverage Ratio (DSCR)</td>
+                <td>3</td>
+              </tr>
+              <!-- Cash Flow Ratios -->
+              <tr>
+                <td colspan="2"><strong>Cash Flow Ratios</strong></td>
+              </tr>
+              <tr>
+                <td>13. Operating Cash Flow Ratio</td>
+                <td>0.5</td>
+              </tr>
+              <tr>
+                <td>14. Free Cash Flow (FCF)</td>
+                <td>-20</td>
+              </tr>
+              <!-- Valuation Ratios -->
+              <tr>
+                <td colspan="2"><strong>Valuation Ratios</strong></td>
+              </tr>
+              <tr>
+                <td>15. Price-to-Earnings (P/E) Ratio</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>16. Earnings per Share (EPS)</td>
+                <td>45</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
-    <!-- JavaScript for 20-minute countdown timer -->
-    <script>
-        // Set the countdown duration (20 minutes)
-        const countdownDuration = 20 * 60; // in seconds
-        let remainingTime = countdownDuration;
+    <!-- End Simulation Button -->
+    <a href="#" class="end-button">End Simulation</a>
+  </div>
 
-        const timerElement = document.getElementById('countdown-timer');
+  <!-- JavaScript for 20-minute countdown timer -->
+  <script>
+    // Set the countdown duration (20 minutes)
+    const countdownDuration = 5 * 60; // in seconds
+    let remainingTime = countdownDuration;
 
-        function updateTimer() {
-            const minutes = Math.floor(remainingTime / 60);
-            const seconds = remainingTime % 60;
-            timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            if (remainingTime > 0) {
-                remainingTime--;
-            } else {
-                clearInterval(timerInterval);
-                // Optional: Add actions to take when timer ends
-                alert('Time is up! The simulation will now end.');
-                // Redirect or perform any other desired action
-                window.location.href = "#"; // Replace with desired URL or action
-            }
-        }
+    const timerElement = document.getElementById('countdown-timer');
 
-        // Initialize the timer
-        updateTimer(); // Initial call to display the starting time
-        const timerInterval = setInterval(updateTimer, 1000);
-    </script>
+    function updateTimer() {
+      const minutes = Math.floor(remainingTime / 60);
+      const seconds = remainingTime % 60;
+      timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      if (remainingTime > 0) {
+        remainingTime--;
+      } else {
+        clearInterval(timerInterval);
+        // Optional: Add actions to take when timer ends
+        alert('Time is up! The simulation will now end.');
+        // Redirect or perform any other desired action
+        window.location.href = "#"; // Replace with desired URL or action
+      }
+    }
+
+    // Initialize the timer
+    updateTimer(); // Initial call to display the starting time
+    const timerInterval = setInterval(updateTimer, 1000);
+  </script>
 </body>
 </html>
