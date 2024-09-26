@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Financial Simulation</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <style>
+    /* Reset and Base Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 1200px;
+      margin: 20px auto;
+      border: 2px solid #000;
+      padding: 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    /* Header Styles */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: bold;
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .header img {
+      position: absolute;
+      top: 0%;
+      right: 0;
+      transform: translateY(-50%);
+      width: 80px;
+      height: 80px;
+    }
+
+    /* Clock Styles */
+    .clock {
+      text-align: left;
+      font-size: 20px; /* Reduced font size */
+      margin-bottom: 10px;
+      color: #000; /* Removed bold color */
+    }
+
+    /* Scenario Title */
+    .scenario {
+      font-size: 26px;
+      margin-bottom: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    /* Content Layout */
+    .content {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    /* Vertical Divider */
+    .content::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100%;
+      width: 1px;
+      background-color: #000;
+    }
+
+    /* Left and Right Columns */
+    .left-column,
+    .right-column {
+      width: 48%;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    /* Section Styles */
+    .market-condition,
+    .options,
+    .investment,
+    .output {
+      margin-top: 20px;
+    }
+
+    .options ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .options ul li {
+      margin-bottom: 10px;
+    }
+
+    .options ul li::before {
+      content: "\2022";
+      color: black;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    /* Tables Styling */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    .table th,
+    .table td {
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: left; /* Default alignment */
+    }
+
+    /* Right-align the second column */
+    .table th:nth-child(2),
+    .table td:nth-child(2) {
+      text-align: right;
+    }
+
+    .table th {
+      background-color: #4E67EB;
+      color: white;
+    }
+
+    /* Buttons Styling */
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Align buttons to the start (left) */
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .button-container .button {
+      background-color: #4E67EB;
+      color: #ffffff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      max-width: 200px;
+      border-radius: 5px;
+      text-decoration: none;
+      text-align: center;
+      transition: opacity 0.3s ease;
+    }
+
+    .button-container .button:hover {
+      opacity: 0.9;
+    }
+
+    /* End Simulation Button Styling */
+    .end-button {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background-color: #e97878;
+      color: #fff;
+      padding: 12px 24px;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    .end-button:hover {
+      opacity: 0.9;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+      }
+
+      .content {
+        flex-direction: column;
+      }
+
+      .content::before {
+        display: none;
+      }
+
+      .left-column,
+      .right-column {
+        width: 100%;
+        padding: 0;
+      }
+
+      .clock {
+        text-align: center;
+      }
+
+      .header img {
+        position: static;
+        transform: none;
+        margin-bottom: 10px;
+      }
+
+      .header {
+        flex-direction: column;
+      }
+
+      .end-button {
+        position: static;
+        width: 100%;
+        max-width: none;
+        margin-top: 20px;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="clock"><i class="far fa-clock"></i> <span id="countdown-timer">20:00</span></div>
+    <div class="header">
+      Financial Simulation
+      <img alt="ZENLEARN Logo" src="logo.png" />
+    </div>
+    <div class="scenario">Beginner Scenario 2: Participating in Tenders</div>
+
+    <div class="content">
+      <!-- Left column: Description and details -->
+      <div class="left-column">
+        <div class="participant-brief">
+          <p><strong>Participant Brief</strong></p>
+        </div>
+        <div class="market-condition">
+          <p><strong>Market Condition:</strong> A government department has opened a tender for a supply contract related to the company’s products. Government tenders are highly regulated but often provide consistent and significant revenue if won.</p>
+        </div>
+        <div class="options">
+          <p><strong>Options for Management:</strong></p>
+          <ul>
+            
+              <strong>1. Submit Tender Application:</strong> The company could submit a tender application, focusing on compliance and offering competitive pricing.
+
+              <ul>
+                <li><strong>Pros:</strong> Secure, consistent revenue from government contracts.</li>
+                <li><strong>Cons:</strong> Stringent compliance and long approval processes.</li>
+              </ul>
+
+
+              <strong>2. Focus on Private Sector Tenders:</strong> Instead of public tenders, the company can focus on private sector tenders, which may offer more flexibility and faster decisions.
+              <ul>
+                <li><strong>Pros:</strong> Quicker decision-making processes.</li>
+                <li><strong>Cons:</strong> Less secure than government contracts.</li>
+              </ul>
+
+          </ul>
+        </div>
+
+
+
+        <div class="investment">
+          <p><strong>Investment Required:</strong></p>
+          <ul>
+            <li>INR 2,00,000 costs associated with preparing the tender application</li>
+            <li>INR 1,00,000 sales, marketing, and bidding costs associated with private tender application</li>
+          </ul>
+        </div>
+        <div class="output">
+          <p><strong>Output Gained:</strong></p>
+          <ul>
+            <li>INR 60,00,000 Revenue from Winning the Tender</li>
+            <li>INR 45,00,000 Revenue from Private sector Tender</li>
+          </ul>
+        </div>
+        <div class="button-container">
+          <a href="scenerio2_page_2.html" class="button">Submit Tender Application</a>
+          <a href="scenerio2_page_2.html" class="button">Private Sector Tenders</a>
+        </div>
+      </div>
+
+      <!-- Right column: Tables -->
+      <div class="right-column">
+        <div class="updated-values">(Updated values post Scenario 1)</div>
+        <div class="values">
+          <!-- Balance Sheet Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Balance Sheet (End of Q4 2024)</th>
+              </tr>
+              <tr>
+                <th>Assets</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Current Assets</strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Cash and Cash Equivalents</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>Accounts Receivable</td>
+                <td>80</td>
+              </tr>
+              <tr>
+                <td>Inventory</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td><strong>Total Current Assets</strong></td>
+                <td>230</td>
+              </tr>
+              <tr>
+                <td><strong>Non-current Assets</strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Property, Plant & Equipment</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>Intangible Assets (Patents)</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td><strong>Total Non-current Assets</strong></td>
+                <td>520</td>
+              </tr>
+              <tr>
+                <td><strong>Total Assets</strong></td>
+                <td>750</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Liabilities & Equity Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Liabilities & Equity (End of Q4 2024)</th>
+              </tr>
+              <tr>
+                <th>Liabilities & Equity</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Current Liabilities</strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Accounts Payable</td>
+                <td>70</td>
+              </tr>
+              <tr>
+                <td>Short-term Debt</td>
+                <td>30</td>
+              </tr>
+              <tr>
+                <td><strong>Total Current Liabilities</strong></td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td><strong>Long-term Liabilities</strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Long-term Debt</td>
+                <td>150</td>
+              </tr>
+              <tr>
+                <td><strong>Total Liabilities</strong></td>
+                <td>250</td>
+              </tr>
+              <tr>
+                <td><strong>Equity</strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Shareholders’ Equity</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td><strong>Total Liabilities & Equity</strong></td>
+                <td>750</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Profit and Loss Statement Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Profit & Loss (Income) Statement (Q4 2024)</th>
+              </tr>
+              <tr>
+                <th>Line Item</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Revenue (Sales)</td>
+                <td>400</td>
+              </tr>
+              <tr>
+                <td>Cost of Goods Sold (COGS)</td>
+                <td>200</td>
+              </tr>
+              <tr>
+                <td>Gross Profit</td>
+                <td>200</td>
+              </tr>
+              <tr>
+                <td>Operating Expenses</td>
+                <td>120</td>
+              </tr>
+              <tr>
+                <td>Operating Income (EBIT)</td>
+                <td>80</td>
+              </tr>
+              <tr>
+                <td>Interest Expense</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>Income Before Tax</td>
+                <td>60</td>
+              </tr>
+              <tr>
+                <td>Tax</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>Net Income</td>
+                <td>45</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Cash Flow Statement Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Cash Flow Statement (Q4 2024)</th>
+              </tr>
+              <tr>
+                <th>Line Item</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cash from Operating Activities</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>Cash from Investing Activities</td>
+                <td>-100</td>
+              </tr>
+              <tr>
+                <td>Cash from Financing Activities</td>
+                <td>30</td>
+              </tr>
+              <tr>
+                <td><strong>Net Increase in Cash</strong></td>
+                <td>-20</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Ratios Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Ratios</th>
+              </tr>
+              <tr>
+                <th>Ratio</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Liquidity Ratios -->
+              <tr>
+                <td colspan="2"><strong>Liquidity Ratios</strong></td>
+              </tr>
+              <tr>
+                <td>1. Current Ratio</td>
+                <td>1.5</td>
+              </tr>
+              <tr>
+                <td>2. Quick Ratio (Acid Test)</td>
+                <td>1.2</td>
+              </tr>
+              <!-- Profitability Ratios -->
+              <tr>
+                <td colspan="2"><strong>Profitability Ratios</strong></td>
+              </tr>
+              <tr>
+                <td>3. Gross Profit Margin</td>
+                <td>50%</td>
+              </tr>
+              <tr>
+                <td>4. Net Profit Margin</td>
+                <td>11.25%</td>
+              </tr>
+              <tr>
+                <td>5. Return on Assets (ROA)</td>
+                <td>6%</td>
+              </tr>
+              <tr>
+                <td>6. Return on Equity (ROE)</td>
+                <td>9%</td>
+              </tr>
+              <!-- Efficiency Ratios -->
+              <tr>
+                <td colspan="2"><strong>Efficiency Ratios</strong></td>
+              </tr>
+              <tr>
+                <td>7. Inventory Turnover Ratio</td>
+                <td>2.5</td>
+              </tr>
+              <tr>
+                <td>8. Accounts Receivable Turnover Ratio</td>
+                <td>4.0</td>
+              </tr>
+              <tr>
+                <td>9. Asset Turnover Ratio</td>
+                <td>0.53</td>
+              </tr>
+              <!-- Leverage Ratios -->
+              <tr>
+                <td colspan="2"><strong>Leverage Ratios</strong></td>
+              </tr>
+              <tr>
+                <td>10. Debt-to-Equity Ratio</td>
+                <td>0.5</td>
+              </tr>
+              <tr>
+                <td>11. Interest Coverage Ratio</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>12. Debt Service Coverage Ratio (DSCR)</td>
+                <td>3</td>
+              </tr>
+              <!-- Cash Flow Ratios -->
+              <tr>
+                <td colspan="2"><strong>Cash Flow Ratios</strong></td>
+              </tr>
+              <tr>
+                <td>13. Operating Cash Flow Ratio</td>
+                <td>0.5</td>
+              </tr>
+              <tr>
+                <td>14. Free Cash Flow (FCF)</td>
+                <td>-20</td>
+              </tr>
+              <!-- Valuation Ratios -->
+              <tr>
+                <td colspan="2"><strong>Valuation Ratios</strong></td>
+              </tr>
+              <tr>
+                <td>15. Price-to-Earnings (P/E) Ratio</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>16. Earnings per Share (EPS)</td>
+                <td>45</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- End Simulation Button -->
+    <a href="#" class="end-button">End Simulation</a>
+  </div>
+
+  <!-- JavaScript for 20-minute countdown timer -->
+  <script>
+    // Set the countdown duration (20 minutes)
+    const countdownDuration = 5 * 60; // in seconds
+    let remainingTime = countdownDuration;
+
+    const timerElement = document.getElementById('countdown-timer');
+
+    function updateTimer() {
+      const minutes = Math.floor(remainingTime / 60);
+      const seconds = remainingTime % 60;
+      timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      if (remainingTime > 0) {
+        remainingTime--;
+      } else {
+        clearInterval(timerInterval);
+        // Optional: Add actions to take when timer ends
+        alert('Time is up! The simulation will now end.');
+        // Redirect or perform any other desired action
+        window.location.href = "#"; // Replace with desired URL or action
+      }
+    }
+
+    // Initialize the timer
+    updateTimer(); // Initial call to display the starting time
+    const timerInterval = setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>
