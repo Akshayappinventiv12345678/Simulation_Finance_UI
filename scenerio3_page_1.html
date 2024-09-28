@@ -14,15 +14,14 @@
     }
 
     .container {
-      width: 80%;
-      max-width: 1200px;
+      width: 90%;
+      max-width: 1300px;
       margin: 20px auto;
       border: 2px solid #000;
-      padding: 20px;
+      padding: 10px;
       box-sizing: border-box;
       position: relative;
     }
-
     /* Header Styles */
     .header {
       display: flex;
@@ -65,6 +64,7 @@
       justify-content: space-between;
       margin-top: 20px;
       position: relative;
+      align-items: flex-start; /* Align items to the top */
     }
 
     /* Vertical Divider */
@@ -140,9 +140,8 @@
     /* Buttons Styling */
     .button-container {
       display: flex;
-      flex-direction: column;
-      align-items: center; /* Align buttons to the start (left) */
-      gap: 10px;
+      justify-content: space-between; /* Ensures even spacing between buttons */
+      gap: 10px; /* Adjust gap between buttons */
       margin-top: 20px;
     }
 
@@ -153,23 +152,28 @@
       border: none;
       cursor: pointer;
       font-size: 16px;
-      width: 100%;
-      max-width: 200px;
       border-radius: 5px;
       text-decoration: none;
       text-align: center;
+      flex: 1; /* Allow buttons to expand evenly */
+      max-width: 200px;
       transition: opacity 0.3s ease;
     }
+  
 
     .button-container .button:hover {
       opacity: 0.9;
     }
 
-    /* End Simulation Button Styling */
-    .end-button {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
+    /* Footer Section */
+    .footer-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: flex-start; /* Align items to the left */
+      align-items: center;
+    }
+
+    .footer-buttons .end-button {
       background-color: #e97878;
       color: #fff;
       padding: 12px 24px;
@@ -181,8 +185,14 @@
       transition: opacity 0.3s ease;
     }
 
-    .end-button:hover {
+    .footer-buttons .end-button:hover {
       opacity: 0.9;
+    }
+
+    /* Scrollable Table Container */
+    .table-container {
+      height: 500px; /* Adjust the height as needed */
+      overflow-y: auto;
     }
 
     /* Responsive Design */
@@ -219,13 +229,23 @@
         flex-direction: column;
       }
 
-      .end-button {
-        position: static;
-        width: 100%;
+      .button-container .button {
         max-width: none;
-        margin-top: 20px;
-        left: 0;
-        bottom: 0;
+      }
+
+      .table-container {
+        height: auto;
+        max-height: 300px; /* Set a max-height for scrolling on mobile */
+      }
+
+      .footer-buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .footer-buttons .end-button {
+        width: 100%;
+        margin-top: 10px;
       }
     }
   </style>
@@ -237,11 +257,12 @@
       Financial Simulation
       <img alt="ZENLEARN Logo" src="logo.png" />
     </div>
-    <div class="scenario">Scenario 3: Participating in RFQ for New Bids</div>
+    <div class="scenario">Scenario 3: Participating in RFQ for New Bids    </div>
 
     <div class="content">
       <!-- Left column: Description and details -->
       <div class="left-column">
+        <div class="table-container">
         <div class="market-condition">
           <p>
             <strong>Market Condition:</strong>A leading manufacturing company in the region has issued a Request for Quotation (RFQ) for a large order of industrial components. The MSME sees this as a chance to increase revenue by securing new business from a reputable client.
@@ -285,7 +306,7 @@
             <li>INR 25,00,000 Revenue from customized product RFQ.</li>
           </ul>
         </div>
-        
+      </div>
 
         <div class="button-container">
           <a href="scenerio3_page_2.html" class="button">Submit competitive RFQ</a>
@@ -295,13 +316,14 @@
 
       <!-- Right column: Tables -->
       <div class="right-column">
-        <div class="updated-values">(Updated values post Scenario 2)</div>
-        <div class="values">
+        <div class="updated-values">(Beginning Values)</div>
+        <!-- Scrollable Container Start -->
+        <div class="table-container">
           <!-- Balance Sheet Table -->
           <table class="table">
             <thead>
               <tr>
-                <th colspan="2">Balance Sheet (End of Q4 2024)</th>
+                <th colspan="2">Balance Sheet</th>
               </tr>
               <tr>
                 <th>Assets</th>
@@ -592,16 +614,19 @@
             </tbody>
           </table>
         </div>
+        <!-- Scrollable Container End -->
       </div>
     </div>
 
-    <!-- End Simulation Button -->
-    <a href="#" class="end-button">End Simulation</a>
+    <!-- Footer Section with End Simulation Button -->
+    <div class="footer-buttons">
+      <a href="index.html" class="end-button">End Simulation</a>
+    </div>
   </div>
 
-  <!-- JavaScript for 20-minute countdown timer -->
+  <!-- JavaScript for 5-minute countdown timer -->
   <script>
-    // Set the countdown duration (20 minutes)
+    // Set the countdown duration (5 minutes)
     const countdownDuration = 5 * 60; // in seconds
     let remainingTime = countdownDuration;
 
