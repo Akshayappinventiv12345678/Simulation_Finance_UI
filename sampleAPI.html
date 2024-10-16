@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Financial Simulation - Home Page</title>
+  <title>Financial Simulation - Scenario 1</title>
   <!-- Font Awesome for Icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
   <!-- Chart.js CDN -->
@@ -108,7 +108,7 @@
     }
 
     .progress-bar-inner {
-      height: 20px;
+      height: 5px;
       width: 0;
       background-color: #4E67EB;
       border-radius: 25px;
@@ -145,40 +145,25 @@
     }
 
     /* Section Styles */
-    .description {
-      margin-bottom: 20px;
+    .market-condition,
+    .options,
+    .investment,
+    .output {
+      margin-top: 20px;
     }
 
-    .description h3 {
-      margin-bottom: 10px;
-    }
-
-    .description p {
-      margin: 10px 0;
-    }
-
-    .options p {
-      margin: 10px 0;
-    }
-
-    .options ul,
-    .investment ul,
-    .output ul {
+    .options ul {
       list-style-type: none;
       padding-left: 0;
     }
 
-    .options ul li,
-    .investment ul li,
-    .output ul li {
+    .options ul li {
       margin-bottom: 10px;
       position: relative;
       padding-left: 20px;
     }
 
-    .options ul li::before,
-    .investment ul li::before,
-    .output ul li::before {
+    .options ul li::before {
       content: "\2022";
       color: #4E67EB;
       position: absolute;
@@ -415,7 +400,7 @@
           <circle cx="40" cy="40" r="40"></circle>
           <circle class="progress" cx="40" cy="40" r="40"></circle>
         </svg>
-        <div class="time" id="countdown-timer">20:00</div>
+        <div class="time" id="countdown-timer">05:00</div>
       </div>
 
       <!-- Title -->
@@ -426,7 +411,7 @@
     </div>
 
     <!-- Scenario Title -->
-    <div class="scenario">Scenario 2: Participating in Tenders</div>
+    <div class="scenario">Scenario 1: Bidding for New Projects</div>
 
     <!-- Progress Bar -->
     <div class="progress-bar">
@@ -436,22 +421,62 @@
     <div class="content">
       <!-- Left column: Description and details -->
       <div class="left-column">
-        <div class="description">
-          <h3>Concepts</h3>
-          <h4>Assumptions:</h4>
-          <p><strong>Tender Submission Costs:</strong> This includes legal, marketing, and consulting expenses related to the tender process. These expenses are accounted for in the P&L as operational expenses.</p>
-          <p><strong>Revenue from Winning the Tender:</strong> If the tender is awarded, the company will record the revenue from the contract. This will also impact the accounts receivable as the customer will owe the company once the contract starts.
+        <div class="market-condition">
+          <p>
+            <strong>Market Condition:</strong> The company has identified a major upcoming infrastructure project within its industry that requires industrial components similar to its offerings. Management sees this as an opportunity to secure a large, long-term contract, which could lead to consistent revenue streams over multiple years.
           </p>
+        </div>
+        
+        <div class="options">
+          <p><strong>Options for Management:</strong></p>
+          <ul>
+            <li>
+              <strong>1. Prepare a Competitive Bid for the Project:</strong>
+              <ul>
+                <li>Pros: Potential for a long-term revenue stream.</li>
+                <li>Cons: High competition; the bidding process is costly and time-consuming.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>2. Collaborate with Another Firm to Bid Jointly:</strong>
+              <ul>
+                <li>Pros: Shares risks and costs.</li>
+                <li>Cons: Must share profits if the bid is successful.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="investment">
+          <p><strong>Investment Required:</strong></p>
+          <ul>
+            <li>Bid Preparation Costs: INR 1,50,000</li>
+            <li>Administrative Expenses for Joint Bid: INR 75,000</li>
+          </ul>
+        </div>
+        
+        <div class="output">
+          <p><strong>Output Gained:</strong></p>
+          <ul>
+            <li>Revenue from Successful Bid: INR 50,00,000</li>
+            <li>Shared Revenue in a Joint Bid Collaboration: INR 25,00,000</li>
+          </ul>
+        </div>
+
+        <!-- Buttons for Competitive Bid and Joint Bid -->
+        <div class="footer-buttons">
+          <button class="next-button" id="competitive-bid-btn">Competitive Bid</button>
+          <button class="next-button" id="joint-bid-btn">Joint Bid</button>
         </div>
       </div>
 
       <!-- Right column: Tables and Charts -->
       <div class="right-column">
-        <div class="updated-values"><strong>(Updated values post Scenario)</strong></div>
+        <div class="updated-values"><strong>(Values before the scenario)</strong></div>
         <!-- Scrollable Container Start -->
         <div class="table-container">
           <!-- Balance Sheet Table -->
-          <table class="table">
+          <table class="table" id="balance-sheet-table">
             <thead>
               <tr>
                 <th colspan="2">Balance Sheet</th>
@@ -468,19 +493,19 @@
               </tr>
               <tr class="hidden-row">
                 <td>Cash and Cash Equivalents</td>
-                <td>50</td>
+                <td id="cash-equivalents">50</td>
               </tr>
               <tr class="hidden-row">
                 <td>Accounts Receivable</td>
-                <td>80</td>
+                <td id="accounts-receivable">80</td>
               </tr>
               <tr class="hidden-row">
                 <td>Inventory</td>
-                <td>100</td>
+                <td id="inventory">100</td>
               </tr>
               <tr class="hidden-row">
                 <td><strong>Total Current Assets</strong></td>
-                <td>230</td>
+                <td id="total-current-assets">230</td>
               </tr>
               <tr class="expandable">
                 <td><strong>Non-current Assets <i class="fas fa-plus"></i></strong></td>
@@ -488,25 +513,25 @@
               </tr>
               <tr class="hidden-row">
                 <td>Property, Plant & Equipment</td>
-                <td>500</td>
+                <td id="property-plant-equipment">500</td>
               </tr>
               <tr class="hidden-row">
                 <td>Intangible Assets (Patents)</td>
-                <td>20</td>
+                <td id="intangible-assets">20</td>
               </tr>
               <tr class="hidden-row">
                 <td><strong>Total Non-current Assets</strong></td>
-                <td>520</td>
+                <td id="total-non-current-assets">520</td>
               </tr>
               <tr>
                 <td><strong>Total Assets</strong></td>
-                <td>750</td>
+                <td id="total-assets">750</td>
               </tr>
             </tbody>
           </table>
 
           <!-- Liabilities & Equity Table -->
-          <table class="table">
+          <table class="table" id="liabilities-equity-table">
             <thead>
               <tr>
                 <th>Liabilities & Equity</th>
@@ -520,15 +545,15 @@
               </tr>
               <tr class="hidden-row">
                 <td>Accounts Payable</td>
-                <td>70</td>
+                <td id="accounts-payable">70</td>
               </tr>
               <tr class="hidden-row">
                 <td>Short-term Debt</td>
-                <td>30</td>
+                <td id="short-term-debt">30</td>
               </tr>
               <tr class="hidden-row">
                 <td><strong>Total Current Liabilities</strong></td>
-                <td>100</td>
+                <td id="total-current-liabilities">100</td>
               </tr>
               <tr class="expandable">
                 <td><strong>Long-term Liabilities <i class="fas fa-plus"></i></strong></td>
@@ -536,11 +561,11 @@
               </tr>
               <tr class="hidden-row">
                 <td>Long-term Debt</td>
-                <td>150</td>
+                <td id="long-term-debt">150</td>
               </tr>
               <tr class="hidden-row">
                 <td><strong>Total Liabilities</strong></td>
-                <td>250</td>
+                <td id="total-liabilities">250</td>
               </tr>
               <tr class="expandable">
                 <td><strong>Equity <i class="fas fa-plus"></i></strong></td>
@@ -548,17 +573,17 @@
               </tr>
               <tr class="hidden-row">
                 <td>Shareholders’ Equity</td>
-                <td>500</td>
+                <td id="shareholders-equity">500</td>
               </tr>
               <tr>
                 <td><strong>Total Liabilities & Equity</strong></td>
-                <td>750</td>
+                <td id="total-liabilities-equity">750</td>
               </tr>
             </tbody>
           </table>
 
           <!-- Profit and Loss Statement Table -->
-          <table class="table">
+          <table class="table" id="profit-loss-table">
             <thead>
               <tr>
                 <th colspan="2">Profit & Loss (Income) Statement</th>
@@ -571,45 +596,45 @@
             <tbody>
               <tr>
                 <td><span class="tooltip" data-tooltip="Total sales revenue generated by the company.">Revenue (Sales)</span></td>
-                <td>400</td>
+                <td id="revenue">400</td>
               </tr>
               <tr>
                 <td><span class="tooltip" data-tooltip="Direct costs attributable to the production of goods sold by the company.">Cost of Goods Sold (COGS)</span></td>
-                <td>200</td>
+                <td id="cogs">200</td>
               </tr>
               <tr>
                 <td>Gross Profit</td>
-                <td>200</td>
+                <td id="gross-profit">200</td>
               </tr>
               <tr>
                 <td>Operating Expenses</td>
-                <td>120</td>
+                <td id="operating-expenses">120</td>
               </tr>
               <tr>
                 <td>Operating Income (EBIT)</td>
-                <td>80</td>
+                <td id="operating-income">80</td>
               </tr>
               <tr>
                 <td>Interest Expense</td>
-                <td>20</td>
+                <td id="interest-expense">20</td>
               </tr>
               <tr>
                 <td>Income Before Tax</td>
-                <td>60</td>
+                <td id="income-before-tax">60</td>
               </tr>
               <tr>
                 <td>Tax</td>
-                <td>15</td>
+                <td id="tax">15</td>
               </tr>
               <tr>
                 <td>Net Income</td>
-                <td>45</td>
+                <td id="net-income">45</td>
               </tr>
             </tbody>
           </table>
 
           <!-- Cash Flow Statement Table -->
-          <table class="table">
+          <table class="table" id="cash-flow-table">
             <thead>
               <tr>
                 <th colspan="2">Cash Flow Statement</th>
@@ -622,25 +647,25 @@
             <tbody>
               <tr>
                 <td>Cash from Operating Activities</td>
-                <td>50</td>
+                <td id="cash-operating">50</td>
               </tr>
               <tr>
                 <td>Cash from Investing Activities</td>
-                <td>-100</td>
+                <td id="cash-investing">-100</td>
               </tr>
               <tr>
                 <td>Cash from Financing Activities</td>
-                <td>30</td>
+                <td id="cash-financing">30</td>
               </tr>
               <tr>
                 <td><strong>Net Increase in Cash</strong></td>
-                <td>-20</td>
+                <td id="net-increase-cash">-20</td>
               </tr>
             </tbody>
           </table>
 
           <!-- Ratios Table -->
-          <table class="table">
+          <table class="table" id="ratios-table">
             <thead>
               <tr>
                 <th>Ratio</th>
@@ -651,95 +676,101 @@
               <!-- Liquidity Ratios -->
               <tr class="expandable">
                 <td colspan="2"><strong>Liquidity Ratios <i class="fas fa-plus"></i></strong></td>
+                <td></td>
               </tr>
               <tr class="hidden-row">
                 <td>1. Current Ratio</td>
-                <td>1.5</td>
+                <td id="current-ratio">1.5</td>
               </tr>
               <tr class="hidden-row">
                 <td>2. Quick Ratio (Acid Test)</td>
-                <td>1.2</td>
+                <td id="quick-ratio">1.2</td>
               </tr>
 
               <!-- Profitability Ratios -->
               <tr class="expandable">
                 <td colspan="2"><strong>Profitability Ratios <i class="fas fa-plus"></i></strong></td>
+                <td></td>
               </tr>
               <tr class="hidden-row">
                 <td>3. Gross Profit Margin</td>
-                <td>50%</td>
+                <td id="gross-profit-margin">50%</td>
               </tr>
               <tr class="hidden-row">
                 <td>4. Net Profit Margin</td>
-                <td>11.25%</td>
+                <td id="net-profit-margin">11.25%</td>
               </tr>
               <tr class="hidden-row">
                 <td>5. Return on Assets (ROA)</td>
-                <td>6%</td>
+                <td id="roa">6%</td>
               </tr>
               <tr class="hidden-row">
                 <td>6. Return on Equity (ROE)</td>
-                <td>9%</td>
+                <td id="roe">9%</td>
               </tr>
 
               <!-- Efficiency Ratios -->
               <tr class="expandable">
                 <td colspan="2"><strong>Efficiency Ratios <i class="fas fa-plus"></i></strong></td>
+                <td></td>
               </tr>
               <tr class="hidden-row">
                 <td>7. Inventory Turnover Ratio</td>
-                <td>2.5</td>
+                <td id="inventory-turnover">2.5</td>
               </tr>
               <tr class="hidden-row">
                 <td>8. Accounts Receivable Turnover Ratio</td>
-                <td>4.0</td>
+                <td id="ar-turnover">4.0</td>
               </tr>
               <tr class="hidden-row">
                 <td>9. Asset Turnover Ratio</td>
-                <td>0.53</td>
+                <td id="asset-turnover">0.53</td>
               </tr>
 
               <!-- Leverage Ratios -->
               <tr class="expandable">
                 <td colspan="2"><strong>Leverage Ratios <i class="fas fa-plus"></i></strong></td>
+                <td></td>
               </tr>
               <tr class="hidden-row">
                 <td>10. Debt-to-Equity Ratio</td>
-                <td>0.5</td>
+                <td id="debt-equity-ratio">0.5</td>
               </tr>
               <tr class="hidden-row">
                 <td>11. Interest Coverage Ratio</td>
-                <td>4</td>
+                <td id="interest-coverage-ratio">4</td>
               </tr>
               <tr class="hidden-row">
                 <td>12. Debt Service Coverage Ratio (DSCR)</td>
-                <td>3</td>
+                <td id="dscr">3</td>
               </tr>
 
               <!-- Cash Flow Ratios -->
               <tr class="expandable">
                 <td colspan="2"><strong>Cash Flow Ratios <i class="fas fa-plus"></i></strong></td>
+                <td></td>
               </tr>
               <tr class="hidden-row">
                 <td>13. Operating Cash Flow Ratio</td>
-                <td>0.5</td>
+                <td id="operating-cash-flow-ratio">0.5</td>
               </tr>
               <tr class="hidden-row">
                 <td>14. Free Cash Flow (FCF)</td>
-                <td>-20</td>
+                <td id="free-cash-flow">-20</td>
               </tr>
 
               <!-- Valuation Ratios -->
               <tr class="expandable">
                 <td colspan="2"><strong>Valuation Ratios <i class="fas fa-plus"></i></strong></td>
+                <td></td>
               </tr>
               <tr class="hidden-row">
                 <td>15. Price-to-Earnings (P/E) Ratio</td>
-                <td>15</td>
+                <td id="pe-ratio">15</td>
               </tr>
               <tr class="hidden-row">
                 <td>16. Earnings per Share (EPS)</td>
-                <td>45</td>
+                <td id="eps">45</td>
               </tr>
             </tbody>
           </table>
@@ -756,7 +787,6 @@
     <!-- Footer Section with End Simulation Button -->
     <div class="footer-buttons">
       <a href="index.html" class="end-button">End Simulation</a>
-      <a href="scenario3_page_1.html" class="next-button">Next Scenario</a>
     </div>
   </div>
 
@@ -848,7 +878,7 @@
         labels: ['Before Scenario', 'After Scenario'],
         datasets: [{
           label: 'Revenue (INR Lakhs)',
-          data: [400, 450], // Updated data
+          data: [400, 0], // Initial data
           backgroundColor: ['#4E67EB', '#f1c40f']
         }]
       },
@@ -865,7 +895,7 @@
           },
           title: {
             display: true,
-            text: 'Values Before and After the Scenario'
+            text: 'Revenue Before and After Scenario'
           }
         },
         animation: {
@@ -880,22 +910,202 @@
       }
     });
 
-    // Button Click Animations and Chart Updates
-    document.querySelectorAll('.footer-buttons .end-button, .footer-buttons .next-button').forEach(button => {
-      button.addEventListener('click', () => {
-        // Example: Update chart data based on button clicked
-        if(button.textContent.includes('Submit Tender Application')) {
-          // Government Tender selected
-          revenueChart.data.datasets[0].data[1] = 600; // Example value
-        } else if(button.textContent.includes('Private Sector Tenders')) {
-          // Private Tender selected
-          revenueChart.data.datasets[0].data[1] = 450; // Example value
-        }
-        revenueChart.update();
+    // Function to update the chart with new data
+    function updateChart(data) {
+      revenueChart.data.datasets[0].data[1] = data.profitAndLoss.revenue;
+      revenueChart.options.plugins.title.text = 'Revenue Before and After Scenario';
+      revenueChart.update();
+    }
 
-        // Update progress bar as an example
-        progressBarInner.style.width = '50%';
-      });
+    // Function to update tables with fetched data
+    function updateTables(data) {
+      // Balance Sheet Table
+      document.getElementById('cash-equivalents').textContent = data.balanceSheet.assets.currentAssets.cash;
+      document.getElementById('accounts-receivable').textContent = data.balanceSheet.assets.currentAssets.accountsReceivable;
+      document.getElementById('inventory').textContent = data.balanceSheet.assets.currentAssets.inventory;
+      document.getElementById('total-current-assets').textContent = data.balanceSheet.assets.currentAssets.totalCurrentAssets;
+
+      document.getElementById('property-plant-equipment').textContent = data.balanceSheet.assets.nonCurrentAssets.propertyPlantEquipment;
+      document.getElementById('intangible-assets').textContent = data.balanceSheet.assets.nonCurrentAssets.intangibleAssets;
+      document.getElementById('total-non-current-assets').textContent = data.balanceSheet.assets.nonCurrentAssets.totalNonCurrentAssets;
+
+      document.getElementById('total-assets').textContent = data.balanceSheet.assets.totalAssets;
+
+      // Liabilities & Equity Table
+      document.getElementById('accounts-payable').textContent = data.liabilitiesAndEquity.currentLiabilities.accountsPayable;
+      document.getElementById('short-term-debt').textContent = data.liabilitiesAndEquity.currentLiabilities.shortTermDebt;
+      document.getElementById('total-current-liabilities').textContent = data.liabilitiesAndEquity.currentLiabilities.totalCurrentLiabilities;
+
+      document.getElementById('long-term-debt').textContent = data.liabilitiesAndEquity.longTermLiabilities.longTermDebt;
+      document.getElementById('total-liabilities').textContent = data.liabilitiesAndEquity.longTermLiabilities.totalLiabilities;
+
+      document.getElementById('shareholders-equity').textContent = data.liabilitiesAndEquity.equity.shareholdersEquity;
+      document.getElementById('total-liabilities-equity').textContent = data.liabilitiesAndEquity.totalLiabilitiesAndEquity;
+
+      // Profit and Loss Statement Table
+      document.getElementById('revenue').textContent = data.profitAndLoss.revenue;
+      document.getElementById('cogs').textContent = data.profitAndLoss.costOfGoodsSold;
+      document.getElementById('gross-profit').textContent = data.profitAndLoss.grossProfit;
+      document.getElementById('operating-expenses').textContent = data.profitAndLoss.operatingExpenses;
+      document.getElementById('operating-income').textContent = data.profitAndLoss.operatingIncome;
+      document.getElementById('interest-expense').textContent = data.profitAndLoss.interestExpense;
+      document.getElementById('income-before-tax').textContent = data.profitAndLoss.incomeBeforeTax;
+      document.getElementById('tax').textContent = data.profitAndLoss.tax;
+      document.getElementById('net-income').textContent = data.profitAndLoss.netIncome;
+
+      // Cash Flow Statement Table
+      document.getElementById('cash-operating').textContent = data.cashFlow.cashFromOperatingActivities;
+      document.getElementById('cash-investing').textContent = data.cashFlow.cashFromInvestingActivities;
+      document.getElementById('cash-financing').textContent = data.cashFlow.cashFromFinancingActivities;
+      document.getElementById('net-increase-cash').textContent = data.cashFlow.netIncreaseInCash;
+
+      // Ratios Table
+      document.getElementById('current-ratio').textContent = data.ratios.liquidityRatios.currentRatio;
+      document.getElementById('quick-ratio').textContent = data.ratios.liquidityRatios.quickRatio;
+
+      document.getElementById('gross-profit-margin').textContent = data.ratios.profitabilityRatios.grossProfitMargin;
+      document.getElementById('net-profit-margin').textContent = data.ratios.profitabilityRatios.netProfitMargin;
+      document.getElementById('roa').textContent = data.ratios.profitabilityRatios.returnOnAssets;
+      document.getElementById('roe').textContent = data.ratios.profitabilityRatios.returnOnEquity;
+
+      document.getElementById('inventory-turnover').textContent = data.ratios.efficiencyRatios.inventoryTurnover;
+      document.getElementById('ar-turnover').textContent = data.ratios.efficiencyRatios.accountsReceivableTurnover;
+      document.getElementById('asset-turnover').textContent = data.ratios.efficiencyRatios.assetTurnover;
+
+      document.getElementById('debt-equity-ratio').textContent = data.ratios.leverageRatios.debtToEquityRatio;
+      document.getElementById('interest-coverage-ratio').textContent = data.ratios.leverageRatios.interestCoverageRatio;
+      document.getElementById('dscr').textContent = data.ratios.leverageRatios.debtServiceCoverageRatio;
+
+      document.getElementById('operating-cash-flow-ratio').textContent = data.ratios.cashFlowRatios.operatingCashFlowRatio;
+      document.getElementById('free-cash-flow').textContent = data.ratios.cashFlowRatios.freeCashFlow;
+
+      document.getElementById('pe-ratio').textContent = data.ratios.valuationRatios.peRatio;
+      document.getElementById('eps').textContent = data.ratios.valuationRatios.eps;
+
+      // Update the "Values before the scenario" label
+      document.querySelector('.updated-values').innerHTML = '<strong>(Values after the scenario)</strong>';
+    }
+
+    // Function to simulate fetching data from an API and updating the tables and chart
+    function fetchDataAndUpdate(option) {
+      // Example API endpoint (replace with your actual API)
+      const apiUrl = `https://example.com/api/data?option=${option}`;
+
+      // For demonstration purposes, we'll use sample data instead of an actual API call
+      // Uncomment the fetch code below and remove the sampleData object when using a real API
+
+      /*
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          updateTables(data);
+          updateChart(data);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+      */
+
+      // Sample data for demonstration
+      const sampleData = {
+        balanceSheet: {
+          assets: {
+            currentAssets: {
+              cash: option === 'competitive' ? 60 : 55,
+              accountsReceivable: option === 'competitive' ? 90 : 85,
+              inventory: option === 'competitive' ? 110 : 105,
+              totalCurrentAssets: option === 'competitive' ? 260 : 245
+            },
+            nonCurrentAssets: {
+              propertyPlantEquipment: option === 'competitive' ? 520 : 510,
+              intangibleAssets: option === 'competitive' ? 25 : 23,
+              totalNonCurrentAssets: option === 'competitive' ? 545 : 533
+            },
+            totalAssets: option === 'competitive' ? 805 : 778
+          },
+          liabilitiesAndEquity: {
+            currentLiabilities: {
+              accountsPayable: option === 'competitive' ? 75 : 72,
+              shortTermDebt: option === 'competitive' ? 35 : 33,
+              totalCurrentLiabilities: option === 'competitive' ? 110 : 105
+            },
+            longTermLiabilities: {
+              longTermDebt: option === 'competitive' ? 160 : 155,
+              totalLiabilities: option === 'competitive' ? 270 : 260
+            },
+            equity: {
+              shareholdersEquity: option === 'competitive' ? 535 : 518
+            },
+            totalLiabilitiesAndEquity: option === 'competitive' ? 805 : 778
+          }
+        },
+        profitAndLoss: {
+          revenue: option === 'competitive' ? 500 : 450,
+          costOfGoodsSold: option === 'competitive' ? 250 : 225,
+          grossProfit: option === 'competitive' ? 250 : 225,
+          operatingExpenses: option === 'competitive' ? 135 : 130,
+          operatingIncome: option === 'competitive' ? 115 : 95,
+          interestExpense: option === 'competitive' ? 25 : 22,
+          incomeBeforeTax: option === 'competitive' ? 90 : 73,
+          tax: option === 'competitive' ? 22 : 18,
+          netIncome: option === 'competitive' ? 68 : 55
+        },
+        cashFlow: {
+          cashFromOperatingActivities: option === 'competitive' ? 70 : 60,
+          cashFromInvestingActivities: option === 'competitive' ? -120 : -110,
+          cashFromFinancingActivities: option === 'competitive' ? 40 : 35,
+          netIncreaseInCash: option === 'competitive' ? -10 : -15
+        },
+        ratios: {
+          liquidityRatios: {
+            currentRatio: option === 'competitive' ? 1.7 : 1.6,
+            quickRatio: option === 'competitive' ? 1.4 : 1.3
+          },
+          profitabilityRatios: {
+            grossProfitMargin: '50%',
+            netProfitMargin: option === 'competitive' ? '15%' : '12.22%',
+            returnOnAssets: option === 'competitive' ? '8.45%' : '7.07%',
+            returnOnEquity: option === 'competitive' ? '12.71%' : '10.61%'
+          },
+          efficiencyRatios: {
+            inventoryTurnover: 3.0,
+            accountsReceivableTurnover: 4.5,
+            assetTurnover: 0.6
+          },
+          leverageRatios: {
+            debtToEquityRatio: 0.6,
+            interestCoverageRatio: 5,
+            debtServiceCoverageRatio: 3.5
+          },
+          cashFlowRatios: {
+            operatingCashFlowRatio: 0.6,
+            freeCashFlow: -15
+          },
+          valuationRatios: {
+            peRatio: 16,
+            eps: 50
+          }
+        }
+      };
+
+      // Simulate API call delay
+      setTimeout(() => {
+        updateTables(sampleData);
+        updateChart(sampleData);
+        updateProgressBarAfterSelection();
+      }, 500);
+    }
+
+    // Function to update progress bar to 100% after selection
+    function updateProgressBarAfterSelection() {
+      progressBarInner.style.width = '100%';
+    }
+
+    // Add event listeners to the buttons
+    document.getElementById('competitive-bid-btn').addEventListener('click', () => {
+      fetchDataAndUpdate('competitive');
+    });
+
+    document.getElementById('joint-bid-btn').addEventListener('click', () => {
+      fetchDataAndUpdate('joint');
     });
 
     // Accessibility: Keyboard Navigation for Buttons

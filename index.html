@@ -1,226 +1,451 @@
-<!DOCTYPE html>  
-<html lang="en"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <title>Financial Simulation</title> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added for responsiveness -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> 
-    <style> 
-        /* Reset and Base Styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        html, body { 
-            height: 100%; 
-            font-family: Arial, sans-serif; 
-            background-color: #fff; 
-        } 
-        body { 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        /* Container Styles */
-        .container { 
-            width: 90vw; /* Full viewport width */
-            height: 90vh; /* Full viewport height */
-            max-width: 1300px; /* Maximum width to prevent excessive stretching on large screens */
-            border: 2px solid #000; 
-            padding: 20px; 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background-color: #f9f9f9; /* Slight background for better contrast */
-        } 
-        /* Header Styles */
-        .header { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 36px; 
-            font-weight: bold; 
-            position: relative; 
-            padding-bottom: 20px; 
-        } 
-        .header img { 
-            position: absolute; 
-            right: 20px; 
-            top: 0%; 
-            transform: translateY(-50%); 
-            width: 80px; /* Reduced size for better fit */
-            height: 80px; 
-        } 
-        /* Timer Styles */
-        .timer { 
-            text-align: left; 
-            font-size: 24px; 
-            margin-bottom: 10px; 
-        } 
-        /* Content Styles */
-        .content { 
-            border: 2px solid #000; 
-            padding: 20px; 
-            flex: 1; /* Allows content to expand and fill available space */
-            overflow-y: auto; /* Adds scrollbar if content overflows */
-            margin-bottom: 20px; 
-            background-color: #fff;
-        } 
-        .section { 
-            margin-bottom: 20px; 
-        } 
-        .section-title { 
-            font-weight: bold; 
-            margin-bottom: 10px; 
-        } 
-        .section-title h2 { 
-            margin: 0; 
-            font-size: 24px; 
-        } 
-        /* Buttons Styles */ 
-        .buttons {  
-            display: flex; 
-            justify-content: space-between; /* Distribute buttons to the far ends */
-            align-items: center; /* Vertically center the buttons */
-            width: 100%; /* Ensure buttons container spans full width */
-            gap: 20px; /* Space between buttons */
-            margin-top: 20px; 
-        } 
-        .button, .button-secondary { 
-            background-color: #4E67EB; 
-            color: #fff; 
-            border: none; 
-            padding: 12px 20px; 
-            font-size: 16px; 
-            cursor: pointer; 
-            text-decoration: none; 
-            text-align: center; 
-            min-width: 120px; /* Reduced from 150px */
-            border-radius: 4px; 
-            transition: background-color 0.3s ease; 
-            display: inline-block;
-        } 
-        .button-secondary { 
-            background-color: #e97878; 
-        } 
-        .button:hover, .button-secondary:hover { 
-            opacity: 0.9; 
-        } 
-        /* Responsive Adjustments */ 
-        @media (max-width: 768px) { 
-            .container { 
-                width: 95vw; 
-                height: 95vh; 
-                padding: 15px; 
-            } 
-            .header { 
-                flex-direction: column; 
-                text-align: center; 
-                padding-bottom: 10px; 
-            } 
-            .header img { 
-                position: static; 
-                transform: none; 
-                margin-top: 10px; 
-                width: 60px; 
-                height: 60px; 
-            } 
-            .buttons { 
-                flex-direction: column; 
-                justify-content: center; /* Center buttons vertically in column layout */
-                align-items: center; /* Center buttons horizontally in column layout */
-                gap: 10px; 
-                width: 100%;
-            } 
-            .button, .button-secondary { 
-                width: 100%; 
-                max-width: 300px; 
-                min-width: unset; /* Remove min-width on smaller screens */
-            } 
-            .timer { 
-                text-align: center; 
-                font-size: 20px; 
-            } 
-        } 
-    </style> 
-</head> 
-<body> 
-    <div class="container"> 
-        <div class="timer"><i class="far fa-clock"></i> <span id="countdown-timer">20:00</span></div> 
-        <div class="header"> 
-            Financial Simulation 
-            <img alt="ZENLEARN Logo" src="logo.png" /> 
-        </div> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Financial Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <!-- AOS Library -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <!-- Chart.js CDN (if needed for future extensions) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Reset and Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        <div class="content">
-            <div class="section">
-                <div class="section-title">
-                    <h2>Simulation Overview</h2>
-                </div>
-                <p>
-                    This simulation is designed to effectively apply the concepts learned during the program.
-                </p>
-                <p>
-                    <strong>Structure:</strong> Make informed decisions across 24 market scenarios that a CXO may encounter within an organization. Participants are encouraged to discuss the presented options and select a choice at the end of each scenario. The financial impact of the selected option will be reflected in updated financial statements after each scenario.
-                </p>
-                <p>
-                    <strong>Duration:</strong> Each scenario is expected to take approximately 10 minutes. Participants can proceed to the next scenario or end the simulation at any point. Please ensure you download your final financial statements upon completion of the simulation. Note that data may be available afterward, but reverting to previous scenarios or simulation briefs may not be possible.
-                </p>
-            </div>
-            
-            <div class="section">
-                <div class="section-title">
-                    <h2>Participant Brief</h2>
-                </div>
-                <p>
-                    As a CXO of an Indian MSME manufacturing organization, you are responsible for steering the company towards growth and profitability.
-                </p>
-                <p>
-                    The Board of Directors and shareholders expect the organization to increase its top line by 30% year-over-year and achieve a profit after tax of at least 20%.
-                </p>
-                <p>
-                    Given the current market conditions, there are various opportunities and scenarios to increase sales, control costs, and improve cash flow. These opportunities may include commercial bidding, investing in new products, expanding into new markets, acquiring new capital equipment, or pursuing mergers and acquisitions (M&A) opportunities.
-                </p>
-                <p>
-                    Decisions will be based on the various scenarios presented continuously throughout the simulation.
-                </p>
-            </div>
+    /* Animated Gradient Background */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(-45deg, #f4f4f4, #c5d1f1, #294D89, #ffffff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      overflow-x: hidden;
+      color: #294D89;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      width: 90%;
+      max-width: 1300px;
+      margin: 20px auto;
+      padding: 20px;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Loader Styles */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #294D89;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Container Styling */
+    .container {
+      border: 2px solid #294D89;
+      padding: 20px;
+      box-sizing: border-box;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Header Container Styles */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 36px;
+      font-weight: bold;
+      padding-bottom: 20px;
+      animation: slideIn 1s ease-out;
+      width: 100%;
+      position: relative;
+    }
+
+    .header .title {
+      color: #294D89;
+      flex: 1;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header img {
+      width: 80px;
+      height: 80px;
+      animation: bounceIn 1s ease-out;
+    }
+
+    /* Timer Styles */
+    .timer-container {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+    }
+
+    .timer-container svg {
+      width: 80px;
+      height: 80px;
+      transform: rotate(-90deg);
+    }
+
+    .timer-container circle {
+      fill: none;
+      stroke-width: 8;
+      stroke: #e0e0e0;
+    }
+
+    .timer-container .progress {
+      stroke: #4E67EB;
+      stroke-dasharray: 226;
+      stroke-dashoffset: 226;
+      stroke-linecap: round;
+      transform-origin: center;
+      transition: stroke-dashoffset 1s linear, stroke 0.3s;
+    }
+
+    .timer-container .time {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      font-weight: bold;
+      color: #294D89;
+    }
+
+    /* Content Styles */
+    .content {
+      border: 2px solid #294D89;
+      padding: 20px;
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      background-color: #fafafa;
+      animation: fadeInUp 1s forwards 0.5s;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .section-title::before {
+      content: "\f0c8"; /* Font Awesome Square Icon */
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #4E67EB;
+    }
+
+    /* Buttons Styles */
+    .footer-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-buttons .end-button,
+    .footer-buttons .next-button {
+      background-color: #4E67EB;
+      color: #fff;
+      padding: 15px 30px;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-buttons .end-button {
+      background-color: #e97878;
+    }
+
+    .footer-buttons .end-button:hover {
+      background-color: #d45b5b;
+    }
+
+    .footer-buttons .next-button:hover {
+      background-color: #3b50c1;
+    }
+
+    .footer-buttons .end-button::before,
+    .footer-buttons .next-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: skewX(-45deg);
+      transition: left 0.3s;
+      pointer-events: none;
+    }
+
+    .footer-buttons .end-button:hover::before,
+    .footer-buttons .next-button:hover::before {
+      left: 100%;
+    }
+
+    .footer-buttons .end-button:active,
+    .footer-buttons .next-button:active {
+      transform: scale(0.95);
+    }
+
+    /* Animations */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounceIn {
+      0% { transform: translateY(-100%) scale(0.3); opacity: 0; }
+      50% { transform: translateY(15%) scale(1.05); opacity: 1; }
+      70% { transform: translateY(-10%) scale(0.9); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+        padding: 15px;
+      }
+
+      .header {
+        flex-direction: column;
+        text-align: center;
+        padding-bottom: 10px;
+      }
+
+      .header img {
+        width: 60px;
+        height: 60px;
+      }
+
+      .timer-container {
+        width: 60px;
+        height: 60px;
+      }
+
+      .timer-container .time {
+        font-size: 14px;
+      }
+
+      .footer-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .section-title {
+        padding-left: 20px;
+      }
+
+      .section-title::before {
+        left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Container -->
+  <div class="container">
+    <!-- Header with Timer, Title, and Logo -->
+    <div class="header">
+      <!-- Countdown Timer -->
+      <div class="timer-container">
+        <svg>
+          <circle cx="40" cy="40" r="36"></circle>
+          <circle class="progress" cx="40" cy="40" r="36"></circle>
+        </svg>
+        <div class="time" id="countdown-timer">05:00</div>
+      </div>
+
+      <!-- Title -->
+      <div class="title">Financial Simulation</div>
+
+      <!-- Logo -->
+      <img alt="ZENLEARN Logo" src="logo.png" />
+    </div>
+
+    <!-- Content Section -->
+    <div class="content" data-aos="fade-up">
+      <div class="section">
+        <div class="section-title">
+          <h2>Simulation Overview</h2>
         </div>
-        
+        <p>
+          This simulation is designed to effectively apply the concepts learned during the program.
+        </p>
+        <p>
+          <strong>Structure:</strong> Make informed decisions across 24 market scenarios that a CXO may encounter within an organization. Participants are encouraged to discuss the presented options and select a choice at the end of each scenario. The financial impact of the selected option will be reflected in updated financial statements after each scenario.
+        </p>
+        <p>
+          <strong>Duration:</strong> Each scenario is expected to take approximately 10 minutes. Participants can proceed to the next scenario or end the simulation at any point. Please ensure you download your final financial statements upon completion of the simulation. Note that data may be available afterward, but reverting to previous scenarios or simulation briefs may not be possible.
+        </p>
+      </div>
 
-        <div class="buttons">  
-            <a href="index.html" class="button-secondary">End Simulation</a> 
-            <a href="organization_brief.html" class="button">Let's Start</a> 
-        </div> 
-    </div> 
+      <div class="section">
+        <div class="section-title">
+          <h2>Participant Brief</h2>
+        </div>
+        <p>
+          As a CXO of an Indian MSME manufacturing organization, you are responsible for steering the company towards growth and profitability.
+        </p>
+        <p>
+          The Board of Directors and shareholders expect the organization to increase its top line by 30% year-over-year and achieve a profit after tax of at least 20%.
+        </p>
+        <p>
+          Given the current market conditions, there are various opportunities and scenarios to increase sales, control costs, and improve cash flow. These opportunities may include commercial bidding, investing in new products, expanding into new markets, acquiring new capital equipment, or pursuing mergers and acquisitions (M&A) opportunities.
+        </p>
+        <p>
+          Decisions will be based on the various scenarios presented continuously throughout the simulation.
+        </p>
+      </div>
+    </div>
 
-    <!-- JavaScript for 20-minute countdown timer --> 
-    <script> 
-        // Set the countdown duration (20 minutes) 
-        const countdownDuration = 5 * 60; // 20 minutes in seconds 
-        let remainingTime = countdownDuration; 
+    <!-- Footer Buttons -->
+    <div class="footer-buttons" data-aos="fade-up">
+      <a href="index.html" class="end-button"><i class="fas fa-times-circle"></i> End Simulation</a>
+      <a href="organization_brief.html" class="next-button"><i class="fas fa-play-circle"></i> Let's Start</a>
+    </div>
+  </div>
 
-        const timerElement = document.getElementById('countdown-timer'); 
+  <!-- AOS JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- JavaScript for Interactive Elements -->
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
 
-        function updateTimer() { 
-            const minutes = Math.floor(remainingTime / 60); 
-            const seconds = remainingTime % 60; 
-            timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`; 
-            if (remainingTime > 0) { 
-                remainingTime--; 
-            } else { 
-                clearInterval(timerInterval); 
-                // Actions to take when timer ends 
-                alert('Time is up! The simulation will now end.'); 
-                // Redirect to a specific page or perform any other desired action 
-                window.location.href = "index.html"; // Replace with your desired URL 
-            } 
-        } 
+    // Loader
+    window.addEventListener('load', function() {
+      var loader = document.getElementById('loader');
+      loader.style.display = 'none';
+    });
 
-        // Initialize the timer 
-        updateTimer(); // Initial call to display the starting time 
-        const timerInterval = setInterval(updateTimer, 1000); 
-    </script> 
-</body> 
+    // Countdown Timer with Circular Progress
+    const countdownDuration = 5 * 60; // 20 minutes in seconds
+    let remainingTime = countdownDuration;
+    const timerElement = document.getElementById('countdown-timer');
+    const progressCircle = document.querySelector('.progress');
+    const totalDash = 2 * Math.PI * 36; // Circumference for r=36
+
+    // Initialize the timer
+    progressCircle.style.strokeDasharray = totalDash;
+    progressCircle.style.strokeDashoffset = totalDash;
+    progressCircle.style.stroke = '#4E67EB'; // Initial color
+    updateTimer(); // Initial call
+    const timerInterval = setInterval(updateTimer, 1000);
+
+    function updateTimer() {
+      const minutes = Math.floor(remainingTime / 60);
+      const seconds = remainingTime % 60;
+      timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      // Update circular progress
+      const progressOffset = totalDash - (remainingTime / countdownDuration) * totalDash;
+      progressCircle.style.strokeDashoffset = progressOffset;
+
+      // Change color based on time remaining
+      if (remainingTime <= 60) {
+        progressCircle.style.stroke = '#ff4e4e'; // Red
+      } else if (remainingTime <= 3 * 60) {
+        progressCircle.style.stroke = '#f1c40f'; // Yellow
+      } else {
+        progressCircle.style.stroke = '#4E67EB'; // Blue
+      }
+
+      if (remainingTime > 0) {
+        remainingTime--;
+      } else {
+        clearInterval(timerInterval);
+        alert('Time is up! The simulation will now end.');
+        window.location.href = "index.html"; // Redirect to index or desired action
+      }
+    }
+
+    // Smooth Page Transition (optional)
+    window.onload = () => {
+      document.body.classList.add('loaded');
+    };
+  </script>
+</body>
 </html>
