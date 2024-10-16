@@ -1,451 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Financial Simulation</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Font Awesome for Icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-  <!-- AOS Library -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-  <!-- Chart.js CDN (if needed for future extensions) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    /* Reset and Base Styles */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Screen</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <!-- AOS Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        /* Reset and Root Variables */
+        :root {
+            --light-gray: #c5d1f1;
+            --bright-blue: #4E67EB;
+            --dark-blue: #294D89;
+            --error-red: #ff4d4f;
+            --transition-speed: 0.3s;
+            --font-size-base: 16px;
+            --font-size-small: 14px;
+            --font-size-large: 18px;
+        }
 
-    /* Animated Gradient Background */
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(-45deg, #f4f4f4, #c5d1f1, #294D89, #ffffff);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      overflow-x: hidden;
-      color: #294D89;
-      line-height: 1.6;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      width: 90%;
-      max-width: 1300px;
-      margin: 20px auto;
-      padding: 20px;
-      position: relative;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        /* Animated Gradient Background */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(-45deg, #c5d1f1, #294D89, #4E67EB, #ffffff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
 
-    /* Loader Styles */
-    #loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #fff;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    .spinner {
-      border: 8px solid #f3f3f3;
-      border-top: 8px solid #294D89;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
-    }
+        /* Loader Styles */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid var(--bright-blue);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
 
-    /* Container Styling */
-    .container {
-      border: 2px solid #294D89;
-      padding: 20px;
-      box-sizing: border-box;
-      background-color: #fff;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      animation: fadeIn 1s ease-out;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      flex: 1;
-    }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+        /* Login Container Styling */
+        .login-container {
+            background: white;
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            transition: all var(--transition-speed) ease;
+            animation: fadeIn 1s ease-out;
+            position: relative;
+        }
 
-    /* Header Container Styles */
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 36px;
-      font-weight: bold;
-      padding-bottom: 20px;
-      animation: slideIn 1s ease-out;
-      width: 100%;
-      position: relative;
-    }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .header .title {
-      color: #294D89;
-      flex: 1;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
+        /* Logo Styling */
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            animation: bounceIn 1s ease-out;
+        }
 
-    .header img {
-      width: 80px;
-      height: 80px;
-      animation: bounceIn 1s ease-out;
-    }
+        .logo img {
+            max-width: 100%;
+            height: auto;
+            width: 150px;
+            transition: transform var(--transition-speed);
+        }
 
-    /* Timer Styles */
-    .timer-container {
-      position: relative;
-      width: 80px;
-      height: 80px;
-      flex-shrink: 0;
-    }
+        .logo img:hover {
+            transform: scale(1.05);
+        }
 
-    .timer-container svg {
-      width: 80px;
-      height: 80px;
-      transform: rotate(-90deg);
-    }
+        @keyframes bounceIn {
+            0% { transform: translateY(-100%) scale(0.3); opacity: 0; }
+            50% { transform: translateY(15%) scale(1.05); opacity: 1; }
+            70% { transform: translateY(-10%) scale(0.9); }
+            100% { transform: translateY(0) scale(1); }
+        }
 
-    .timer-container circle {
-      fill: none;
-      stroke-width: 8;
-      stroke: #e0e0e0;
-    }
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            animation: slideIn 1s ease-out;
+        }
 
-    .timer-container .progress {
-      stroke: #4E67EB;
-      stroke-dasharray: 226;
-      stroke-dashoffset: 226;
-      stroke-linecap: round;
-      transform-origin: center;
-      transition: stroke-dashoffset 1s linear, stroke 0.3s;
-    }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .timer-container .time {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 18px;
-      font-weight: bold;
-      color: #294D89;
-    }
+        .input-group {
+            position: relative;
+            width: 100%;
+            animation: fadeInUp 0.5s ease-out;
+        }
 
-    /* Content Styles */
-    .content {
-      border: 2px solid #294D89;
-      padding: 20px;
-      flex: 1;
-      overflow-y: auto;
-      margin-bottom: 20px;
-      background-color: #fafafa;
-      animation: fadeInUp 1s forwards 0.5s;
-    }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .section {
-      margin-bottom: 20px;
-    }
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 2.5rem 0.75rem 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
 
-    .section-title {
-      font-weight: bold;
-      margin-bottom: 10px;
-      position: relative;
-      padding-left: 25px;
-    }
+        .input-field:focus {
+            outline: none;
+            border-color: var(--bright-blue);
+            box-shadow: 0 0 5px rgba(78, 103, 235, 0.5);
+        }
 
-    .section-title h2 {
-      margin: 0;
-      font-size: 24px;
-    }
+        .input-label {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            pointer-events: none;
+            background-color: white;
+            padding: 0 0.25rem;
+            transition: all var(--transition-speed) ease;
+            font-size: 1rem;
+        }
 
-    .section-title::before {
-      content: "\f0c8"; /* Font Awesome Square Icon */
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #4E67EB;
-    }
+        .input-field:focus + .input-label,
+        .input-field:not(:placeholder-shown) + .input-label {
+            top: -0.6rem;
+            font-size: 0.75rem;
+            color: var(--bright-blue);
+        }
 
-    /* Buttons Styles */
-    .footer-buttons {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        /* Password Toggle Icon */
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #999;
+            font-size: 1.2rem;
+            transition: color var(--transition-speed);
+        }
 
-    .footer-buttons .end-button,
-    .footer-buttons .next-button {
-      background-color: #4E67EB;
-      color: #fff;
-      padding: 15px 30px;
-      text-decoration: none;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: transform 0.3s, background-color 0.3s;
-      position: relative;
-      overflow: hidden;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
+        .password-toggle:hover {
+            color: var(--bright-blue);
+        }
 
-    .footer-buttons .end-button {
-      background-color: #e97878;
-    }
+        /* Submit Button */
+        .button {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            background-color: var(--bright-blue);
+            color: white;
+            font-size: 1.125rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+        }
 
-    .footer-buttons .end-button:hover {
-      background-color: #d45b5b;
-    }
+        .button:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    .footer-buttons .next-button:hover {
-      background-color: #3b50c1;
-    }
+        .button:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
 
-    .footer-buttons .end-button::before,
-    .footer-buttons .next-button::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      transform: skewX(-45deg);
-      transition: left 0.3s;
-      pointer-events: none;
-    }
+        /* Error Message Styling */
+        .error-message {
+            color: var(--error-red);
+            font-size: var(--font-size-small);
+            margin-top: 0.25rem;
+            display: none;
+            text-align: left;
+            animation: fadeIn 0.3s ease-out;
+        }
 
-    .footer-buttons .end-button:hover::before,
-    .footer-buttons .next-button:hover::before {
-      left: 100%;
-    }
+        /* Responsive Typography */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 2rem;
+            }
 
-    .footer-buttons .end-button:active,
-    .footer-buttons .next-button:active {
-      transform: scale(0.95);
-    }
+            .logo img {
+                width: 120px;
+            }
+        }
 
-    /* Animations */
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 1.5rem;
+            }
 
-    @keyframes bounceIn {
-      0% { transform: translateY(-100%) scale(0.3); opacity: 0; }
-      50% { transform: translateY(15%) scale(1.05); opacity: 1; }
-      70% { transform: translateY(-10%) scale(0.9); }
-      100% { transform: translateY(0) scale(1); }
-    }
+            .logo img {
+                width: 100px;
+            }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+            .input-field {
+                padding: 0.5rem 2rem 0.5rem 0.5rem;
+                font-size: 0.9rem;
+            }
 
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .container {
-        width: 95%;
-        padding: 15px;
-      }
+            .input-label {
+                font-size: 0.9rem;
+            }
 
-      .header {
-        flex-direction: column;
-        text-align: center;
-        padding-bottom: 10px;
-      }
-
-      .header img {
-        width: 60px;
-        height: 60px;
-      }
-
-      .timer-container {
-        width: 60px;
-        height: 60px;
-      }
-
-      .timer-container .time {
-        font-size: 14px;
-      }
-
-      .footer-buttons {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-      }
-
-      .section-title {
-        padding-left: 20px;
-      }
-
-      .section-title::before {
-        left: 0;
-      }
-    }
-  </style>
+            .button {
+                font-size: 1rem;
+                padding: 0.6rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Loader -->
-  <div id="loader">
-    <div class="spinner"></div>
-  </div>
-
-  <!-- Container -->
-  <div class="container">
-    <!-- Header with Timer, Title, and Logo -->
-    <div class="header">
-      <!-- Countdown Timer -->
-      <div class="timer-container">
-        <svg>
-          <circle cx="40" cy="40" r="36"></circle>
-          <circle class="progress" cx="40" cy="40" r="36"></circle>
-        </svg>
-        <div class="time" id="countdown-timer">05:00</div>
-      </div>
-
-      <!-- Title -->
-      <div class="title">Financial Simulation</div>
-
-      <!-- Logo -->
-      <img alt="ZENLEARN Logo" src="logo.png" />
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner"></div>
     </div>
 
-    <!-- Content Section -->
-    <div class="content" data-aos="fade-up">
-      <div class="section">
-        <div class="section-title">
-          <h2>Simulation Overview</h2>
+    <!-- Login Container -->
+    <div class="login-container" data-aos="fade-up">
+        <div class="logo">
+            <img src="logo.png" alt="Zen Learn Logo">
         </div>
-        <p>
-          This simulation is designed to effectively apply the concepts learned during the program.
-        </p>
-        <p>
-          <strong>Structure:</strong> Make informed decisions across 24 market scenarios that a CXO may encounter within an organization. Participants are encouraged to discuss the presented options and select a choice at the end of each scenario. The financial impact of the selected option will be reflected in updated financial statements after each scenario.
-        </p>
-        <p>
-          <strong>Duration:</strong> Each scenario is expected to take approximately 10 minutes. Participants can proceed to the next scenario or end the simulation at any point. Please ensure you download your final financial statements upon completion of the simulation. Note that data may be available afterward, but reverting to previous scenarios or simulation briefs may not be possible.
-        </p>
-      </div>
-
-      <div class="section">
-        <div class="section-title">
-          <h2>Participant Brief</h2>
-        </div>
-        <p>
-          As a CXO of an Indian MSME manufacturing organization, you are responsible for steering the company towards growth and profitability.
-        </p>
-        <p>
-          The Board of Directors and shareholders expect the organization to increase its top line by 30% year-over-year and achieve a profit after tax of at least 20%.
-        </p>
-        <p>
-          Given the current market conditions, there are various opportunities and scenarios to increase sales, control costs, and improve cash flow. These opportunities may include commercial bidding, investing in new products, expanding into new markets, acquiring new capital equipment, or pursuing mergers and acquisitions (M&A) opportunities.
-        </p>
-        <p>
-          Decisions will be based on the various scenarios presented continuously throughout the simulation.
-        </p>
-      </div>
+        <form id="loginForm" novalidate>
+            <div class="input-group" data-aos="fade-up" data-aos-delay="100">
+                <input type="text" class="input-field" id="company" required placeholder=" ">
+                <label for="company" class="input-label">Company Name</label>
+                <div class="error-message" id="companyError"></div>
+            </div>
+            <div class="input-group" data-aos="fade-up" data-aos-delay="200">
+                <input type="text" class="input-field" id="userId" required placeholder=" ">
+                <label for="userId" class="input-label">User ID</label>
+                <div class="error-message" id="userIdError"></div>
+            </div>
+            <div class="input-group" data-aos="fade-up" data-aos-delay="300">
+                <input type="password" class="input-field" id="password" required placeholder=" ">
+                <label for="password" class="input-label">Password</label>
+                <span class="password-toggle" onclick="togglePassword()"><i class="fas fa-eye"></i></span>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+            <button type="submit" class="button" data-aos="fade-up" data-aos-delay="400">Log In</button>
+        </form>
     </div>
 
-    <!-- Footer Buttons -->
-    <div class="footer-buttons" data-aos="fade-up">
-      <a href="index.html" class="end-button"><i class="fas fa-times-circle"></i> End Simulation</a>
-      <a href="organization_brief.html" class="next-button"><i class="fas fa-play-circle"></i> Let's Start</a>
-    </div>
-  </div>
+    <!-- AOS JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Font Awesome JS (Optional for more interactive icons) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
 
-  <!-- AOS JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <!-- JavaScript for Interactive Elements -->
-  <script>
-    // Initialize AOS
-    AOS.init({
-      duration: 800,
-      once: true,
-    });
+        // Hide Loader Once Page is Fully Loaded
+        window.addEventListener('load', function() {
+            var loader = document.getElementById('loader');
+            loader.style.display = 'none';
+        });
 
-    // Loader
-    window.addEventListener('load', function() {
-      var loader = document.getElementById('loader');
-      loader.style.display = 'none';
-    });
+        // Form Elements
+        const form = document.getElementById('loginForm');
+        const companyInput = document.getElementById('company');
+        const userIdInput = document.getElementById('userId');
+        const passwordInput = document.getElementById('password');
 
-    // Countdown Timer with Circular Progress
-    const countdownDuration = 5 * 60; // 20 minutes in seconds
-    let remainingTime = countdownDuration;
-    const timerElement = document.getElementById('countdown-timer');
-    const progressCircle = document.querySelector('.progress');
-    const totalDash = 2 * Math.PI * 36; // Circumference for r=36
+        // Form Submission Event
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (validateForm()) {
+                // Simulate form submission delay
+                form.querySelector('.button').textContent = 'Logging In...';
+                form.querySelector('.button').disabled = true;
+                setTimeout(() => {
+                    window.location.href = 'overview.html';  // Redirect to overview.html after successful login
+                }, 1500);
+            }
+        });
 
-    // Initialize the timer
-    progressCircle.style.strokeDasharray = totalDash;
-    progressCircle.style.strokeDashoffset = totalDash;
-    progressCircle.style.stroke = '#4E67EB'; // Initial color
-    updateTimer(); // Initial call
-    const timerInterval = setInterval(updateTimer, 1000);
+        // Form Validation Function
+        function validateForm() {
+            let isValid = true;
 
-    function updateTimer() {
-      const minutes = Math.floor(remainingTime / 60);
-      const seconds = remainingTime % 60;
-      timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            // Validate Company Name
+            if (!companyInput.value.trim()) {
+                showError('companyError', 'Company name is required');
+                isValid = false;
+            } else {
+                hideError('companyError');
+            }
 
-      // Update circular progress
-      const progressOffset = totalDash - (remainingTime / countdownDuration) * totalDash;
-      progressCircle.style.strokeDashoffset = progressOffset;
+            // Validate User ID
+            if (!userIdInput.value.trim()) {
+                showError('userIdError', 'User ID is required');
+                isValid = false;
+            } else {
+                hideError('userIdError');
+            }
 
-      // Change color based on time remaining
-      if (remainingTime <= 60) {
-        progressCircle.style.stroke = '#ff4e4e'; // Red
-      } else if (remainingTime <= 3 * 60) {
-        progressCircle.style.stroke = '#f1c40f'; // Yellow
-      } else {
-        progressCircle.style.stroke = '#4E67EB'; // Blue
-      }
+            // Validate Password
+            if (!passwordInput.value) {
+                showError('passwordError', 'Password is required');
+                isValid = false;
+            } else if (passwordInput.value.length < 8) {
+                showError('passwordError', 'Password must be at least 8 characters long');
+                isValid = false;
+            } else {
+                hideError('passwordError');
+            }
 
-      if (remainingTime > 0) {
-        remainingTime--;
-      } else {
-        clearInterval(timerInterval);
-        alert('Time is up! The simulation will now end.');
-        window.location.href = "index.html"; // Redirect to index or desired action
-      }
-    }
+            return isValid;
+        }
 
-    // Smooth Page Transition (optional)
-    window.onload = () => {
-      document.body.classList.add('loaded');
-    };
-  </script>
+        // Show Error Message
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        // Hide Error Message
+        function hideError(elementId) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.style.display = 'none';
+        }
+
+        // Toggle Password Visibility
+        function togglePassword() { 
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.querySelector('.password-toggle i');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Reset Labels After Form Reset
+        function resetLabels() {
+            const labels = document.querySelectorAll('.input-label');
+            labels.forEach(label => {
+                if (label.previousElementSibling.value === '') {
+                    label.classList.remove('active');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
