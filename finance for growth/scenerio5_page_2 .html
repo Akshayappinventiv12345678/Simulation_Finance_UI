@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Financial Simulation - Scenario 5 Results</title>
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Reset and Base Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      /* Animated Gradient Background */
+      background: linear-gradient(-45deg, #c5d1f1, #294D89, #4E67EB, #ffffff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1300px;
+      margin: 20px auto;
+      border: 2px solid #000;
+      padding: 20px;
+      box-sizing: border-box;
+      position: relative;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease-out;
+    }
+
+    /* Header Container Styles */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 36px;
+      font-weight: bold;
+      position: relative;
+      padding-bottom: 20px;
+      animation: slideIn 1s ease-out;
+    }
+
+    .header .title {
+      flex: 1;
+      text-align: center;
+    }
+
+    .header img {
+      width: 80px;
+      height: 80px;
+      animation: bounceIn 1s ease-out;
+    }
+
+    /* Timer Styles */
+    .timer-container {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+    }
+
+    .timer-container svg {
+      transform: rotate(-90deg);
+      width: 80px;
+      height: 80px;
+    }
+
+    .timer-container circle {
+      fill: none;
+      stroke-width: 8;
+      stroke: #e0e0e0;
+    }
+
+    .timer-container .progress {
+      stroke: #4E67EB;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s linear, stroke 0.3s;
+    }
+
+    .timer-container .time {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* Scenario Title */
+    .scenario {
+      font-size: 26px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: bold;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 0.5s;
+    }
+
+    /* Updated Values Text */
+    .updated-values {
+      font-size: 14px;
+      font-style: italic;
+      text-align: left;
+      margin-bottom: 20px;
+      color: #000;
+    }
+
+    /* Content Layout */
+    .content {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      position: relative;
+      align-items: flex-start;
+    }
+
+    /* Vertical Divider */
+    .content::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100%;
+      width: 1px;
+      background-color: #000;
+    }
+
+    /* Left and Right Columns */
+    .left-column,
+    .right-column {
+      width: 48%;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    /* Description Styles */
+    .description {
+      margin-bottom: 20px;
+    }
+
+    .description h3 {
+      margin-bottom: 10px;
+    }
+
+    .description p {
+      margin: 10px 0;
+    }
+
+    /* Tables Styling */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    .table th,
+    .table td {
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: left;
+      position: relative;
+    }
+
+    /* Tooltip Styles */
+    .tooltip {
+      position: relative;
+      cursor: help;
+    }
+
+    .tooltip::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 50%;
+      bottom: 125%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s;
+      z-index: 10;
+    }
+
+    .tooltip:hover::after {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Right-align the second column */
+    .table th:nth-child(2),
+    .table td:nth-child(2) {
+      text-align: right;
+    }
+
+    .table th {
+      background-color: #4E67EB;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    /* Expandable Rows */
+    .expandable {
+      cursor: pointer;
+      background-color: #e9e9e9;
+    }
+
+    .expandable:hover {
+      background-color: #dcdcdc;
+    }
+
+    .hidden-row {
+      display: none;
+      background-color: #f9f9f9;
+    }
+
+    /* Footer Section */
+    .footer-buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-buttons .end-button,
+    .footer-buttons .next-button {
+      background-color: #4E67EB;
+      color: #fff;
+      padding: 15px 30px;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-buttons .end-button {
+      background-color: #e97878;
+    }
+
+    .footer-buttons .end-button:hover {
+      background-color: #d45b5b;
+    }
+
+    .footer-buttons .next-button:hover {
+      background-color: #3b50c1;
+    }
+
+    .footer-buttons .end-button::before,
+    .footer-buttons .next-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: skewX(-45deg);
+      transition: left 0.3s;
+    }
+
+    .footer-buttons .end-button:hover::before,
+    .footer-buttons .next-button:hover::before {
+      left: 100%;
+    }
+
+    .footer-buttons .end-button:active,
+    .footer-buttons .next-button:active {
+      transform: scale(0.95);
+    }
+
+    /* Scrollable Table Container */
+    .table-container {
+      height: 500px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #fdfdfd;
+      border-radius: 5px;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 25px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .progress-bar-inner {
+      height: 5px;
+      width: 0;
+      background-color: #4E67EB;
+      border-radius: 25px;
+      transition: width 1s ease-in-out;
+    }
+
+    /* Chart Container */
+    .chart-container {
+      margin-top: 20px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: translateY(-100%) scale(0.3);
+        opacity: 0;
+      }
+
+      50% {
+        transform: translateY(15%) scale(1.05);
+        opacity: 1;
+      }
+
+      70% {
+        transform: translateY(-10%) scale(0.9);
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+        padding: 15px;
+      }
+
+      .content {
+        flex-direction: column;
+      }
+
+      .content::before {
+        display: none;
+      }
+
+      .left-column,
+      .right-column {
+        width: 100%;
+        padding: 0;
+      }
+
+      .footer-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .table-container {
+        height: auto;
+        max-height: 300px;
+      }
+
+      .timer-container {
+        width: 60px;
+        height: 60px;
+      }
+
+      .timer-container .time {
+        font-size: 14px;
+      }
+
+      .header {
+        font-size: 24px;
+      }
+
+      .header img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header with Timer, Title, and Logo -->
+    <div class="header">
+      <!-- Countdown Timer -->
+      <div class="timer-container">
+        <svg>
+          <circle cx="40" cy="40" r="36"></circle>
+          <circle class="progress" cx="40" cy="40" r="36"></circle>
+        </svg>
+        <div class="time" id="countdown-timer">05:00</div>
+      </div>
+
+      <!-- Title -->
+      <div class="title">Financial Simulation</div>
+
+      <!-- Logo -->
+      <img alt="ZENLEARN Logo" src="logo.png" />
+    </div>
+
+    <!-- Scenario Title -->
+    <div class="scenario">Scenario 5: Organizing Sales Day at Customer Location</div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+      <div class="progress-bar-inner" id="progress-bar-inner"></div>
+    </div>
+
+    <div class="content">
+      <!-- Left column: Description and details -->
+      <div class="left-column">
+        <div class="description">
+          <h3>Concepts</h3>
+          <h4>Assumptions:</h4>
+          <p><strong>Event Costs:</strong> Expenses associated with organizing the sales event are recorded as marketing expenses. The costs impact the P&L immediately.</p>
+
+          <p><strong>Revenue from the Event:</strong> Orders generated from the event are booked as revenue, with corresponding entries in accounts receivable.</p>
+
+          <p><strong>Collaborative Costs:</strong> If the company shares costs with the customer, the expense is lower, but both companies bear the marketing expenses proportionally.</p>
+        </div>
+
+        <div class="options">
+          <!-- Optional content can go here -->
+        </div>
+
+        <div class="investment">
+          <!-- Optional content can go here -->
+        </div>
+
+        <div class="output">
+          <!-- Optional content can go here -->
+        </div>
+
+        <div class="buttons">
+          <!-- Optional buttons can go here -->
+        </div>
+      </div>
+
+      <!-- Right column: Tables and Charts -->
+      <div class="right-column">
+        <div class="updated-values"><strong>(Updated values post Scenario)</strong></div>
+        <!-- Scrollable Container Start -->
+        <div class="table-container">
+          <!-- Balance Sheet Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Balance Sheet</th>
+              </tr>
+              <tr>
+                <th>Assets</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="expandable">
+                <td><strong>Current Assets <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Cash and Cash Equivalents</td>
+                <td>50</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Accounts Receivable</td>
+                <td>80</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Inventory</td>
+                <td>100</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Current Assets</strong></td>
+                <td>230</td>
+              </tr>
+              <tr class="expandable">
+                <td><strong>Non-current Assets <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Property, Plant & Equipment</td>
+                <td>500</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Intangible Assets (Patents)</td>
+                <td>20</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Non-current Assets</strong></td>
+                <td>520</td>
+              </tr>
+              <tr>
+                <td><strong>Total Assets</strong></td>
+                <td>750</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Liabilities & Equity Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Liabilities & Equity</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="expandable">
+                <td><strong>Current Liabilities <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Accounts Payable</td>
+                <td>70</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Short-term Debt</td>
+                <td>30</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Current Liabilities</strong></td>
+                <td>100</td>
+              </tr>
+              <tr class="expandable">
+                <td><strong>Long-term Liabilities <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Long-term Debt</td>
+                <td>150</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Liabilities</strong></td>
+                <td>250</td>
+              </tr>
+              <tr class="expandable">
+                <td><strong>Equity <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Shareholders’ Equity</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td><strong>Total Liabilities & Equity</strong></td>
+                <td>750</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Profit and Loss Statement Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Profit & Loss (Income) Statement</th>
+              </tr>
+              <tr>
+                <th>Line Item</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Revenue (Sales)</td>
+                <td>400</td>
+              </tr>
+              <tr>
+                <td>Cost of Goods Sold (COGS)</td>
+                <td>200</td>
+              </tr>
+              <tr>
+                <td>Gross Profit</td>
+                <td>200</td>
+              </tr>
+              <tr>
+                <td>Operating Expenses</td>
+                <td>120</td>
+              </tr>
+              <tr>
+                <td>Operating Income (EBIT)</td>
+                <td>80</td>
+              </tr>
+              <tr>
+                <td>Interest Expense</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>Income Before Tax</td>
+                <td>60</td>
+              </tr>
+              <tr>
+                <td>Tax</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>Net Income</td>
+                <td>45</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Cash Flow Statement Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Cash Flow Statement</th>
+              </tr>
+              <tr>
+                <th>Line Item</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cash from Operating Activities</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>Cash from Investing Activities</td>
+                <td>-100</td>
+              </tr>
+              <tr>
+                <td>Cash from Financing Activities</td>
+                <td>30</td>
+              </tr>
+              <tr>
+                <td><strong>Net Increase in Cash</strong></td>
+                <td>-20</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Ratios Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Ratio</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Liquidity Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Liquidity Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>1. Current Ratio</td>
+                <td>1.5</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>2. Quick Ratio (Acid Test)</td>
+                <td>1.2</td>
+              </tr>
+
+              <!-- Profitability Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Profitability Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>3. Gross Profit Margin</td>
+                <td>50%</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>4. Net Profit Margin</td>
+                <td>11.25%</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>5. Return on Assets (ROA)</td>
+                <td>6%</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>6. Return on Equity (ROE)</td>
+                <td>9%</td>
+              </tr>
+
+              <!-- Efficiency Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Efficiency Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>7. Inventory Turnover Ratio</td>
+                <td>2.5</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>8. Accounts Receivable Turnover Ratio</td>
+                <td>4.0</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>9. Asset Turnover Ratio</td>
+                <td>0.53</td>
+              </tr>
+
+              <!-- Leverage Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Leverage Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>10. Debt-to-Equity Ratio</td>
+                <td>0.5</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>11. Interest Coverage Ratio</td>
+                <td>4</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>12. Debt Service Coverage Ratio (DSCR)</td>
+                <td>3</td>
+              </tr>
+
+              <!-- Cash Flow Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Cash Flow Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>13. Operating Cash Flow Ratio</td>
+                <td>0.5</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>14. Free Cash Flow (FCF)</td>
+                <td>-20</td>
+              </tr>
+
+              <!-- Valuation Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Valuation Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>15. Price-to-Earnings (P/E) Ratio</td>
+                <td>15</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>16. Earnings per Share (EPS)</td>
+                <td>45</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Scrollable Container End -->
+
+        <!-- Interactive Chart -->
+        <div class="chart-container">
+          <canvas id="revenueChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section with End Simulation and Next Scenario Buttons -->
+    <div class="footer-buttons">
+      <a href="index.html" class="end-button">End Simulation</a>
+      <a href="scenerio6_page_1.html" class="next-button">Next Scenario</a>
+    </div>
+  </div>
+
+  <!-- JavaScript for Interactive Elements -->
+  <script>
+    // Countdown Timer with Circular Progress
+    const countdownDuration = 5 * 60; // 20 minutes in seconds
+    let remainingTime = countdownDuration;
+    const timerElement = document.getElementById('countdown-timer');
+    const progressCircle = document.querySelector('.progress');
+    const totalDash = 2 * Math.PI * 36; // Circumference for r=36
+
+    // Initialize the progress circle
+    progressCircle.style.strokeDasharray = totalDash;
+    progressCircle.style.strokeDashoffset = totalDash;
+
+    function updateTimer() {
+      const minutes = Math.floor(remainingTime / 60);
+      const seconds = remainingTime % 60;
+      timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      // Update circular progress
+      const progressOffset = totalDash - (remainingTime / countdownDuration) * totalDash;
+      progressCircle.style.strokeDashoffset = progressOffset;
+
+      // Change color based on time remaining
+      if (remainingTime <= 60) {
+        progressCircle.style.stroke = '#ff4e4e'; // Red
+      } else if (remainingTime <= 3 * 60) {
+        progressCircle.style.stroke = '#f1c40f'; // Yellow
+      } else {
+        progressCircle.style.stroke = '#4E67EB'; // Blue
+      }
+
+      if (remainingTime > 0) {
+        remainingTime--;
+      } else {
+        clearInterval(timerInterval);
+        clearInterval(progressInterval);
+        alert('Time is up! The simulation will now end.');
+        window.location.href = "index.html"; // Redirect to index or desired action
+      }
+    }
+
+    // Initialize the timer
+    updateTimer(); // Initial call
+    const timerInterval = setInterval(updateTimer, 1000);
+
+    // Progress Bar Update synchronized with the countdown timer
+    const progressBarInner = document.getElementById('progress-bar-inner');
+    function updateProgressBar() {
+      const elapsedTime = countdownDuration - remainingTime;
+      const progressPercentage = (elapsedTime / countdownDuration) * 100;
+      progressBarInner.style.width = `${progressPercentage}%`;
+    }
+
+    // Initialize the progress bar
+    updateProgressBar(); // Initial call
+    const progressInterval = setInterval(updateProgressBar, 1000);
+
+    // Expandable Rows in Tables
+    const expandableRows = document.querySelectorAll('.expandable');
+    expandableRows.forEach(row => {
+      row.addEventListener('click', () => {
+        const icon = row.querySelector('i');
+        const nextRows = [];
+        let sibling = row.nextElementSibling;
+        while (sibling && sibling.classList.contains('hidden-row')) {
+          nextRows.push(sibling);
+          sibling = sibling.nextElementSibling;
+        }
+        nextRows.forEach(r => {
+          r.style.display = r.style.display === 'table-row' ? 'none' : 'table-row';
+        });
+        // Toggle icon
+        if (icon.classList.contains('fa-plus')) {
+          icon.classList.remove('fa-plus');
+          icon.classList.add('fa-minus');
+        } else {
+          icon.classList.remove('fa-minus');
+          icon.classList.add('fa-plus');
+        }
+      });
+    });
+
+    // Interactive Chart using Chart.js
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    const revenueChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Before Scenario', 'After Scenario'],
+        datasets: [{
+          label: 'Revenue (INR Lakhs)',
+          data: [400, 450], // Update these values based on Scenario 5 outcomes
+          backgroundColor: ['#4E67EB', '#f1c40f']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              boxWidth: 20,
+              padding: 15
+            }
+          },
+          title: {
+            display: true,
+            text: 'Revenue Before and After the Scenario'
+          }
+        },
+        animation: {
+          duration: 1000,
+          easing: 'easeInOutQuad'
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Accessibility: Keyboard Navigation for Buttons
+    const buttons = document.querySelectorAll('.end-button, .next-button');
+    buttons.forEach(button => {
+      button.setAttribute('tabindex', '0');
+      button.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          button.click();
+        }
+      });
+    });
+
+    // Animations for Page Load
+    window.onload = () => {
+      document.querySelector('.container').classList.add('loaded');
+    };
+  </script>
+</body>
+
+</html>

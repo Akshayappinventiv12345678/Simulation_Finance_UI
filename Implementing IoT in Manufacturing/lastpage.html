@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Congratulations - Program Completed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts for Enhanced Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <!-- AOS Library for Animations -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <style>
+    /* Reset and Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Animated Gradient Background */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(-45deg, #f4f4f4, #c5d1f1, #294D89, #ffffff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      overflow-x: hidden;
+      color: #294D89;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Loader Styles */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #294D89;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Container Styling */
+    .container {
+      width: 90%;
+      max-width: 900px;
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      padding: 50px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1s ease-out;
+      margin: 50px auto;
+      flex: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Header Container Styles */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 36px;
+      font-weight: bold;
+      padding-bottom: 20px;
+      animation: slideIn 1s ease-out;
+      width: 100%;
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .header .title {
+      color: #294D89;
+      flex: 1;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header img {
+      width: 80px;
+      height: 80px;
+      animation: bounceIn 1s ease-out;
+    }
+
+    /* Timer Styles */
+    .timer-container {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+    }
+
+    .timer-container svg {
+      width: 80px;
+      height: 80px;
+      transform: rotate(-90deg);
+    }
+
+    .timer-container circle {
+      fill: none;
+      stroke-width: 8;
+      stroke: #e0e0e0;
+    }
+
+    .timer-container .progress {
+      stroke: #4E67EB;
+      stroke-dasharray: 226;
+      stroke-dashoffset: 226;
+      stroke-linecap: round;
+      transform-origin: center;
+      transition: stroke-dashoffset 1s linear, stroke 0.3s;
+    }
+
+    .timer-container .time {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      font-weight: bold;
+      color: #294D89;
+    }
+
+    /* Celebratory SVG */
+    .celebration-svg {
+      width: 150px;
+      margin: 0 auto 20px;
+      animation: bounceIn 1s ease-out;
+    }
+
+    /* Header Styles */
+    .header-main {
+      font-size: 36px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      animation: slideInDown 1s ease-out;
+    }
+
+    /* Congratulations Message */
+    .congrats-message {
+      font-size: 24px;
+      color: #34495e;
+      margin-bottom: 40px;
+      line-height: 1.5;
+      animation: fadeInUp 1s forwards 0.5s;
+    }
+
+    /* Buttons */
+    .footer-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .footer-buttons .button {
+      background-color: #4E67EB;
+      color: #fff;
+      padding: 15px 25px;
+      text-decoration: none;
+      border: none;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 200px;
+      overflow: hidden;
+    }
+
+    .footer-buttons .button.exit {
+      background-color: #e97878;
+    }
+
+    .footer-buttons .button.exit:hover {
+      background-color: #d45b5b;
+    }
+
+    .footer-buttons .button:hover {
+      background-color: #3b50c1;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .footer-buttons .button .icon {
+      margin-right: 10px;
+      transition: transform 0.3s;
+    }
+
+    .footer-buttons .button:hover .icon {
+      transform: translateX(5px);
+    }
+
+    .footer-buttons .button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: skewX(-45deg) translateX(-100%);
+      transition: transform 0.3s;
+      border-radius: 50px;
+      pointer-events: none;
+    }
+
+    .footer-buttons .button:hover::before {
+      transform: skewX(-45deg) translateX(100%);
+    }
+
+    .footer-buttons .button:active {
+      transform: scale(0.95);
+    }
+
+    /* Animations */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.3); opacity: 0; }
+      50% { transform: scale(1.1); opacity: 1; }
+      70% { transform: scale(0.9); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+        padding: 30px 20px;
+      }
+
+      .header {
+        flex-direction: column;
+        text-align: center;
+        padding-bottom: 10px;
+      }
+
+      .header img {
+        width: 60px;
+        height: 60px;
+      }
+
+      .timer-container {
+        width: 60px;
+        height: 60px;
+      }
+
+      .timer-container .time {
+        font-size: 14px;
+      }
+
+      .footer-buttons {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .footer-buttons .button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .footer-buttons .button .icon {
+        margin-right: 8px;
+      }
+
+      .congrats-message {
+        font-size: 20px;
+      }
+
+      .celebration-svg {
+        width: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Container -->
+  <div class="container">
+    <!-- Header with Timer, Title, and Logo -->
+    <div class="header">
+      <!-- Countdown Timer -->
+      <div class="timer-container">
+        <svg>
+          <circle cx="40" cy="40" r="36"></circle>
+          <circle class="progress" cx="40" cy="40" r="36"></circle>
+        </svg>
+        <div class="time" id="countdown-timer">05:00</div>
+      </div>
+
+      <!-- Title -->
+      <div class="title">Financial Simulation</div>
+
+      <!-- Logo -->
+      <img alt="ZENLEARN Logo" src="logo.png" />
+    </div>
+
+    <!-- Celebratory SVG Illustration -->
+    <div class="celebration-svg" data-aos="zoom-in">
+      <!-- Example SVG: You can replace this with any celebratory SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#4E67EB">
+        <path d="M32 0C14.326 0 0 14.326 0 32s14.326 32 32 32 32-14.326 32-32S49.674 0 32 0zm0 60C16.561 60 4 47.439 4 32S16.561 4 32 4s28 12.561 28 28-12.561 28-28 28z"/>
+        <path d="M32 12a20 20 0 1 0 0 40 20 20 0 0 0 0-40zm0 36a16 16 0 1 1 0-32 16 16 0 0 1 0 32z"/>
+        <path d="M32 20a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm0 20a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/>
+      </svg>
+    </div>
+
+    <!-- Congratulations Message -->
+    <div class="congrats-message" data-aos="fade-up">
+      You have successfully completed the program:<br>
+      <strong>"Decision Making and Problem Solving"</strong>
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="footer-buttons" data-aos="fade-up">
+      <a href="index.html" class="button exit" aria-label="Exit Simulation">
+        <i class="fas fa-sign-out-alt icon"></i>
+        Exit Simulation
+      </a>
+      
+      <a href="program2_page.html" class="button" aria-label="Proceed to Next Program">
+        <i class="fas fa-arrow-right icon"></i>
+        Proceed to Next Program<br><small>"2. Digital Tools for Manufacturing Design"</small>
+      </a>
+    </div>
+
+    <!-- AOS JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- JavaScript for Interactive Elements -->
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 800,
+        once: true,
+      });
+
+      // Loader
+      window.addEventListener('load', function() {
+        var loader = document.getElementById('loader');
+        loader.style.display = 'none';
+      });
+
+      // Initialize Confetti
+      function launchConfetti() {
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+
+      // Launch confetti on page load
+      window.addEventListener('load', () => {
+        launchConfetti();
+        // Optional: Launch multiple bursts
+        setTimeout(launchConfetti, 1000);
+        setTimeout(launchConfetti, 2000);
+      });
+
+      // Countdown Timer with Circular Progress
+      const countdownDuration = 5 * 60; // 5 minutes in seconds
+      let remainingTime = countdownDuration;
+      const timerElement = document.getElementById('countdown-timer');
+      const progressCircle = document.querySelector('.progress');
+      const totalDash = 2 * Math.PI * 36; // Circumference for r=36
+
+      // Initialize the timer
+      progressCircle.style.strokeDasharray = totalDash;
+      progressCircle.style.strokeDashoffset = totalDash;
+      progressCircle.style.stroke = '#4E67EB'; // Initial color
+      updateTimer(); // Initial call
+      const timerInterval = setInterval(updateTimer, 1000);
+
+      function updateTimer() {
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+        timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        // Update circular progress
+        const progressOffset = totalDash - (remainingTime / countdownDuration) * totalDash;
+        progressCircle.style.strokeDashoffset = progressOffset;
+
+        // Change color based on time remaining
+        if (remainingTime <= 60) {
+          progressCircle.style.stroke = '#ff4e4e'; // Red
+        } else if (remainingTime <= 3 * 60) {
+          progressCircle.style.stroke = '#f1c40f'; // Yellow
+        } else {
+          progressCircle.style.stroke = '#4E67EB'; // Blue
+        }
+
+        if (remainingTime > 0) {
+          remainingTime--;
+        } else {
+          clearInterval(timerInterval);
+          alert('Time is up! The simulation will now end.');
+          window.location.href = "index.html"; // Redirect to index or desired action
+        }
+      }
+
+      // Accessibility: Keyboard Navigation for Buttons
+      const buttons = document.querySelectorAll('.footer-buttons .button');
+      buttons.forEach(button => {
+        button.setAttribute('tabindex', '0');
+        button.addEventListener('keydown', (e) => {
+          if(e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            button.click();
+          }
+        });
+      });
+    </script>
+  </div>
+</body>
+</html>

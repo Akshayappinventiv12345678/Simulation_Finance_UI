@@ -1,0 +1,418 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Program Directory</title>
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <!-- AOS Library -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <style>
+    /* Reset some default styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Animated Gradient Background */
+    body {
+      font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+      background: linear-gradient(-45deg, #c5d1f1, #294D89, #4E67EB, #ffffff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #294D89;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Loader Styles */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      z-index: 9999;
+    }
+
+    .spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #294D89;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Container Styling */
+    .container {
+      width: 100%;
+      max-width: 1300px;
+      border: 2px solid #294D89;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Header Container Styles */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 36px; /* Adjusted for better responsiveness */
+      font-weight: bold;
+      padding-bottom: 20px;
+      animation: slideIn 1s ease-out;
+      width: 100%;
+    }
+
+    .header .title {
+      flex-grow: 1;
+      text-align: center;
+      color: #294D89;
+    }
+
+    .header img {
+      width: 80px;
+      height: 80px;
+      animation: bounceIn 1s ease-out;
+    }
+
+    /* Timer Styles */
+    .timer-container {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+    }
+
+    .timer-container svg {
+      width: 80px;
+      height: 80px;
+      transform: rotate(-90deg);
+    }
+
+    .timer-container circle {
+      fill: none;
+      stroke-width: 8;
+      stroke: #e0e0e0;
+    }
+
+    .timer-container .progress {
+      stroke: #4E67EB;
+      stroke-dasharray: 226;
+      stroke-dashoffset: 226;
+      stroke-linecap: round;
+      transform-origin: center;
+      transition: stroke-dashoffset 1s linear, stroke 0.3s;
+    }
+
+    .timer-container .time {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      font-weight: bold;
+      color: #294D89;
+    }
+
+    /* Animations */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounceIn {
+      0% { transform: translateY(-100%) scale(0.3); opacity: 0; }
+      50% { transform: translateY(15%) scale(1.05); opacity: 1; }
+      70% { transform: translateY(-10%) scale(0.9); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    /* Main Content Styling */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Program Grid Styles */
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+      margin-top: 20px;
+    }
+
+    .program-item {
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s;
+      text-align: center;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #fafafa;
+    }
+
+    .program-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s;
+      border-radius: 4px;
+    }
+
+    .program-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .program-item a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      height: 100%;
+    }
+
+    .program-name {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #294D89;
+    }
+
+    /* Responsive Images */
+    @media (max-width: 1200px) {
+      .program-item img {
+        max-height: 300px;
+        object-fit: cover;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        text-align: center;
+        padding-bottom: 10px;
+      }
+
+      .header img {
+        width: 60px;
+        height: 60px;
+      }
+
+      .timer-container {
+        width: 60px;
+        height: 60px;
+      }
+
+      .timer-container .time {
+        font-size: 14px;
+      }
+
+      .title {
+        text-align: center;
+        margin: 10px 0;
+      }
+
+      .program-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header {
+        font-size: 28px;
+      }
+    }
+
+    /* Ensure only two columns on larger screens */
+    @media (min-width: 1201px) {
+      .program-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Container -->
+  <div class="container">
+    <div class="header">
+      <!-- Timer -->
+      <div class="timer-container">
+        <svg>
+          <circle cx="40" cy="40" r="36"></circle>
+          <circle class="progress" cx="40" cy="40" r="36"></circle>
+        </svg>
+        <div class="time" id="countdown-timer">05:00</div>
+      </div>
+      <!-- Title -->
+      <div class="title">Program List Page</div>
+      <!-- Logo -->
+      <img alt="ZENLEARN Logo" src="logo.png" />
+    </div>
+    <!-- Main Content -->
+    <main>
+      <div class="program-grid">
+        <!-- Program 1 -->
+        <div class="program-item" data-aos="fade-up">
+          <a href="program1_page.html">
+            <img src="program1_image.jpg" alt="Program 1: Decision Making and Problem Solving">
+            <p class="program-name">1. Decision Making and Problem Solving</p>
+          </a>
+        </div>
+        <!-- Program 2 -->
+        <div class="program-item" data-aos="fade-up">
+          <a href="program2_page.html">
+            <img src="program2_image.jpg" alt="Program 2: Digital Tools for Manufacturing Design">
+            <p class="program-name">2. Digital Tools for Manufacturing Design</p>
+          </a>
+        </div>
+        <!-- Program 3 -->
+        <div class="program-item" data-aos="fade-up">
+          <a href="program3_page.html">
+            <img src="program3_image.jpg" alt="Program 3: Business Excellence through AI / Data Analysis">
+            <p class="program-name">3. Business Excellence through AI / Data Analysis</p>
+          </a>
+        </div>
+        <!-- Program 4 -->
+        <div class="program-item" data-aos="fade-up">
+          <a href="program4_page.html">
+            <img src="program4_image.jpg" alt="Program 4: Trends in Digital Manufacturing">
+            <p class="program-name">4. Trends in Digital Manufacturing</p>
+          </a>
+        </div>
+        <!-- Program 5 -->
+        <div class="program-item" data-aos="fade-up">
+          <a href="program5_page.html">
+            <img src="program5_image.jpg" alt="Program 5: Strategic Thinking and Change Management">
+            <p class="program-name">5. Strategic Thinking and Change Management</p>
+          </a>
+        </div>
+        <!-- Program 6 -->
+        <div class="program-item" data-aos="fade-up">
+          <a href="program6_page.html">
+            <img src="program6_image.jpg" alt="Program 6: Implementing IoT in Manufacturing">
+            <p class="program-name">6. Implementing IoT in Manufacturing</p>
+          </a>
+        </div>
+        <!-- Program 7 -->
+        <div class="program-item" data-aos="fade-up">
+          <a href="program7_page.html">
+            <img src="program7_image.jpg" alt="Program 7: Finance for Growth">
+            <p class="program-name">7. Finance for Growth</p>
+          </a>
+        </div>
+        <!-- Program 8 -->
+        <div class="program-item" data-aos="fade-up">
+          <a href="program8_page.html">
+            <img src="program8_image.jpg" alt="Program 8: Financial Analysis for Decision-Making">
+            <p class="program-name">8. Financial Analysis for Decision-Making</p>
+          </a>
+        </div>
+
+        <!-- Program 9 -->
+        <div class="program-item" data-aos="fade-up">
+          <a href="program9_page.html">
+            <img src="program8_image.jpg" alt="Program 9: Marketing and Business Development for Growth">
+            <p class="program-name">9. Marketing and Business Development for Growth</p>
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- AOS JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- JavaScript Functionality -->
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+
+    // Loader
+    window.addEventListener('load', function() {
+      var loader = document.getElementById('loader');
+      loader.style.display = 'none';
+    });
+
+    // Countdown Timer with Circular Progress
+    const countdownDuration = 5 * 60; // 5 minutes in seconds
+    let remainingTime = countdownDuration;
+    const timerElement = document.getElementById('countdown-timer');
+    const progressCircle = document.querySelector('.progress');
+    const totalDash = 2 * Math.PI * 36; // Circumference for r=36
+
+    function updateTimer() {
+      const minutes = Math.floor(remainingTime / 60);
+      const seconds = remainingTime % 60;
+      timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      // Update circular progress
+      const progressOffset = totalDash - (remainingTime / countdownDuration) * totalDash;
+      progressCircle.style.strokeDashoffset = progressOffset;
+
+      // Change color based on time remaining
+      if (remainingTime <= 60) {
+        progressCircle.style.stroke = '#ff4e4e'; // Red
+      } else if (remainingTime <= 3 * 60) {
+        progressCircle.style.stroke = '#f1c40f'; // Yellow
+      } else {
+        progressCircle.style.stroke = '#4E67EB'; // Blue
+      }
+
+      if (remainingTime > 0) {
+        remainingTime--;
+      } else {
+        clearInterval(timerInterval);
+        alert('Time is up! The simulation will now end.');
+        window.location.href = "index.html";
+      }
+    }
+
+    // Initialize the timer
+    progressCircle.style.strokeDasharray = totalDash;
+    updateTimer();
+    const timerInterval = setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>
