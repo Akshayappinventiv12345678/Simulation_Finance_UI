@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Implementing IoT in Manufacturing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <!-- AOS Library -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <!-- Chart.js CDN (if needed for future extensions) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Reset and Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Animated Gradient Background */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(-45deg, #f4f4f4, #c5d1f1, #294D89, #ffffff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      overflow-x: hidden;
+      color: #294D89;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      width: 90%;
+      max-width: 1300px;
+      margin: 20px auto;
+      padding: 20px;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Loader Styles */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #294D89;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Container Styling */
+    .container {
+      border: 2px solid #294D89;
+      padding: 20px;
+      box-sizing: border-box;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Header Container Styles */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 36px;
+      font-weight: bold;
+      padding-bottom: 20px;
+      animation: slideIn 1s ease-out;
+      width: 100%;
+      position: relative;
+    }
+
+    .header .title {
+      color: #294D89;
+      flex: 1;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header img {
+      width: 80px;
+      height: 80px;
+      animation: bounceIn 1s ease-out;
+    }
+
+    /* Timer Styles */
+    .timer-container {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+    }
+
+    .timer-container svg {
+      width: 80px;
+      height: 80px;
+      transform: rotate(-90deg);
+    }
+
+    .timer-container circle {
+      fill: none;
+      stroke-width: 8;
+      stroke: #e0e0e0;
+    }
+
+    .timer-container .progress {
+      stroke: #4E67EB;
+      stroke-dasharray: 226;
+      stroke-dashoffset: 226;
+      stroke-linecap: round;
+      transform-origin: center;
+      transition: stroke-dashoffset 1s linear, stroke 0.3s;
+    }
+
+    .timer-container .time {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      font-weight: bold;
+      color: #294D89;
+    }
+
+    /* Content Styles */
+    .content {
+      border: 2px solid #294D89;
+      padding: 20px;
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      background-color: #fafafa;
+      animation: fadeInUp 1s forwards 0.5s;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .section-title::before {
+      content: "\f0c8"; /* Font Awesome Square Icon */
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #4E67EB;
+    }
+
+    /* Buttons Styles */
+    .footer-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-buttons .end-button,
+    .footer-buttons .next-button {
+      background-color: #4E67EB;
+      color: #fff;
+      padding: 15px 30px;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-buttons .end-button {
+      background-color: #e97878;
+    }
+
+    .footer-buttons .end-button:hover {
+      background-color: #d45b5b;
+    }
+
+    .footer-buttons .next-button:hover {
+      background-color: #3b50c1;
+    }
+
+    .footer-buttons .end-button::before,
+    .footer-buttons .next-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: skewX(-45deg);
+      transition: left 0.3s;
+      pointer-events: none;
+    }
+
+    .footer-buttons .end-button:hover::before,
+    .footer-buttons .next-button:hover::before {
+      left: 100%;
+    }
+
+    .footer-buttons .end-button:active,
+    .footer-buttons .next-button:active {
+      transform: scale(0.95);
+    }
+
+    /* Animations */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounceIn {
+      0% { transform: translateY(-100%) scale(0.3); opacity: 0; }
+      50% { transform: translateY(15%) scale(1.05); opacity: 1; }
+      70% { transform: translateY(-10%) scale(0.9); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+        padding: 15px;
+      }
+
+      .header {
+        flex-direction: column;
+        text-align: center;
+        padding-bottom: 10px;
+      }
+
+      .header img {
+        width: 60px;
+        height: 60px;
+      }
+
+      .timer-container {
+        width: 60px;
+        height: 60px;
+      }
+
+      .timer-container .time {
+        font-size: 14px;
+      }
+
+      .footer-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .section-title {
+        padding-left: 20px;
+      }
+
+      .section-title::before {
+        left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Container -->
+  <div class="container">
+    <!-- Header with Timer, Title, and Logo -->
+    <div class="header">
+      <!-- Countdown Timer -->
+      <div class="timer-container">
+        <svg>
+          <circle cx="40" cy="40" r="36"></circle>
+          <circle class="progress" cx="40" cy="40" r="36"></circle>
+        </svg>
+        <div class="time" id="countdown-timer">05:00</div>
+      </div>
+
+      <!-- Title -->
+      <div class="title">Implementing IoT in Manufacturing</div>
+
+      <!-- Logo -->
+      <img alt="ZENLEARN Logo" src="logo.png" />
+    </div>
+
+    <!-- Content Section -->
+    <div class="content" data-aos="fade-up">
+      <!-- Program Overview Section -->
+      <div class="section">
+        <div class="section-title">
+          <h2>Program Overview</h2>
+        </div>
+        <p>
+          The <strong>Implementing IoT in Manufacturing Program</strong> is designed to equip mid-career professionals and leaders with the knowledge and strategies to effectively integrate Internet of Things (IoT) technologies into manufacturing operations. This program focuses on:
+        </p>
+        <ul>
+          <li>Fundamentals of IoT and its impact on manufacturing</li>
+          <li>Integration of IoT with manufacturing systems</li>
+          <li>Benefits and challenges of IoT implementation</li>
+        </ul>
+        <p>
+          Through a series of realistic simulation scenarios, participants will engage in strategic decision-making processes that drive operational efficiency, innovation, and competitive advantage for the fictional manufacturing organization <strong>GlobalFusion</strong>. This overarching theme integrates the fundamentals of IoT, its strategic integration into manufacturing systems, and the management of associated benefits and challenges. Participants will navigate through incremental challenges that reflect real-world technological advancements and operational dynamics in a digitally transforming manufacturing environment.
+        </p>
+      </div>
+
+      <!-- Mini Case Study Section -->
+      <div class="section">
+        <div class="section-title">
+          <h2>Mini Case Study</h2>
+        </div>
+        <p><strong>Leveraging IoT for Enhanced Operational Efficiency</strong></p>
+        <p><strong>Market Situation:</strong></p>
+        <p>
+          GlobalFusion Industries, a leading supplier in the motor vehicle aftermarket industry, has seen a steady increase in sales. Recently, the company has experienced steady growth, driven by increasing demand for sustainable manufacturing solutions.
+        </p>
+        <p>
+          To sustain and enhance this growth, GlobalFusion recognizes the need to integrate IoT technologies into its manufacturing processes. This integration aims to optimize operations, enhance product quality, reduce downtime, and enable data-driven decision-making. However, GlobalFusion faces challenges related to the seamless integration of IoT systems, data management, and ensuring cybersecurity. GlobalFusion seeks to implement IoT technologies to monitor and optimize its manufacturing processes, aiming to increase efficiency and reduce operational costs.
+        </p>
+      </div>
+
+      <!-- Key Highlights Section -->
+      <div class="section">
+        <div class="section-title">
+          <h2>Key Highlights</h2>
+        </div>
+        <ul>
+          <li><strong>IoT Fundamentals:</strong> Covers the basics of IoT and its transformative impact on manufacturing processes.</li>
+          <li><strong>Strategic Integration:</strong> Teaches strategies for integrating IoT technologies with existing manufacturing systems.</li>
+          <li><strong>Operational Efficiency:</strong> Emphasizes the benefits of IoT for optimizing production and reducing costs.</li>
+          <li><strong>Real-World Simulations:</strong> Engages participants with challenges that mirror actual technological advancements in IoT implementation.</li>
+          <li><strong>Cybersecurity and Data Management:</strong> Provides insights into managing IoT data and addressing cybersecurity challenges in IoT deployment.</li>
+        </ul>
+      </div>
+
+      <!-- Footer Buttons -->
+      <div class="footer-buttons" data-aos="fade-up">
+        <a href="index.html" class="end-button">End Simulation</a>
+        <a href="Implementing IoT in Manufacturing/scenario_page_1.html" class="next-button">Let's Start</a>
+      </div>
+    </div>
+
+    <!-- AOS JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- JavaScript for Interactive Elements -->
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 800,
+        once: true,
+      });
+
+      // Loader
+      window.addEventListener('load', function() {
+        var loader = document.getElementById('loader');
+        loader.style.display = 'none';
+      });
+
+      // Countdown Timer with Circular Progress
+      const countdownDuration = 5 * 60; // 5 minutes in seconds
+      let remainingTime = countdownDuration;
+      const timerElement = document.getElementById('countdown-timer');
+      const progressCircle = document.querySelector('.progress');
+      const totalDash = 2 * Math.PI * 36; // Circumference for r=36
+
+      // Initialize the timer
+      progressCircle.style.strokeDasharray = totalDash;
+      progressCircle.style.strokeDashoffset = totalDash;
+      progressCircle.style.stroke = '#4E67EB'; // Initial color
+      updateTimer(); // Initial call
+      const timerInterval = setInterval(updateTimer, 1000);
+
+      function updateTimer() {
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+        timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        // Update circular progress
+        const progressOffset = totalDash - (remainingTime / countdownDuration) * totalDash;
+        progressCircle.style.strokeDashoffset = progressOffset;
+
+        // Change color based on time remaining
+        if (remainingTime <= 60) {
+          progressCircle.style.stroke = '#ff4e4e'; // Red
+        } else if (remainingTime <= 3 * 60) {
+          progressCircle.style.stroke = '#f1c40f'; // Yellow
+        } else {
+          progressCircle.style.stroke = '#4E67EB'; // Blue
+        }
+
+        if (remainingTime > 0) {
+          remainingTime--;
+        } else {
+          clearInterval(timerInterval);
+          alert('Time is up! The simulation will now end.');
+          window.location.href = "index.html"; // Redirect to index or desired action
+        }
+      }
+
+      // Smooth Page Transition (optional)
+      window.onload = () => {
+        document.body.classList.add('loaded');
+      };
+    </script>
+  </div>
+</body>
+</html>
