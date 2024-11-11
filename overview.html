@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Financial Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <!-- AOS Library -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <!-- Chart.js CDN (if needed for future extensions) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Your Custom CSS File -->
+  <link rel="stylesheet" href="assets/css/overview.css">
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Container -->
+  <div class="container">
+    <!-- Header with Timer, Title, and Logo -->
+    <div class="header">
+      <!-- Countdown Timer -->
+      <div class="timer-container">
+        <svg>
+          <circle cx="40" cy="40" r="36"></circle>
+          <circle class="progress" cx="40" cy="40" r="36"></circle>
+        </svg>
+        <div class="time" id="countdown-timer">05:00</div>
+      </div>
+
+      <!-- Title -->
+      <div class="title">Financial Simulation</div>
+
+      <!-- Logo -->
+      <img alt="ZENLEARN Logo" src="assets/images/logo.png" />
+    </div>
+
+    <!-- Content Section -->
+    <div class="content" data-aos="fade-up">
+      <div class="section">
+        <div class="section-title">
+          <h2>Simulation Overview</h2>
+        </div>
+        <p>
+          This simulation is designed to effectively apply the concepts learned during the program.
+        </p>
+        <p>
+          <strong>Structure:</strong> Make informed decisions across 24 market scenarios that a CXO may encounter within an organization. Participants are encouraged to discuss the presented options and select a choice at the end of each scenario. The financial impact of the selected option will be reflected in updated financial statements after each scenario.
+        </p>
+        <p>
+          <strong>Duration:</strong> Each scenario is expected to take approximately 10 minutes. Participants can proceed to the next scenario or end the simulation at any point. Please ensure you download your final financial statements upon completion of the simulation. Note that data may be available afterward, but reverting to previous scenarios or simulation briefs may not be possible.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <h2>Participant Brief</h2>
+        </div>
+        <p>
+          As a CXO of an Indian MSME manufacturing organization, you are responsible for steering the company towards growth and profitability.
+        </p>
+        <p>
+          The Board of Directors and shareholders expect the organization to increase its top line by 30% year-over-year and achieve a profit after tax of at least 20%.
+        </p>
+        <p>
+          Given the current market conditions, there are various opportunities and scenarios to increase sales, control costs, and improve cash flow. These opportunities may include commercial bidding, investing in new products, expanding into new markets, acquiring new capital equipment, or pursuing mergers and acquisitions (M&A) opportunities.
+        </p>
+        <p>
+          Decisions will be based on the various scenarios presented continuously throughout the simulation.
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="footer-buttons" data-aos="fade-up">
+      <a href="index.html" class="end-button"><i class="fas fa-times"></i> End Simulation</a>
+      <a href="organization_brief.html" class="next-button"><i class="fas fa-arrow-right"></i> Let's Start</a>
+    </div>
+  </div>
+
+  <!-- AOS JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- Your Custom JavaScript File -->
+  <script src="assets/js/overview.js"></script>
+</body>
+</html>
