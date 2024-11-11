@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Financial Simulation - Scenario 28</title>
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <!-- Link to External CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header with Timer, Title, and Logo -->
+    <div class="header">
+      <!-- Countdown Timer -->
+      <div class="timer-container">
+        <svg>
+          <circle cx="40" cy="40" r="40"></circle>
+          <circle class="progress" cx="40" cy="40" r="36"></circle>
+        </svg>
+        <div class="time" id="countdown-timer">05:00</div>
+      </div>
+
+      <!-- Title -->
+      <div class="title">Financial Simulation</div>
+
+      <!-- Logo -->
+      <img alt="ZENLEARN Logo" src="../../images/logo.png" />
+    </div>
+
+    <!-- Scenario Title -->
+    <div class="scenario">Scenario 2: Integration of New Production Processes and Technologies</div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+      <div class="progress-bar-inner" id="progress-bar-inner"></div>
+    </div>
+
+    <div class="content">
+      <!-- Left column: Description and details -->
+      <div class="left-column">
+        <div class="market-condition">
+          <p>
+            <strong>Concepts:</strong> The Business Excellence through AI / Data Analysis Program can help with:
+          </p>
+          <ul>
+            <li><strong>Process Optimization:</strong> AI can analyze data from new production technologies to optimize workflows, reduce cycle times, and enhance productivity.</li>
+            <li><strong>Quality Assurance:</strong> Real-time data analytics can monitor the performance of new technologies, ensuring consistent quality and early detection of defects.</li>
+            <li><strong>Predictive Maintenance:</strong> AI-driven maintenance systems can anticipate failures in new machinery, minimizing downtime and maintenance costs.</li>
+          </ul>
+          <p>
+            <strong>Market Conditions:</strong> In the rapidly evolving automotive aftermarket, GlobalFusion Industries faces significant pressure from market conditions characterized by continuous advancements in manufacturing technologies such as additive manufacturing (3D printing) and robotics. These innovations are not only enhancing production efficiency but also enabling the creation of complex and customized components that meet the growing demand for tailored automotive solutions.
+          </p>
+          <p>
+            To maintain a competitive edge and respond effectively to customer preferences, GlobalFusion must integrate these cutting-edge technologies into its existing operations. Failing to do so could result in decreased market share as competitors leverage advanced manufacturing capabilities to offer superior products and faster turnaround times.
+          </p>
+          <p>
+            Internally, GlobalFusion may be grappling with production and operational issues such as inefficiencies in current manufacturing processes, limitations in producing intricate designs, and high operational costs. Integrating AI-driven automation and advanced manufacturing systems can address these challenges by streamlining workflows, reducing production errors, and lowering costs through optimized resource utilization.
+          </p>
+        </div>
+
+        <div class="options">
+          <p><strong>Management Options:</strong></p>
+          <p>Management has to balance the pursuit of technological advancements to drive innovation against maintaining stable and reliable current operations to avoid disruptions. Also deciding whether to adopt the latest technologies that may require significant changes to existing systems or to enhance current technologies incrementally to ensure compatibility and minimize disruption.</p>
+          <ul>
+            <li><strong>Fully Adopt Cutting-Edge Manufacturing Technologies with AI Integration</strong>
+              <ul>
+                <li><strong>Pros:</strong> Significant improvements in production capabilities and efficiency; ability to produce complex and customized components with ease.</li>
+                <li><strong>Cons:</strong> High costs associated with purchasing and integrating new technologies; potential disruptions to existing operations during the transition phase.</li>
+              </ul>
+            </li>
+            <li><strong>Gradual Enhancement of Existing Systems with Selective Technology Upgrades</strong>
+              <ul>
+                <li><strong>Pros:</strong> Lower initial investment compared to full technological overhaul; reduced risk of operational disruptions by easier integration with legacy systems and implementing changes gradually.</li>
+                <li><strong>Cons:</strong> Slower pace of innovation, potentially lagging behind competitors adopting full-scale technological advancements; may require multiple phases of investment and implementation, extending the timeline for realizing benefits.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="investment">
+          <p><strong>Practical Steps to Evaluate Both Options:</strong></p>
+          <ul>
+            <li><strong>Define Strategic Objectives:</strong> Clearly outline the strategic goals GlobalFusion aims to achieve with technology integration, such as enhancing productivity, improving quality, or gaining competitive advantage.</li>
+            <li><strong>Conduct Cost-Benefit Analysis:</strong> Identify and quantify all costs and benefits associated with each option to assess their financial viability and potential ROI.</li>
+            <li><strong>Assess Technological Compatibility:</strong> Evaluate how each option aligns with existing systems and infrastructure to ensure seamless integration and minimize disruptions.</li>
+            <li><strong>Evaluate Operational Impact:</strong> Analyze how each option will affect current operations, including production workflows, cycle times, and overall productivity.</li>
+            <li><strong>Analyze Workforce Requirements:</strong> Determine the training and upskilling needs for employees to effectively manage and utilize new technologies.</li>
+            <li><strong>Perform Risk Assessment:</strong> Identify potential risks associated with each option, such as operational disruptions, high costs, or resistance to change, and develop mitigation strategies.</li>
+            <li><strong>Engage Stakeholders:</strong> Involve key stakeholders, including department heads, employees, and suppliers, to gather insights and ensure buy-in for the selected option.</li>
+            <li><strong>Implement Pilot Programs:</strong> Test each option on a smaller scale to gather real-world data, assess feasibility, and refine implementation strategies based on pilot outcomes.</li>
+            <li><strong>Finalize Decision and Develop Implementation Plan:</strong> Choose the most suitable option and create a detailed implementation roadmap, including timelines, resource allocation, and key milestones.</li>
+          </ul>
+        </div>
+
+        <!-- Buttons for Options -->
+        <div class="footer-buttons">
+          <a href="page2.html" class="next-button" >Fully Adopt Technologies</a>
+          <a href="page2.html" class="next-button" >Gradual Enhancement</a>
+        </div>
+      </div>
+
+      <!-- Right column: Tables and Charts -->
+      <div class="right-column">
+        <div class="updated-values"><strong>(Values before the scenario)</strong></div>
+        <!-- Scrollable Container Start -->
+        <div class="table-container">
+          <!-- Balance Sheet Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Balance Sheet</th>
+              </tr>
+              <tr>
+                <th>Assets</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="expandable">
+                <td><strong>Current Assets <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Cash and Cash Equivalents</td>
+                <td>70</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Accounts Receivable</td>
+                <td>100</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Inventory</td>
+                <td>120</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Current Assets</strong></td>
+                <td>290</td>
+              </tr>
+              <tr class="expandable">
+                <td><strong>Non-current Assets <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Property, Plant & Equipment</td>
+                <td>600</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Intangible Assets (Patents)</td>
+                <td>30</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Non-current Assets</strong></td>
+                <td>630</td>
+              </tr>
+              <tr>
+                <td><strong>Total Assets</strong></td>
+                <td>920</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Liabilities & Equity Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Liabilities & Equity</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="expandable">
+                <td><strong>Current Liabilities <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Accounts Payable</td>
+                <td>90</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Short-term Debt</td>
+                <td>40</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Current Liabilities</strong></td>
+                <td>130</td>
+              </tr>
+              <tr class="expandable">
+                <td><strong>Long-term Liabilities <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Long-term Debt</td>
+                <td>190</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Liabilities</strong></td>
+                <td>320</td>
+              </tr>
+              <tr class="expandable">
+                <td><strong>Equity <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Shareholders’ Equity</td>
+                <td>600</td>
+              </tr>
+              <tr>
+                <td><strong>Total Liabilities & Equity</strong></td>
+                <td>920</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Profit and Loss Statement Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Profit & Loss (Income) Statement</th>
+              </tr>
+              <tr>
+                <th>Line Item</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tooltip" data-tooltip="Total sales revenue generated by the company.">Revenue
+                    (Sales)</span></td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td><span class="tooltip"
+                    data-tooltip="Direct costs attributable to the production of goods sold by the company.">Cost of
+                    Goods Sold (COGS)</span></td>
+                <td>250</td>
+              </tr>
+              <tr>
+                <td>Gross Profit</td>
+                <td>250</td>
+              </tr>
+              <tr>
+                <td>Operating Expenses</td>
+                <td>140</td>
+              </tr>
+              <tr>
+                <td>Operating Income (EBIT)</td>
+                <td>110</td>
+              </tr>
+              <tr>
+                <td>Interest Expense</td>
+                <td>30</td>
+              </tr>
+              <tr>
+                <td>Income Before Tax</td>
+                <td>80</td>
+              </tr>
+              <tr>
+                <td>Tax</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>Net Income</td>
+                <td>60</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Cash Flow Statement Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Cash Flow Statement</th>
+              </tr>
+              <tr>
+                <th>Line Item</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cash from Operating Activities</td>
+                <td>70</td>
+              </tr>
+              <tr>
+                <td>Cash from Investing Activities</td>
+                <td>-150</td>
+              </tr>
+              <tr>
+                <td>Cash from Financing Activities</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td><strong>Net Increase in Cash</strong></td>
+                <td>-30</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Ratios Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Ratio</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Liquidity Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Liquidity Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>1. Current Ratio</td>
+                <td>1.5</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>2. Quick Ratio (Acid Test)</td>
+                <td>1.2</td>
+              </tr>
+
+              <!-- Profitability Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Profitability Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>3. Gross Profit Margin</td>
+                <td>50%</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>4. Net Profit Margin</td>
+                <td>12%</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>5. Return on Assets (ROA)</td>
+                <td>6.52%</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>6. Return on Equity (ROE)</td>
+                <td>10%</td>
+              </tr>
+
+              <!-- Efficiency Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Efficiency Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>7. Inventory Turnover Ratio</td>
+                <td>2.5</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>8. Accounts Receivable Turnover Ratio</td>
+                <td>5.0</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>9. Asset Turnover Ratio</td>
+                <td>0.54</td>
+              </tr>
+
+              <!-- Leverage Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Leverage Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>10. Debt-to-Equity Ratio</td>
+                <td>0.53</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>11. Interest Coverage Ratio</td>
+                <td>3.67</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>12. Debt Service Coverage Ratio (DSCR)</td>
+                <td>3.2</td>
+              </tr>
+
+              <!-- Cash Flow Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Cash Flow Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>13. Operating Cash Flow Ratio</td>
+                <td>0.54</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>14. Free Cash Flow (FCF)</td>
+                <td>-30</td>
+              </tr>
+
+              <!-- Valuation Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Valuation Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>15. Price-to-Earnings (P/E) Ratio</td>
+                <td>13</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>16. Earnings per Share (EPS)</td>
+                <td>60</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Scrollable Container End -->
+
+        <!-- Interactive Chart -->
+        <div class="chart-container">
+          <canvas id="revenueChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section with End Simulation Button -->
+    <div class="footer-buttons">
+      <a href="index.html" class="end-button">End Simulation</a>
+    </div>
+  </div>
+
+  <!-- Link to External JavaScript -->
+  <script src="scripts.js"></script>
+</body>
+
+</html>

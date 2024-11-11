@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Financial Simulation - Scenario 29</title>
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <!-- Link to External CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header with Timer, Title, and Logo -->
+    <div class="header">
+      <!-- Countdown Timer -->
+      <div class="timer-container">
+        <svg>
+          <circle cx="40" cy="40" r="36"></circle>
+          <circle class="progress" cx="40" cy="40" r="36"></circle>
+        </svg>
+        <div class="time" id="countdown-timer">05:00</div>
+      </div>
+
+      <!-- Title -->
+      <div class="title">Financial Simulation</div>
+
+      <!-- Logo -->
+      <img alt="ZENLEARN Logo" src="../../images/logo.png" />
+    </div>
+
+    <!-- Scenario Title -->
+    <div class="scenario">Scenario 1: Shifts in Sales Profile Towards Customization and Niche Markets</div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+      <div class="progress-bar-inner" id="progress-bar-inner"></div>
+    </div>
+
+    <div class="content">
+      <!-- Left column: Description and details -->
+      <div class="left-column">
+        <div class="market-condition">
+          <p>
+            <strong>Concepts:</strong> The Business Excellence through AI / Data Analysis Program can help with:
+          </p>
+          <ul>
+            <li><strong>CAD/CAM Applications:</strong> Allow designers to create precise and intricate designs that meet specific aesthetic and functional requirements. These tools enable rapid prototyping and modifications based on customer feedback.</li>
+            <li><strong>Simulation and Modeling:</strong> Facilitate virtual testing of designs to ensure they meet performance and quality standards before physical production, reducing the need for multiple prototypes and accelerating time-to-market.</li>
+            <li><strong>DFM Principles:</strong> Ensure that customized designs are optimized for efficient and cost-effective manufacturing, balancing aesthetic appeal with manufacturability to meet both customer desires and production constraints.</li>
+          </ul>
+          <p>
+            <strong>Market Conditions:</strong> There is a growing trend towards customized automotive components and niche market segments. Customers increasingly demand tailored solutions that meet specific requirements, necessitating flexibility in production processes and supply chain management.
+          </p>
+          <ul>
+            <li><strong>Custom Exhaust Systems:</strong> Tailored to specific vehicle models, allowing customers to choose from various configurations that enhance performance, improve sound quality, or increase fuel efficiency, e.g., sportier sound and improved airflow, resulting in increased horsepower and torque.</li>
+            <li><strong>Personalized Interior Accessories:</strong> Seat covers, dashboards, steering wheels, and infotainment systems that reflect individual aesthetic preferences and ergonomic needs, e.g., custom leather seat covers with personalized stitching and embroidery for a Mercedes-Benz S-Class, enhancing both comfort and luxury appeal.</li>
+            <li><strong>Performance Suspension Kits:</strong> Adjustable suspension components designed to cater to different driving styles, whether for comfort, sportiness, or off-road capability, e.g., an adjustable coilover suspension kit that allows drivers to customize ride height and damping settings.</li>
+            <li><strong>Classic Car Restoration Parts:</strong> Specialized parts for vintage and classic vehicles, ensuring authenticity and compatibility with original designs, e.g., authentic reproduction headlight assemblies for a 1967 Ford Mustang.</li>
+          </ul>
+        </div>
+
+        <div class="options">
+          <p><strong>Management Options:</strong></p>
+          <p>Balancing the investment in flexible manufacturing technologies to support customization against maintaining the efficiencies of mass production. Management has to decide whether to focus on deepening penetration in existing niche markets or diversifying the product portfolio to explore multiple niche segments.</p>
+          <ul>
+            <li><strong>Invest in Flexible Manufacturing Systems with AI Integration for Customization</strong>
+              <ul>
+                <li><strong>Pros:</strong> Enhanced ability to meet specific customer requirements; increased market share in custom segments through tailored offerings.</li>
+                <li><strong>Cons:</strong> Significant capital investment in new manufacturing technologies; potential complexity in managing highly customized production processes.</li>
+              </ul>
+            </li>
+            <li><strong>Expand Product Portfolio to Cover Multiple Niche Markets</strong>
+              <ul>
+                <li><strong>Pros:</strong> Diversification reduces dependency on a single market segment; ability to capture multiple revenue streams from different niches.</li>
+                <li><strong>Cons:</strong> Increased complexity in managing multiple product lines; higher R&D and marketing costs to support diverse products.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="investment">
+          <p><strong>Practical Steps:</strong></p>
+          <ul>
+            <li><strong>Conduct a Comprehensive Cost-Benefit Analysis:</strong> Quantify all investments and estimate the financial and operational benefits for each option to determine potential ROI.</li>
+            <li><strong>Assess Strategic Alignment:</strong> Ensure each option aligns with GlobalFusion’s long-term goals and addresses the specific needs of niche markets and customization demands.</li>
+            <li><strong>Evaluate Operational Feasibility:</strong> Analyze the readiness of current technology and workforce capabilities to support flexible manufacturing or expanded product portfolios.</li>
+            <li><strong>Perform Risk Assessment:</strong> Identify potential risks for each option and develop strategies to mitigate them, ensuring smooth implementation.</li>
+            <li><strong>Implement Pilot Programs:</strong> Test each option on a small scale to gather real-world data and assess performance before full-scale deployment.</li>
+            <li><strong>Analyze Pilot Results and Make Informed Decisions:</strong> Evaluate the outcomes of pilot programs to refine strategies and select the option that offers the best balance of benefits and feasibility.</li>
+          </ul>
+        </div>
+
+        <!-- Buttons for Options -->
+        <div class="footer-buttons">
+          <a href="page2.html" class="next-button" >Flexible Manufacturing</a>
+          <a href="page2.html" class="next-button" >Expand Product Portfolio</a>
+        </div>
+      </div>
+
+      <!-- Right column: Tables and Charts -->
+      <div class="right-column">
+        <div class="updated-values"><strong>(Values before the scenario)</strong></div>
+        <!-- Scrollable Container Start -->
+        <div class="table-container">
+          <!-- Balance Sheet Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Balance Sheet</th>
+              </tr>
+              <tr>
+                <th>Assets</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="expandable">
+                <td><strong>Current Assets <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Cash and Cash Equivalents</td>
+                <td>60</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Accounts Receivable</td>
+                <td>90</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Inventory</td>
+                <td>110</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Current Assets</strong></td>
+                <td>260</td>
+              </tr>
+              <tr class="expandable">
+                <td><strong>Non-current Assets <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Property, Plant & Equipment</td>
+                <td>550</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Intangible Assets (Patents)</td>
+                <td>25</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Non-current Assets</strong></td>
+                <td>575</td>
+              </tr>
+              <tr>
+                <td><strong>Total Assets</strong></td>
+                <td>835</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Liabilities & Equity Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Liabilities & Equity</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="expandable">
+                <td><strong>Current Liabilities <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Accounts Payable</td>
+                <td>80</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Short-term Debt</td>
+                <td>35</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Current Liabilities</strong></td>
+                <td>115</td>
+              </tr>
+              <tr class="expandable">
+                <td><strong>Long-term Liabilities <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Long-term Debt</td>
+                <td>170</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Liabilities</strong></td>
+                <td>285</td>
+              </tr>
+              <tr class="expandable">
+                <td><strong>Equity <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Shareholders’ Equity</td>
+                <td>550</td>
+              </tr>
+              <tr>
+                <td><strong>Total Liabilities & Equity</strong></td>
+                <td>835</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Profit and Loss Statement Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Profit & Loss (Income) Statement</th>
+              </tr>
+              <tr>
+                <th>Line Item</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tooltip" data-tooltip="Total sales revenue generated by the company.">Revenue (Sales)</span></td>
+                <td>450</td>
+              </tr>
+              <tr>
+                <td><span class="tooltip" data-tooltip="Direct costs attributable to the production of goods sold by the company.">Cost of Goods Sold (COGS)</span></td>
+                <td>225</td>
+              </tr>
+              <tr>
+                <td>Gross Profit</td>
+                <td>225</td>
+              </tr>
+              <tr>
+                <td>Operating Expenses</td>
+                <td>130</td>
+              </tr>
+              <tr>
+                <td>Operating Income (EBIT)</td>
+                <td>95</td>
+              </tr>
+              <tr>
+                <td>Interest Expense</td>
+                <td>25</td>
+              </tr>
+              <tr>
+                <td>Income Before Tax</td>
+                <td>70</td>
+              </tr>
+              <tr>
+                <td>Tax</td>
+                <td>18</td>
+              </tr>
+              <tr>
+                <td>Net Income</td>
+                <td>52</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Cash Flow Statement Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Cash Flow Statement</th>
+              </tr>
+              <tr>
+                <th>Line Item</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cash from Operating Activities</td>
+                <td>60</td>
+              </tr>
+              <tr>
+                <td>Cash from Investing Activities</td>
+                <td>-120</td>
+              </tr>
+              <tr>
+                <td>Cash from Financing Activities</td>
+                <td>40</td>
+              </tr>
+              <tr>
+                <td><strong>Net Increase in Cash</strong></td>
+                <td>-20</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Ratios Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Ratio</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Liquidity Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Liquidity Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>1. Current Ratio</td>
+                <td>1.5</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>2. Quick Ratio (Acid Test)</td>
+                <td>1.2</td>
+              </tr>
+
+              <!-- Profitability Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Profitability Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>3. Gross Profit Margin</td>
+                <td>50%</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>4. Net Profit Margin</td>
+                <td>11.56%</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>5. Return on Assets (ROA)</td>
+                <td>6.23%</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>6. Return on Equity (ROE)</td>
+                <td>9.45%</td>
+              </tr>
+
+              <!-- Efficiency Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Efficiency Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>7. Inventory Turnover Ratio</td>
+                <td>2.5</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>8. Accounts Receivable Turnover Ratio</td>
+                <td>5.0</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>9. Asset Turnover Ratio</td>
+                <td>0.54</td>
+              </tr>
+
+              <!-- Leverage Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Leverage Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>10. Debt-to-Equity Ratio</td>
+                <td>0.52</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>11. Interest Coverage Ratio</td>
+                <td>3.8</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>12. Debt Service Coverage Ratio (DSCR)</td>
+                <td>3.1</td>
+              </tr>
+
+              <!-- Cash Flow Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Cash Flow Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>13. Operating Cash Flow Ratio</td>
+                <td>0.52</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>14. Free Cash Flow (FCF)</td>
+                <td>-20</td>
+              </tr>
+
+              <!-- Valuation Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Valuation Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>15. Price-to-Earnings (P/E) Ratio</td>
+                <td>14</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>16. Earnings per Share (EPS)</td>
+                <td>52</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Scrollable Container End -->
+
+        <!-- Interactive Chart -->
+        <div class="chart-container">
+          <canvas id="revenueChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section with End Simulation Button -->
+    <div class="footer-buttons">
+      <a href="../../../../overview.html" class="end-button">End Simulation</a>
+    </div>
+  </div>
+
+  <!-- Link to External JavaScript -->
+  <script src="scripts.js"></script>
+</body>
+
+</html>

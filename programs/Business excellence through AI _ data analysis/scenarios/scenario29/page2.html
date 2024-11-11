@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Financial Simulation - Scenario Results</title>
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <!-- Link to External CSS -->
+  <link rel="stylesheet" href="page2.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header with Timer, Title, and Logo -->
+    <div class="header">
+      <!-- Countdown Timer -->
+      <div class="timer-container">
+        <svg>
+          <circle cx="40" cy="40" r="36"></circle>
+          <circle class="progress" cx="40" cy="40" r="36"></circle>
+        </svg>
+        <div class="time" id="countdown-timer">05:00</div>
+      </div>
+
+      <!-- Title -->
+      <div class="title">Financial Simulation</div>
+
+      <!-- Logo -->
+      <img alt="ZENLEARN Logo" src="../../images/logo.png" />
+    </div>
+
+    <!-- Scenario Title -->
+    <div class="scenario">Scenario 1: Shifts in Sales Profile Towards Customization and Niche Markets - Results</div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+      <div class="progress-bar-inner" id="progress-bar-inner"></div>
+    </div>
+
+    <div class="content">
+      <!-- Left column: Description and details -->
+      <div class="left-column">
+        <div class="description">
+          <h3>Outcome of Your Decision</h3>
+          <p>
+            The company has decided to implement Flexible Manufacturing and Expand Product Portfolio strategies. This includes acquiring new equipment, integrating AI and IoT technologies, expanding the product line, and investing in staff training and market research.
+          </p>
+          <h4>Concept:</h4>
+          <p>
+            <strong>Flexible Manufacturing:</strong> Implementing advanced manufacturing systems that allow for quick changeovers and adaptability to produce different products efficiently. This approach leverages AI and IoT technologies to enhance production flexibility, quality control, and operational efficiency.
+          </p>
+          <p>
+            <strong>Expand Product Portfolio:</strong> Diversifying the range of products offered to meet evolving market demands. This involves investing in R&D, marketing, and adapting production lines to accommodate new products, ultimately aiming to increase market share and revenue streams.
+          </p>
+          <h4>Financial Impact:</h4>
+          <ul>
+            <li>Significant capital expenditures on equipment, software, and infrastructure.</li>
+            <li>Increased operating expenses due to staff training, consulting, and maintenance.</li>
+            <li>Revenue increase from enhanced production flexibility, market reach, and customer loyalty.</li>
+            <li>Cost savings from improved quality control and reduced production lead times.</li>
+          </ul>
+          <h4>Assumptions:</h4>
+          <p>
+            The investments in AI, IoT, and flexible manufacturing will lead to a 20% increase in sales revenue. Operating expenses have increased due to training and implementation costs. Cost of Goods Sold (COGS) has decreased due to operational efficiencies and cost savings.
+          </p>
+          <h4>Key Concepts Emphasized:</h4>
+          <ul>
+            <li><strong>Strategic Alignment:</strong> Initiatives support overarching business objectives.</li>
+            <li><strong>Operational Feasibility:</strong> Ensuring infrastructure and workforce can support new technologies.</li>
+            <li><strong>Risk Assessment and Mitigation:</strong> Anticipating and addressing potential challenges.</li>
+            <li><strong>Capitalization vs. Expensing:</strong> Distinguishing between long-term investments and operational costs.</li>
+            <li><strong>Financial Transparency and Integrity:</strong> Accurate recording for informed decision-making.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right column: Tables and Charts -->
+      <div class="right-column">
+        <div class="updated-values"><strong>(Updated values post Scenario)</strong></div>
+        <!-- Scrollable Container Start -->
+        <div class="table-container">
+          <!-- Balance Sheet Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Balance Sheet</th>
+              </tr>
+              <tr>
+                <th>Assets</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="expandable">
+                <td><strong>Current Assets <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Cash and Cash Equivalents</td>
+                <td>99</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Accounts Receivable</td>
+                <td>77</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Inventory</td>
+                <td>120</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Current Assets</strong></td>
+                <td>296</td>
+              </tr>
+              <tr class="expandable">
+                <td><strong>Non-current Assets <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Property, Plant & Equipment</td>
+                <td>1,140</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Intangible Assets (Software, R&D)</td>
+                <td>57</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Non-current Assets</strong></td>
+                <td>1,197</td>
+              </tr>
+              <tr>
+                <td><strong>Total Assets</strong></td>
+                <td>1,493</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Liabilities & Equity Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Liabilities & Equity</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="expandable">
+                <td><strong>Current Liabilities <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Accounts Payable</td>
+                <td>90</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Short-term Debt</td>
+                <td>45</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Current Liabilities</strong></td>
+                <td>135</td>
+              </tr>
+              <tr class="expandable">
+                <td><strong>Long-term Liabilities <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Long-term Debt</td>
+                <td>210</td>
+              </tr>
+              <tr class="hidden-row">
+                <td><strong>Total Liabilities</strong></td>
+                <td>345</td>
+              </tr>
+              <tr class="expandable">
+                <td><strong>Equity <i class="fas fa-plus"></i></strong></td>
+                <td></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>Shareholders’ Equity</td>
+                <td>1,148</td>
+              </tr>
+              <tr>
+                <td><strong>Total Liabilities & Equity</strong></td>
+                <td>1,493</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Profit and Loss Statement Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Profit & Loss (Income) Statement</th>
+              </tr>
+              <tr>
+                <th>Line Item</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Revenue (Sales)</td>
+                <td>835</td>
+              </tr>
+              <tr>
+                <td>Cost of Goods Sold (COGS)</td>
+                <td>219</td>
+              </tr>
+              <tr>
+                <td>Gross Profit</td>
+                <td>616</td>
+              </tr>
+              <tr>
+                <td>Operating Expenses</td>
+                <td>186</td>
+              </tr>
+              <tr>
+                <td>Operating Income (EBIT)</td>
+                <td>430</td>
+              </tr>
+              <tr>
+                <td>Interest Expense</td>
+                <td>35</td>
+              </tr>
+              <tr>
+                <td>Income Before Tax</td>
+                <td>395</td>
+              </tr>
+              <tr>
+                <td>Tax (Assuming 25%)</td>
+                <td>98.75</td>
+              </tr>
+              <tr>
+                <td>Net Income</td>
+                <td>296.25</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Cash Flow Statement Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Cash Flow Statement</th>
+              </tr>
+              <tr>
+                <th>Line Item</th>
+                <th>INR Lakhs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cash from Operating Activities</td>
+                <td>320</td>
+              </tr>
+              <tr>
+                <td>Cash from Investing Activities</td>
+                <td>-175</td>
+              </tr>
+              <tr>
+                <td>Cash from Financing Activities</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td><strong>Net Increase in Cash</strong></td>
+                <td>145</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Ratios Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Ratio</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Liquidity Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Liquidity Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>1. Current Ratio</td>
+                <td>2.19</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>2. Quick Ratio (Acid Test)</td>
+                <td>1.3</td>
+              </tr>
+
+              <!-- Profitability Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Profitability Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>3. Gross Profit Margin</td>
+                <td>73.77%</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>4. Net Profit Margin</td>
+                <td>35.47%</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>5. Return on Assets (ROA)</td>
+                <td>19.85%</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>6. Return on Equity (ROE)</td>
+                <td>25.82%</td>
+              </tr>
+
+              <!-- Efficiency Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Efficiency Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>7. Inventory Turnover Ratio</td>
+                <td>1.83</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>8. Accounts Receivable Turnover Ratio</td>
+                <td>10.84</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>9. Asset Turnover Ratio</td>
+                <td>0.56</td>
+              </tr>
+
+              <!-- Leverage Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Leverage Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>10. Debt-to-Equity Ratio</td>
+                <td>0.30</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>11. Interest Coverage Ratio</td>
+                <td>12.29</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>12. Debt Service Coverage Ratio (DSCR)</td>
+                <td>9.14</td>
+              </tr>
+
+              <!-- Cash Flow Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Cash Flow Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>13. Operating Cash Flow Ratio</td>
+                <td>2.37</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>14. Free Cash Flow (FCF)</td>
+                <td>145</td>
+              </tr>
+
+              <!-- Valuation Ratios -->
+              <tr class="expandable">
+                <td colspan="2"><strong>Valuation Ratios <i class="fas fa-plus"></i></strong></td>
+              </tr>
+              <tr class="hidden-row">
+                <td>15. Price-to-Earnings (P/E) Ratio</td>
+                <td>10</td>
+              </tr>
+              <tr class="hidden-row">
+                <td>16. Earnings per Share (EPS)</td>
+                <td>296.25</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Scrollable Container End -->
+
+        <!-- Interactive Chart -->
+        <div class="chart-container">
+          <canvas id="revenueChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section with End Simulation and Next Scenario Buttons -->
+    <div class="footer-buttons">
+      <a href="../../../../overview.html" class="end-button">End Simulation</a>
+      <a href="../scenario30/page1.html" class="next-button">Next Scenario</a>
+    </div>
+  </div>
+
+  <!-- Link to External JavaScript -->
+  <script src="page2.js"></script>
+</body>
+
+</html>
