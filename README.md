@@ -231,10 +231,6 @@ We welcome contributions to enhance the platform. Please ensure you:
 - Write clean, commented code.
 - Test your additions thoroughly.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
 ## Acknowledgements
 
 - **Contributors**: Thank you to all the developers and educators who contributed to this project.
