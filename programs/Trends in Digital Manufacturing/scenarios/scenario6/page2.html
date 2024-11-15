@@ -4,10 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <title>Financial Simulation - Scenario 6 Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <!-- Font Awesome for Icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+
   <!-- External CSS -->
   <link rel="stylesheet" href="page2.css">
 </head>
@@ -46,49 +50,18 @@
       <!-- Left column: Description and details -->
       <div class="left-column">
         <div class="description">
-          <h3>Outcome of Your Decision</h3>
+          <h3>Discussion</h3>
           <p>
-            Based on your selection, the company has decided to respond to the
-            RFP with additional customization to increase the chances of
-            winning the contract.
+            Organization incurs administrative expenses, which are recorded as costs spent to pursue a new business opportunity. The organization anticipates receiving payment from the customer for supplying the components, recognizing this amount as sales revenue, which reflects the income from the new contract. To fulfill the large order, the organization purchases additional inventory, ensuring they have enough materials to produce the required components.
+            As production begins, the costs associated with making the products are transferred from inventory to the cost of goods sold, representing the direct expenses tied to manufacturing. Finally, when the customer makes the payment in the next quarter, the organization records the cash received, reducing the amount owed by the customer and increasing its cash reserves.
           </p>
-          <h4>Concept:</h4>
-          <p>
-            <strong>RFP Preparation Costs:</strong> This includes
-            administrative and consulting costs for developing the proposal.
-            These costs are recorded in the P&L.
-          </p>
-          <p>
-            <strong>Revenue from Winning the RFP:</strong> The contract
-            revenue is booked as sales revenue once the contract is won and
-            work begins, with corresponding adjustments to accounts
-            receivable.
-          </p>
-          <p>
-            <strong>Customization Costs:</strong> Additional costs for
-            customizing the proposal or providing value-added services are
-            recorded under COGS if the contract is awarded.
-          </p>
-          <h4>Financial Impact:</h4>
-          <ul>
-            <li>
-              Incurred RFP preparation costs of INR 10 Lakhs, increasing
-              Operating Expenses.
-            </li>
-            <li>
-              Won the contract, resulting in additional Revenue of INR 50
-              Lakhs.
-            </li>
-            <li>
-              Incurred customization costs of INR 15 Lakhs, increasing COGS.
-            </li>
-          </ul>
+
           <h4>Assumptions:</h4>
-          <p>
-            The company decided to invest in customization to enhance the
-            proposal, leading to higher chances of winning the RFP. The costs
-            are justified by the additional revenue from the contract.
-          </p>
+          <ul>
+            <li><strong>RFP Preparation Costs:</strong> This includes administrative and consulting costs for developing the proposal. These costs are recorded in the P&L.</li>
+            <li><strong>Revenue from Winning the RFP:</strong> The contract revenue is booked as sales revenue once the contract is won and work begins, with corresponding adjustments to accounts receivable.</li>
+            <li><strong>Customization Costs:</strong> Additional costs for customizing the proposal or providing value-added services are recorded under COGS if the contract is awarded.</li>
+          </ul>
         </div>
       </div>
 
@@ -137,9 +110,7 @@
               </tr>
               <tr class="expandable">
                 <td>
-                  <strong
-                    >Non-current Assets <i class="fas fa-plus"></i
-                  ></strong>
+                  <strong>Non-current Assets <i class="fas fa-plus"></i></strong>
                 </td>
                 <td></td>
               </tr>
@@ -173,9 +144,7 @@
             <tbody>
               <tr class="expandable">
                 <td>
-                  <strong
-                    >Current Liabilities <i class="fas fa-plus"></i
-                  ></strong>
+                  <strong>Current Liabilities <i class="fas fa-plus"></i></strong>
                 </td>
                 <td></td>
               </tr>
@@ -194,9 +163,7 @@
               </tr>
               <tr class="expandable">
                 <td>
-                  <strong
-                    >Long-term Liabilities <i class="fas fa-plus"></i
-                  ></strong>
+                  <strong>Long-term Liabilities <i class="fas fa-plus"></i></strong>
                 </td>
                 <td></td>
               </tr>
@@ -239,12 +206,12 @@
             </thead>
             <tbody>
               <tr>
-                <td>Revenue (Sales)</td>
+                <td><span class="tooltip" data-tooltip="Total sales revenue generated by the company.">Revenue (Sales)</span></td>
                 <td>450</td>
                 <!-- Increased due to new contract -->
               </tr>
               <tr>
-                <td>Cost of Goods Sold (COGS)</td>
+                <td><span class="tooltip" data-tooltip="Direct costs attributable to the production of goods sold by the company.">Cost of Goods Sold (COGS)</span></td>
                 <td>215</td>
                 <!-- Increased due to customization costs -->
               </tr>
@@ -454,11 +421,13 @@
     <div class="footer-buttons">
       <a href="../../index.html" class="end-button">End Simulation</a>
       <a href="../scenario10/concepts.html" class="next-button">Next Scenario</a>
-    </div>
+      <!-- 
 
-    <!-- External JavaScript -->
-    <script src="page2.js" defer></script>
+    </div>
   </div>
+
+  <!-- External JavaScript -->
+  <script src="page2.js" defer></script>
 </body>
 
 </html>

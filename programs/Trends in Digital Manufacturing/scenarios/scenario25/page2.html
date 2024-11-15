@@ -4,10 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Financial Simulation - Scenario 25 Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <!-- Font Awesome for Icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  
   <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  
   <!-- External CSS -->
   <link rel="stylesheet" href="page2.css">
 </head>
@@ -44,31 +48,80 @@
       <!-- Left column: Description and details -->
       <div class="left-column">
         <div class="description">
-          <h3>Outcome of Your Decision</h3>
-          <p>
-            Based on your selection, the company has proceeded with implementing additive manufacturing (3D printing) into its processes.
-          </p>
-          <h4>Theoretical Concept:</h4>
-          <p>
-            <strong>Additive Manufacturing Integration</strong> – Understanding the strategic implementation of 3D printing technologies in manufacturing processes to enhance customization, reduce lead times, and minimize material waste. This includes evaluating different 3D printing technologies, conducting cost-benefit analyses, and managing the integration process to maximize benefits and align with strategic goals.
-          </p>
-          <h4>Financial Impact:</h4>
-          <ul>
-            <li>Initial investment in 3D printing technology has been accounted for.</li>
-            <li>Reduction in material costs due to minimized waste.</li>
-            <li>Increase in customization capabilities leading to higher revenue.</li>
-            <li>Shortened lead times improving customer satisfaction and sales.</li>
-          </ul>
+          <h3>Discussion</h3>
+          
           <h4>Assumptions:</h4>
-          <p><strong>Capital Expenditure:</strong> Cost of 3D printers added to Property, Plant & Equipment.</p>
-          <p><strong>Material Cost Savings:</strong> Reduction in COGS due to less material waste.</p>
-          <p><strong>Revenue Increase:</strong> Increase in Revenue due to enhanced customization and faster delivery.</p>
+          <ul>
+            <li>
+              <strong>Investment in Advanced Manufacturing:</strong>
+              <ul>
+                <li>
+                  The company records capital expenditures by:
+                  <ul>
+                    <li>Debiting the <strong>Property, Plant & Equipment</strong> account for the purchase and installation of 3D printing equipment and automated inspection systems.</li>
+                    <li>Crediting the <strong>Cash/Bank</strong> account to reflect the outflow of funds.</li>
+                  </ul>
+                </li>
+                <li>
+                  Expenditures on staff training programs are recorded as <strong>Administrative Expenses</strong>, highlighting the operational costs associated with implementing new technologies.
+                </li>
+                <li>
+                  <strong>Output Gained from Investment:</strong>
+                  <ul>
+                    <li>Increased <strong>Accounts Receivable</strong> and <strong>Sales Revenue</strong>, indicating higher sales from faster market entry and enhanced production capabilities.</li>
+                    <li>Cost savings from reduced material waste and improved quality are captured by debiting the <strong>Cost of Goods Sold (COGS)</strong> account, thereby lowering overall production costs.</li>
+                  </ul>
+                </li>
+                <li>
+                  At the end of the accounting period, <strong>Closing Entries</strong> are made to transfer the balances of Sales Revenue and COGS to <strong>Retained Earnings</strong>, ensuring that the financial statements accurately reflect the company’s profitability and maintain the balance sheet’s integrity.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Outsourcing Prototype Development:</strong>
+              <ul>
+                <li>
+                  The company records expenses related to:
+                  <ul>
+                    <li>Partnering fees</li>
+                    <li>Contract management</li>
+                    <li>Quality assurance audits</li>
+                  </ul>
+                  by debiting <strong>Administrative Expenses</strong> and crediting <strong>Cash/Bank</strong>.
+                </li>
+                <li>
+                  This approach allows GlobalFusion to leverage external expertise without significant capital investment.
+                </li>
+                <li>
+                  <strong>Output Gained from Outsourcing:</strong>
+                  <ul>
+                    <li>Cost savings on capital investment.</li>
+                    <li>Increased revenue from access to specialized expertise, reflected by debiting COGS and crediting Sales Revenue.</li>
+                    <li>Operational efficiencies and faster development times contribute to further revenue increases and expense reductions.</li>
+                  </ul>
+                </li>
+                <li>
+                  Similar to the first option, <strong>Closing Entries</strong> are performed to transfer the balances of Sales Revenue and adjusted COGS to Retained Earnings, ensuring that the financial records remain balanced and accurately represent the company’s financial performance.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Investments in long-term assets (like manufacturing equipment) are <strong>capitalized</strong>, meaning they are recorded as assets and depreciated over time.
+            </li>
+            <li>
+              Operational costs (such as staff training and maintenance) are <strong>expensed immediately</strong>, affecting the income statement directly.
+            </li>
+            <li>
+              Understanding how strategic investments translate into financial performance is crucial. Investments lead to increased revenue and cost savings, which are reflected in <strong>Sales Revenue</strong> and reduced <strong>COGS</strong>, respectively.
+            </li>
+          </ul>
         </div>
       </div>
 
       <!-- Right column: Tables and Charts -->
       <div class="right-column">
         <div class="updated-values"><strong>(Updated values post Scenario)</strong></div>
+        
         <!-- Scrollable Container Start -->
         <div class="table-container">
           <!-- Balance Sheet Table -->
@@ -142,6 +195,7 @@
               <tr class="hidden-row">
                 <td>Accounts Payable</td>
                 <td>65</td>
+                <!-- Decreased due to lower purchases -->
               </tr>
               <tr class="hidden-row">
                 <td>Short-term Debt</td>
@@ -170,6 +224,7 @@
               <tr class="hidden-row">
                 <td>Shareholders’ Equity</td>
                 <td>515</td>
+                <!-- Increased due to higher Net Income -->
               </tr>
               <tr>
                 <td><strong>Total Liabilities & Equity</strong></td>
@@ -221,6 +276,7 @@
               <tr>
                 <td>Tax</td>
                 <td>28.75</td>
+                <!-- Assuming 25% tax rate -->
               </tr>
               <tr>
                 <td>Net Income</td>
