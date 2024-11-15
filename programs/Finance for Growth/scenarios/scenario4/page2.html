@@ -1,62 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Financial Simulation - Scenario 4 Results</title>
+    <!-- Font Awesome for Icons -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="page2.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Financial Simulation - Scenario 4 Results</title>
-  <!-- Font Awesome for Icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- External CSS -->
-  <link rel="stylesheet" href="page2.css">
-</head>
-
-<body>
-  <div class="container">
-    <!-- Header with Timer, Title, and Logo -->
-    <div class="header">
-      <!-- Countdown Timer -->
-      <div class="timer-container">
-        <svg>
-          <circle cx="40" cy="40" r="36"></circle>
-          <circle class="progress" cx="40" cy="40" r="36"></circle>
-        </svg>
-        <div class="time" id="countdown-timer">05:00</div>
-      </div>
-
-      <!-- Title -->
-      <div class="title">Financial Simulation</div>
-
-      <!-- Logo -->
-      <img alt="ZENLEARN Logo" src="../../images/logo.png" />
-    </div>
-
-    <!-- Scenario Title -->
-    <div class="scenario">Scenario 1: Reaching Out to Old Inactive Customers</div>
-
-    <!-- Progress Bar -->
-    <div class="progress-bar">
-      <div class="progress-bar-inner" id="progress-bar-inner"></div>
-    </div>
-
-    <div class="content">
-      <!-- Left column: Description and details -->
-      <div class="left-column">
-        <div class="description">
-          <h3>Concepts</h3>
-          <h4>Assumptions:</h4>
-          <p><strong>Sales Campaign Costs:</strong> Marketing expenses, such as calls and visits, are considered administrative and selling costs.</p>
-          <p><strong>Revenue from Re-engaged Customers:</strong> Revenue generated from previously inactive customers is booked as sales, and accounts receivable is adjusted accordingly.</p>
-          <p><strong>Sales Visits Costs:</strong> Travel and sales expenses incurred during personalized sales visits are recorded as selling expenses.</p>
+  <body>
+    <div class="container">
+      <!-- Header with Timer, Title, and Logo -->
+      <div class="header">
+        <!-- Countdown Timer -->
+        <div class="timer-container">
+          <svg>
+            <circle cx="40" cy="40" r="36"></circle>
+            <circle class="progress" cx="40" cy="40" r="36"></circle>
+          </svg>
+          <div class="time" id="countdown-timer">05:00</div>
         </div>
+
+        <!-- Title -->
+        <div class="title">Financial Simulation</div>
+
+        <!-- Logo -->
+        <img alt="ZENLEARN Logo" src="../../images/logo.png" />
       </div>
 
-      <!-- Right column: Tables and Charts -->
-      <div class="right-column">
-        <div class="updated-values"><strong>(Updated values post Scenario)</strong></div>
-        <!-- Scrollable Container Start -->
-        <div class="table-container">
+      <!-- Scenario Title -->
+      <div class="scenario">
+        Scenario 1: Reaching Out to Old Inactive Customers
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar">
+        <div class="progress-bar-inner" id="progress-bar-inner"></div>
+      </div>
+
+      <div class="content">
+        <!-- Left column: Description and details -->
+        <div class="left-column">
+          <div class="description">
+            <h3>Discussion</h3>
+            <h4>Assumptions:</h4>
+            <ul>
+              <li>
+                Organization incurs administrative expenses, which are recorded
+                as costs spent to pursue a new business opportunity.
+              </li>
+              <li>
+                The organization anticipates receiving payment from the customer
+                for supplying the components, recognizing this amount as sales
+                revenue, which reflects the income from the new contract.
+              </li>
+              <li>
+                To fulfill the large order, the organization purchases
+                additional inventory, ensuring they have enough materials to
+                produce the required components.
+              </li>
+              <li>
+                As production begins, the costs associated with making the
+                products are transferred from inventory to the cost of goods
+                sold, representing the direct expenses tied to manufacturing.
+              </li>
+              <li>
+                When the customer makes the payment in the next quarter, the
+                organization records the cash received, reducing the amount owed
+                by the customer and increasing its cash reserves.
+              </li>
+              <li>
+                <strong>Sales Campaign Costs:</strong> Marketing expenses, such
+                as calls and visits, are considered administrative and selling
+                costs.
+              </li>
+              <li>
+                <strong>Revenue from Re-engaged Customers:</strong> Revenue
+                generated from previously inactive customers is booked as sales,
+                and accounts receivable is adjusted accordingly.
+              </li>
+              <li>
+                <strong>Sales Visits Costs:</strong> Travel and sales expenses
+                incurred during personalized sales visits are recorded as
+                selling expenses.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right column: Tables and Charts -->
+        <div class="right-column">
+          <div class="updated-values">
+            <strong>(Updated values post Scenario)</strong>
+          </div>
+          <!-- Scrollable Container Start -->
+          <div class="table-container">
             <!-- Balance Sheet Table -->
             <table class="table">
               <thead>
@@ -70,7 +114,9 @@
               </thead>
               <tbody>
                 <tr class="expandable">
-                  <td><strong>Current Assets <i class="fas fa-plus"></i></strong></td>
+                  <td>
+                    <strong>Current Assets <i class="fas fa-plus"></i></strong>
+                  </td>
                   <td></td>
                 </tr>
                 <tr class="hidden-row">
@@ -90,7 +136,11 @@
                   <td>230</td>
                 </tr>
                 <tr class="expandable">
-                  <td><strong>Non-current Assets <i class="fas fa-plus"></i></strong></td>
+                  <td>
+                    <strong
+                      >Non-current Assets <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                   <td></td>
                 </tr>
                 <tr class="hidden-row">
@@ -111,7 +161,7 @@
                 </tr>
               </tbody>
             </table>
-  
+
             <!-- Liabilities & Equity Table -->
             <table class="table">
               <thead>
@@ -122,7 +172,11 @@
               </thead>
               <tbody>
                 <tr class="expandable">
-                  <td><strong>Current Liabilities <i class="fas fa-plus"></i></strong></td>
+                  <td>
+                    <strong
+                      >Current Liabilities <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                   <td></td>
                 </tr>
                 <tr class="hidden-row">
@@ -138,7 +192,11 @@
                   <td>100</td>
                 </tr>
                 <tr class="expandable">
-                  <td><strong>Long-term Liabilities <i class="fas fa-plus"></i></strong></td>
+                  <td>
+                    <strong
+                      >Long-term Liabilities <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                   <td></td>
                 </tr>
                 <tr class="hidden-row">
@@ -150,7 +208,9 @@
                   <td>250</td>
                 </tr>
                 <tr class="expandable">
-                  <td><strong>Equity <i class="fas fa-plus"></i></strong></td>
+                  <td>
+                    <strong>Equity <i class="fas fa-plus"></i></strong>
+                  </td>
                   <td></td>
                 </tr>
                 <tr class="hidden-row">
@@ -163,7 +223,7 @@
                 </tr>
               </tbody>
             </table>
-  
+
             <!-- Profit and Loss Statement Table -->
             <table class="table">
               <thead>
@@ -177,14 +237,23 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><span class="tooltip" data-tooltip="Total sales revenue generated by the company.">Revenue
-                      (Sales)</span></td>
+                  <td>
+                    <span
+                      class="tooltip"
+                      data-tooltip="Total sales revenue generated by the company."
+                      >Revenue (Sales)</span
+                    >
+                  </td>
                   <td>400</td>
                 </tr>
                 <tr>
-                  <td><span class="tooltip"
-                      data-tooltip="Direct costs attributable to the production of goods sold by the company.">Cost of
-                      Goods Sold (COGS)</span></td>
+                  <td>
+                    <span
+                      class="tooltip"
+                      data-tooltip="Direct costs attributable to the production of goods sold by the company."
+                      >Cost of Goods Sold (COGS)</span
+                    >
+                  </td>
                   <td>200</td>
                 </tr>
                 <tr>
@@ -217,7 +286,7 @@
                 </tr>
               </tbody>
             </table>
-  
+
             <!-- Cash Flow Statement Table -->
             <table class="table">
               <thead>
@@ -248,7 +317,7 @@
                 </tr>
               </tbody>
             </table>
-  
+
             <!-- Ratios Table -->
             <table class="table">
               <thead>
@@ -260,7 +329,11 @@
               <tbody>
                 <!-- Liquidity Ratios -->
                 <tr class="expandable">
-                  <td colspan="2"><strong>Liquidity Ratios <i class="fas fa-plus"></i></strong></td>
+                  <td colspan="2">
+                    <strong
+                      >Liquidity Ratios <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                 </tr>
                 <tr class="hidden-row">
                   <td>1. Current Ratio</td>
@@ -270,10 +343,14 @@
                   <td>2. Quick Ratio (Acid Test)</td>
                   <td>1.2</td>
                 </tr>
-  
+
                 <!-- Profitability Ratios -->
                 <tr class="expandable">
-                  <td colspan="2"><strong>Profitability Ratios <i class="fas fa-plus"></i></strong></td>
+                  <td colspan="2">
+                    <strong
+                      >Profitability Ratios <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                 </tr>
                 <tr class="hidden-row">
                   <td>3. Gross Profit Margin</td>
@@ -291,10 +368,14 @@
                   <td>6. Return on Equity (ROE)</td>
                   <td>9%</td>
                 </tr>
-  
+
                 <!-- Efficiency Ratios -->
                 <tr class="expandable">
-                  <td colspan="2"><strong>Efficiency Ratios <i class="fas fa-plus"></i></strong></td>
+                  <td colspan="2">
+                    <strong
+                      >Efficiency Ratios <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                 </tr>
                 <tr class="hidden-row">
                   <td>7. Inventory Turnover Ratio</td>
@@ -308,10 +389,12 @@
                   <td>9. Asset Turnover Ratio</td>
                   <td>0.53</td>
                 </tr>
-  
+
                 <!-- Leverage Ratios -->
                 <tr class="expandable">
-                  <td colspan="2"><strong>Leverage Ratios <i class="fas fa-plus"></i></strong></td>
+                  <td colspan="2">
+                    <strong>Leverage Ratios <i class="fas fa-plus"></i></strong>
+                  </td>
                 </tr>
                 <tr class="hidden-row">
                   <td>10. Debt-to-Equity Ratio</td>
@@ -325,10 +408,14 @@
                   <td>12. Debt Service Coverage Ratio (DSCR)</td>
                   <td>3</td>
                 </tr>
-  
+
                 <!-- Cash Flow Ratios -->
                 <tr class="expandable">
-                  <td colspan="2"><strong>Cash Flow Ratios <i class="fas fa-plus"></i></strong></td>
+                  <td colspan="2">
+                    <strong
+                      >Cash Flow Ratios <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                 </tr>
                 <tr class="hidden-row">
                   <td>13. Operating Cash Flow Ratio</td>
@@ -338,10 +425,14 @@
                   <td>14. Free Cash Flow (FCF)</td>
                   <td>-20</td>
                 </tr>
-  
+
                 <!-- Valuation Ratios -->
                 <tr class="expandable">
-                  <td colspan="2"><strong>Valuation Ratios <i class="fas fa-plus"></i></strong></td>
+                  <td colspan="2">
+                    <strong
+                      >Valuation Ratios <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                 </tr>
                 <tr class="hidden-row">
                   <td>15. Price-to-Earnings (P/E) Ratio</td>
@@ -356,22 +447,23 @@
           </div>
           <!-- Scrollable Container End -->
 
-        <!-- Interactive Chart -->
-        <div class="chart-container">
-          <canvas id="revenueChart"></canvas>
+          <!-- Interactive Chart -->
+          <div class="chart-container">
+            <canvas id="revenueChart"></canvas>
+          </div>
         </div>
+      </div>
+
+      <!-- Footer Section with End Simulation and Next Scenario Buttons -->
+      <div class="footer-buttons">
+        <a href="../../index.html" class="end-button">End Simulation</a>
+        <a href="../scenario5/concepts.html" class="next-button"
+          >Next Scenario</a
+        >
       </div>
     </div>
 
-    <!-- Footer Section with End Simulation and Next Scenario Buttons -->
-    <div class="footer-buttons">
-      <a href="../../index.html" class="end-button">End Simulation</a>
-      <a href="../scenario5/concepts.html" class="next-button">Next Scenario</a>
-    </div>
-  </div>
-
-  <!-- External JavaScript -->
-  <script src="page2.js"></script>
-</body>
-
+    <!-- External JavaScript -->
+    <script src="page2.js"></script>
+  </body>
 </html>

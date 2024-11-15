@@ -1,78 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Financial Simulation - Scenario 13 Results</title>
+    <!-- Font Awesome for Icons -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="page2.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Financial Simulation - Scenario 13 Results</title>
-  <!-- Font Awesome for Icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- External CSS -->
-  <link rel="stylesheet" href="page2.css">
-</head>
-
-<body>
-  <div class="container">
-    <!-- Header with Timer, Title, and Logo -->
-    <div class="header">
-      <!-- Countdown Timer -->
-      <div class="timer-container">
-        <svg>
-          <circle cx="40" cy="40" r="36"></circle>
-          <circle class="progress" cx="40" cy="40" r="36"></circle>
-        </svg>
-        <div class="time" id="countdown-timer">05:00</div>
-      </div>
-
-      <!-- Title -->
-      <div class="title">Financial Simulation</div>
-
-      <!-- Logo -->
-      <img alt="ZENLEARN Logo" src="../../images/logo.png" />
-    </div>
-
-    <!-- Scenario Title -->
-    <div class="scenario">Scenario 4: Bid for a New Contract</div>
-
-    <!-- Progress Bar -->
-    <div class="progress-bar">
-      <div class="progress-bar-inner" id="progress-bar-inner"></div>
-    </div>
-
-    <div class="content">
-      <!-- Left column: Description and details -->
-      <div class="left-column">
-        <div class="description">
-          <h4>Assumptions:</h4>
-          <ul>
-            <li>The company plans to invest <strong>INR 10 Lakhs</strong> to hire new sales personnel and set up a new office to support its bid for a large industrial contract.</li>
-            <li>This investment is considered a <strong>financing activity</strong> because it is a long-term, strategic investment aimed at increasing the company's future revenue through expanding its market presence and capabilities.</li>
-          </ul>
-
-          <h4>Breakdown of the INR 10 Lakhs Investment:</h4>
-          <ul>
-            <li><strong>Hiring Costs</strong>: Includes salaries, recruitment fees, and onboarding expenses for new sales staff.</li>
-            <li><strong>Office Setup Costs</strong>: Expenses related to leasing office space, purchasing office equipment, and setting up infrastructure to support the sales team's operations.</li>
-          </ul>
-
-          <p>The total investment is <strong>INR 10 Lakhs</strong>, which is spent immediately, reducing the company's cash reserves. The investment in the sales team is not just an operational expense but a <strong>strategic long-term investment</strong> aimed at securing a large contract. The company expects this investment to result in a steady revenue stream in the future if the contract is won, making it a financing activity rather than a purely operating one.</p>
-
-          <ul>
-            <li><strong>SG&A Expenses</strong>: Since this is a long-term investment, it is classified under <strong>SG&A</strong> rather than <strong>COGS</strong>. Expanding the sales team and setting up an office are considered part of the company's administrative costs to increase its capacity.</li>
-            <li><strong>Impact on Cash Flow Statement</strong>: The <strong>INR 10 Lakhs</strong> outflow will be reflected as a negative financing cash flow because it represents cash spent on long-term growth initiatives.</li>
-          </ul>
-
-          <h4>For “Product Innovation” option:</h4>
-          <p>If the organization invests <strong>INR 10 Lakhs</strong> for R&D expenses and <strong>INR 15 Lakhs</strong> for PP&E expenses, it will have long term benefits for the company than just a boost in one season from marketing expenses. It is a short-term vs long term decision, higher risk for higher rewards.</p>
+  <body>
+    <div class="container">
+      <!-- Header with Timer, Title, and Logo -->
+      <div class="header">
+        <!-- Countdown Timer -->
+        <div class="timer-container">
+          <svg>
+            <circle cx="40" cy="40" r="36"></circle>
+            <circle class="progress" cx="40" cy="40" r="36"></circle>
+          </svg>
+          <div class="time" id="countdown-timer">05:00</div>
         </div>
+
+        <!-- Title -->
+        <div class="title">Financial Simulation</div>
+
+        <!-- Logo -->
+        <img alt="ZENLEARN Logo" src="../../images/logo.png" />
       </div>
 
-      <!-- Right column: Tables and Charts -->
-      <div class="right-column">
-        <div class="updated-values"><strong>(Updated values post Scenario)</strong></div>
-        <!-- Scrollable Container Start -->
-        <div class="table-container">
+      <!-- Scenario Title -->
+      <div class="scenario">Scenario 4: Bid for a New Contract</div>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar">
+        <div class="progress-bar-inner" id="progress-bar-inner"></div>
+      </div>
+
+      <div class="content">
+        <!-- Left column: Description and details -->
+        <div class="left-column">
+          <div class="description">
+            <h3>Discussion</h3>
+            <p>
+              Organization incurs administrative expenses, which are recorded as
+              costs spent to pursue a new business opportunity. The organization
+              anticipates receiving payment from the customer for supplying the
+              components, recognizing this amount as sales revenue, which
+              reflects the income from the new contract. To fulfill the large
+              order, the organization purchases additional inventory, ensuring
+              they have enough materials to produce the required components.
+            </p>
+            <p>
+              As production begins, the costs associated with making the
+              products are transferred from inventory to the cost of goods sold,
+              representing the direct expenses tied to manufacturing. Finally,
+              when the customer makes the payment in the next quarter, the
+              organization records the cash received, reducing the amount owed
+              by the customer and increasing its cash reserves.
+            </p>
+            <h4>Assumptions:</h4>
+            <ul>
+              <li>
+                The company plans to invest <strong>INR 10 Lakhs</strong> to
+                hire new sales personnel and set up a new office to support its
+                bid for a large industrial contract.
+              </li>
+              <li>
+                This investment is considered a
+                <strong>financing activity</strong> because it is a long-term,
+                strategic investment aimed at increasing the company's future
+                revenue through expanding its market presence and capabilities.
+              </li>
+            </ul>
+
+            <h4>Breakdown of the INR 10 Lakhs Investment:</h4>
+            <ul>
+              <li>
+                <strong>Hiring Costs</strong>: Includes salaries, recruitment
+                fees, and onboarding expenses for new sales staff.
+              </li>
+              <li>
+                <strong>Office Setup Costs</strong>: Expenses related to leasing
+                office space, purchasing office equipment, and setting up
+                infrastructure to support the sales team's operations.
+              </li>
+            </ul>
+
+            <p>
+              The total investment is <strong>INR 10 Lakhs</strong>, which is
+              spent immediately, reducing the company's cash reserves. The
+              investment in the sales team is not just an operational expense
+              but a <strong>strategic long-term investment</strong> aimed at
+              securing a large contract. The company expects this investment to
+              result in a steady revenue stream in the future if the contract is
+              won, making it a financing activity rather than a purely operating
+              one.
+            </p>
+
+            <ul>
+              <li>
+                <strong>SG&A Expenses</strong>: Since this is a long-term
+                investment, it is classified under <strong>SG&A</strong> rather
+                than <strong>COGS</strong>. Expanding the sales team and setting
+                up an office are considered part of the company's administrative
+                costs to increase its capacity.
+              </li>
+              <li>
+                <strong>Impact on Cash Flow Statement</strong>: The
+                <strong>INR 5 Lakhs</strong> outflow will be reflected as a
+                negative financing cash flow because it represents cash spent on
+                long-term growth initiatives.
+              </li>
+            </ul>
+
+            <h4>For “Product innovation” option:</h4>
+            <p>
+              If the organization invests <strong>INR 10 Lakhs</strong> for R&D
+              expenses and <strong>INR 15 Lakhs</strong> for PP&E expenses, it
+              will have long term benefits for the company than just a boost in
+              one season from marketing expenses. It is a short term vs long
+              term decision, higher risk for higher rewards.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right column: Tables and Charts -->
+        <div class="right-column">
+          <div class="updated-values">
+            <strong>(Updated values post Scenario)</strong>
+          </div>
+          <!-- Scrollable Container Start -->
+          <div class="table-container">
             <!-- Balance Sheet Table -->
             <table class="table">
               <thead>
@@ -86,7 +150,9 @@
               </thead>
               <tbody>
                 <tr class="expandable">
-                  <td><strong>Current Assets <i class="fas fa-plus"></i></strong></td>
+                  <td>
+                    <strong>Current Assets <i class="fas fa-plus"></i></strong>
+                  </td>
                   <td></td>
                 </tr>
                 <tr class="hidden-row">
@@ -106,7 +172,11 @@
                   <td>230</td>
                 </tr>
                 <tr class="expandable">
-                  <td><strong>Non-current Assets <i class="fas fa-plus"></i></strong></td>
+                  <td>
+                    <strong
+                      >Non-current Assets <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                   <td></td>
                 </tr>
                 <tr class="hidden-row">
@@ -127,7 +197,7 @@
                 </tr>
               </tbody>
             </table>
-  
+
             <!-- Liabilities & Equity Table -->
             <table class="table">
               <thead>
@@ -138,7 +208,11 @@
               </thead>
               <tbody>
                 <tr class="expandable">
-                  <td><strong>Current Liabilities <i class="fas fa-plus"></i></strong></td>
+                  <td>
+                    <strong
+                      >Current Liabilities <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                   <td></td>
                 </tr>
                 <tr class="hidden-row">
@@ -154,7 +228,11 @@
                   <td>100</td>
                 </tr>
                 <tr class="expandable">
-                  <td><strong>Long-term Liabilities <i class="fas fa-plus"></i></strong></td>
+                  <td>
+                    <strong
+                      >Long-term Liabilities <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                   <td></td>
                 </tr>
                 <tr class="hidden-row">
@@ -166,7 +244,9 @@
                   <td>250</td>
                 </tr>
                 <tr class="expandable">
-                  <td><strong>Equity <i class="fas fa-plus"></i></strong></td>
+                  <td>
+                    <strong>Equity <i class="fas fa-plus"></i></strong>
+                  </td>
                   <td></td>
                 </tr>
                 <tr class="hidden-row">
@@ -179,7 +259,7 @@
                 </tr>
               </tbody>
             </table>
-  
+
             <!-- Profit and Loss Statement Table -->
             <table class="table">
               <thead>
@@ -193,14 +273,11 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><span class="tooltip" data-tooltip="Total sales revenue generated by the company.">Revenue
-                      (Sales)</span></td>
+                  <td>Revenue (Sales)</td>
                   <td>400</td>
                 </tr>
                 <tr>
-                  <td><span class="tooltip"
-                      data-tooltip="Direct costs attributable to the production of goods sold by the company.">Cost of
-                      Goods Sold (COGS)</span></td>
+                  <td>Cost of Goods Sold (COGS)</td>
                   <td>200</td>
                 </tr>
                 <tr>
@@ -233,7 +310,7 @@
                 </tr>
               </tbody>
             </table>
-  
+
             <!-- Cash Flow Statement Table -->
             <table class="table">
               <thead>
@@ -264,7 +341,7 @@
                 </tr>
               </tbody>
             </table>
-  
+
             <!-- Ratios Table -->
             <table class="table">
               <thead>
@@ -276,7 +353,11 @@
               <tbody>
                 <!-- Liquidity Ratios -->
                 <tr class="expandable">
-                  <td colspan="2"><strong>Liquidity Ratios <i class="fas fa-plus"></i></strong></td>
+                  <td colspan="2">
+                    <strong
+                      >Liquidity Ratios <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                 </tr>
                 <tr class="hidden-row">
                   <td>1. Current Ratio</td>
@@ -286,10 +367,14 @@
                   <td>2. Quick Ratio (Acid Test)</td>
                   <td>1.2</td>
                 </tr>
-  
+
                 <!-- Profitability Ratios -->
                 <tr class="expandable">
-                  <td colspan="2"><strong>Profitability Ratios <i class="fas fa-plus"></i></strong></td>
+                  <td colspan="2">
+                    <strong
+                      >Profitability Ratios <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                 </tr>
                 <tr class="hidden-row">
                   <td>3. Gross Profit Margin</td>
@@ -307,10 +392,14 @@
                   <td>6. Return on Equity (ROE)</td>
                   <td>9%</td>
                 </tr>
-  
+
                 <!-- Efficiency Ratios -->
                 <tr class="expandable">
-                  <td colspan="2"><strong>Efficiency Ratios <i class="fas fa-plus"></i></strong></td>
+                  <td colspan="2">
+                    <strong
+                      >Efficiency Ratios <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                 </tr>
                 <tr class="hidden-row">
                   <td>7. Inventory Turnover Ratio</td>
@@ -324,10 +413,12 @@
                   <td>9. Asset Turnover Ratio</td>
                   <td>0.53</td>
                 </tr>
-  
+
                 <!-- Leverage Ratios -->
                 <tr class="expandable">
-                  <td colspan="2"><strong>Leverage Ratios <i class="fas fa-plus"></i></strong></td>
+                  <td colspan="2">
+                    <strong>Leverage Ratios <i class="fas fa-plus"></i></strong>
+                  </td>
                 </tr>
                 <tr class="hidden-row">
                   <td>10. Debt-to-Equity Ratio</td>
@@ -341,10 +432,14 @@
                   <td>12. Debt Service Coverage Ratio (DSCR)</td>
                   <td>3</td>
                 </tr>
-  
+
                 <!-- Cash Flow Ratios -->
                 <tr class="expandable">
-                  <td colspan="2"><strong>Cash Flow Ratios <i class="fas fa-plus"></i></strong></td>
+                  <td colspan="2">
+                    <strong
+                      >Cash Flow Ratios <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                 </tr>
                 <tr class="hidden-row">
                   <td>13. Operating Cash Flow Ratio</td>
@@ -354,10 +449,14 @@
                   <td>14. Free Cash Flow (FCF)</td>
                   <td>-20</td>
                 </tr>
-  
+
                 <!-- Valuation Ratios -->
                 <tr class="expandable">
-                  <td colspan="2"><strong>Valuation Ratios <i class="fas fa-plus"></i></strong></td>
+                  <td colspan="2">
+                    <strong
+                      >Valuation Ratios <i class="fas fa-plus"></i
+                    ></strong>
+                  </td>
                 </tr>
                 <tr class="hidden-row">
                   <td>15. Price-to-Earnings (P/E) Ratio</td>
@@ -372,22 +471,23 @@
           </div>
           <!-- Scrollable Container End -->
 
-        <!-- Interactive Chart -->
-        <div class="chart-container">
-          <canvas id="revenueChart"></canvas>
+          <!-- Interactive Chart -->
+          <div class="chart-container">
+            <canvas id="revenueChart"></canvas>
+          </div>
         </div>
+      </div>
+
+      <!-- Footer Section with End Simulation and Next Scenario Buttons -->
+      <div class="footer-buttons">
+        <a href="index.html" class="end-button">End Simulation</a>
+        <a href="../scenario16/concepts.html" class="next-button"
+          >Next Scenario</a
+        >
       </div>
     </div>
 
-    <!-- Footer Section with End Simulation and Next Scenario Buttons -->
-    <div class="footer-buttons">
-      <a href="index.html" class="end-button">End Simulation</a>
-      <a href="../scenario16/concepts.html" class="next-button">Next Scenario</a>
-    </div>
-  </div>
-
-  <!-- External JavaScript -->
-  <script src="page2.js"></script>
-</body>
-
+    <!-- External JavaScript -->
+    <script src="page2.js"></script>
+  </body>
 </html>
