@@ -4,10 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Financial Simulation - Scenario 12 Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <!-- Font Awesome for Icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <!-- External CSS -->
   <link rel="stylesheet" href="page2.css">
 </head>
@@ -44,34 +48,52 @@
       <!-- Left column: Description and details -->
       <div class="left-column">
         <div class="description">
-          <h3>Concepts</h3>
+          <h3>Discussion</h3>
+          <p>
+            Organization incurs administrative expenses, which are recorded as costs spent to pursue a new business opportunity. The organization anticipates receiving payment from the customer for supplying the components, recognizing this amount as sales revenue, which reflects the income from the new contract. To fulfill the large order, the organization purchases additional inventory, ensuring they have enough materials to produce the required components.
+            As production begins, the costs associated with making the products are transferred from inventory to the cost of goods sold, representing the direct expenses tied to manufacturing. Finally, when the customer makes the payment in the next quarter, the organization records the cash received, reducing the amount owed by the customer and increasing its cash reserves.
+          </p>
+
           <h4>Assumptions:</h4>
-          <p>In a manufacturing organization, assets—particularly inventory and accounts receivable—are closely tied to
-            sales. When sales increase due to seasonal demand, the company will need to produce more goods, which leads
-            to an increase in inventory. Additionally, the increase in sales will result in higher accounts receivable
-            as customers purchase more products.</p>
+          <p>In a manufacturing organization, assets—particularly inventory and accounts receivable—are closely tied to sales. When sales increase due to seasonal demand, the company will need to produce more goods, which leads to an increase in inventory. Additionally, the increase in sales will result in higher accounts receivable as customers purchase more products.</p>
 
-          <p><strong>Impact on Cash Flow:</strong> Cash flow from operating activities is influenced by changes in
-            sales, COGS, and collections from customers. The reduction in sales means less cash inflow, while the
-            decrease in COGS represents less cash outflow for production.</p>
-
-          <p><strong>Cash Flow Components:</strong></p>
+          <h4>Key Components:</h4>
           <ul>
-            <li>Cash Inflow (from Sales): The increase in sales of INR 60 Lakhs will eventually convert into cash,
-              during the next period.
-              <strong>Cash Collected = 0% of INR 60 Lakhs = INR 0 Lakhs.</strong>
+            <li>
+              <strong>Inventory (Current Assets):</strong> Represents the raw materials, work-in-progress, and finished goods the company holds.
+              <ul>
+                <li>To meet the seasonal demand, the company must increase production, which leads to an increase in inventory (finished goods, raw materials, etc.).</li>
+                <li>Since COGS is 50% of sales, the additional inventory required to meet the increase in sales (INR 60 Lakhs) would be 50% of that amount. = 50% of INR 60 Lakhs = INR 30 Lakhs.</li>
+              </ul>
             </li>
-            <li>Cash Outflow (COGS): The cost to produce the additional sales will be reflected in cash outflows for raw
-              materials, labor, and other direct costs.
-              <strong>Increase in COGS = 50% of INR 60 Lakhs = INR 30 Lakhs.</strong>
+            <li>
+              <strong>Accounts Receivable (Current Assets):</strong> Represents the money owed by customers after making sales.
+              <ul>
+                <li>When sales increase by INR 60 Lakhs, customers will purchase more products on credit. This results in an increase in accounts receivable.</li>
+                <li>The full amount of the increased sales (INR 60 Lakhs) will be reflected in accounts receivable until customers pay their invoices.</li>
+              </ul>
             </li>
           </ul>
 
-          <p><strong>Net Impact on Cash Flow:</strong></p>
+          <h4>Impact on Operating Cash Flow:</h4>
           <ul>
-            <li>Net Increase in Operating Cash Flow = Cash Collected from Sales – Cash Outflow for COGS.</li>
-            <li>Net Operating Cash Flow = INR 0 Lakhs (collected from sales) – INR 30 Lakhs (spent on COGS).</li>
-            <li>Net Change in Operating Cash Flow = -INR 30 Lakhs.</li>
+            <li><strong>Cash from Sales (Collections):</strong> The increase in sales of INR 60 Lakhs will eventually convert into cash during the next period.
+              <ul>
+                <li><strong>Cash Collected = 0% of INR 60 Lakhs = INR 0 Lakhs.</strong></li>
+              </ul>
+            </li>
+            <li><strong>Cash Outflow (COGS):</strong> The cost to produce the additional sales will be reflected in cash outflows for raw materials, labor, and other direct costs.
+              <ul>
+                <li><strong>Increase in COGS = 50% of INR 60 Lakhs = INR 30 Lakhs.</strong></li>
+              </ul>
+            </li>
+          </ul>
+
+          <h4>Net Impact on Operating Cash Flow:</h4>
+          <ul>
+            <li><strong>Net Increase in Operating Cash Flow = Cash Collected from Sales – Cash Outflow for COGS.</strong></li>
+            <li><strong>Net Operating Cash Flow = INR 0 Lakhs (collected from sales) – INR 30 Lakhs (spent on COGS).</strong></li>
+            <li><strong>Net Change in Operating Cash Flow = -INR 30 Lakhs.</strong></li>
           </ul>
         </div>
       </div>
@@ -202,14 +224,11 @@
             </thead>
             <tbody>
               <tr>
-                <td><span class="tooltip" data-tooltip="Total sales revenue generated by the company.">Revenue
-                    (Sales)</span></td>
+                <td><span class="tooltip" data-tooltip="Total sales revenue generated by the company.">Revenue (Sales)</span></td>
                 <td>400</td>
               </tr>
               <tr>
-                <td><span class="tooltip"
-                    data-tooltip="Direct costs attributable to the production of goods sold by the company.">Cost of
-                    Goods Sold (COGS)</span></td>
+                <td><span class="tooltip" data-tooltip="Direct costs attributable to the production of goods sold by the company.">Cost of Goods Sold (COGS)</span></td>
                 <td>200</td>
               </tr>
               <tr>
@@ -387,7 +406,8 @@
         </div>
       </div>
     </div>
-    <!-- Footer Buttons -->
+
+    <!-- Footer Section with End Simulation and Next Scenario Buttons -->
     <div class="footer-buttons">
       <a href="../../index.html" class="end-button">End Simulation</a>
       <a href="../scenario14/concepts.html" class="next-button">Next Scenario</a>
