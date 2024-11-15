@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Concepts - Scenario 23</title>
+  <!-- Responsive Meta Tag -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="../../css/concepts.css">
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <!-- AOS Library for Animations -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header with Timer, Title, and Logo -->
+    <div class="header" data-aos="fade-down">
+      <!-- Countdown Timer -->
+      <div class="timer-container">
+        <svg>
+          <circle cx="40" cy="40" r="36"></circle>
+          <circle class="progress" cx="40" cy="40" r="36"></circle>
+        </svg>
+        <div class="time" id="countdown-timer">05:00</div>
+      </div>
+
+      <!-- Title -->
+      <div class="title" data-aos="fade-up">Implementing IoT in manufacturing</div>
+
+      <!-- Logo -->
+      <img alt="ZENLEARN Logo" src="../../images/logo.png" data-aos="fade-up" />
+    </div>
+
+    <!-- Scenario Title -->
+    <div class="scenario" data-aos="fade-up">Scenario 1: Labor Strike</div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" data-aos="fade-up">
+      <div class="progress-bar-inner" id="progress-bar-inner"></div>
+    </div>
+
+    <div class="content">
+      <!-- Concepts Content -->
+      <div class="concepts-section" data-aos="fade-right">
+        <h2>Concepts</h2>
+        <p>
+          To effectively navigate labor disputes and decide between negotiating with workers or investing in automation, executives at GlobalFusion Industries should master Cost-Benefit Analysis (CBA), Return on Investment (ROI) Analysis, Risk Assessment and Mitigation, and Change Management Strategies from the Implementing IoT in Manufacturing Program.
+        </p>
+
+        <!-- Concept 1 -->
+        <h3>1. Cost Benefit Analysis</h3>
+        <p>
+          Cost Benefit Analysis involves comparing the total expected costs of an initiative against the total expected benefits to determine its financial viability.
+        </p>
+        <ul>
+          <li>Include all direct and indirect costs such as maintenance, training, and downtime during installation.</li>
+          <li>Estimate tangible benefits like increased production efficiency, reduced defect rates, and higher sales.</li>
+          <li>Assess how changes in key assumptions (e.g., cost savings, revenue growth) affect the CBA outcomes.</li>
+        </ul>
+        <p><strong>Key Formulas:</strong></p>
+        <ul>
+          <li><strong>Cost-Benefit Ratio = Total Benefits / Total Costs</strong></li>
+          <li>CBA Ratio &gt; 1 ⇒ Beneficial Investment</li>
+          <li><strong>Net Benefit = Total Benefits − Total Costs</strong></li>
+        </ul>
+        <p>
+          Executives use cost-benefit analysis to prioritize projects with the highest return on cost. Options with a ratio significantly greater than 1 are preferred.
+        </p>
+        <p><strong>Application:</strong></p>
+        <ul>
+          <li><strong>Partial Automation and Negotiation</strong></li>
+          <ul>
+            <li>Total Costs: INR 20 Lakhs (automation) + INR 5 Lakhs (increased labor costs) = INR 25 Lakhs</li>
+            <li>Total Benefits: INR 10 Lakhs (revenue boost from automation)</li>
+            <li>Cost-Benefit Ratio: (10,00,000 / 25,00,000) = 0.4 (or 40%)</li>
+            <li>Net Benefit: 10,00,000 − 25,00,000 = −15,00,000 INR</li>
+          </ul>
+          <li><strong>Full Automation</strong></li>
+          <ul>
+            <li>Total Costs: INR 50 Lakhs (automation)</li>
+            <li>Total Benefits: INR 10 Lakhs (saving in labor costs per quarter) × 4 quarters = INR 40 Lakhs</li>
+            <li>Cost-Benefit Ratio: 40,00,000 / 50,00,000 = 0.8 (or 80%)</li>
+            <li>Net Benefit: 40,00,000 − 50,00,000 = −10,00,000 INR</li>
+          </ul>
+        </ul>
+
+        <!-- Concept 2 -->
+        <h3>2. Return on Investment (ROI)</h3>
+        <p>
+          Measures the profitability of an investment relative to its cost, indicating the efficiency and effectiveness of the investment.
+        </p>
+        <ul>
+          <li>Ensure all expenditures related to the investment (i.e., interest on loans) are accounted for to avoid skewed ROI.</li>
+          <li>Establish minimum acceptable ROI levels (e.g., 13% ROI guidance from finance team) to guide investment decisions.</li>
+        </ul>
+        <p><strong>Key Formula:</strong></p>
+        <ul>
+          <li><strong>ROI = (Net Profit / Investment Cost) × 100%</strong></li>
+          <li>Where <strong>Net Profit = Revenue - Cost</strong></li>
+        </ul>
+        <p>
+          Use KPIs to compare the financial viability.
+        </p>
+        <p><strong>Application:</strong></p>
+        <ul>
+          <li><strong>Partial Automation and Negotiation</strong></li>
+          <ul>
+            <li>Investment Cost: INR 25 Lakhs</li>
+            <li>Revenue Savings: INR 10 Lakhs</li>
+            <li>Net Profit: 10,00,000 − 25,00,000 = −15,00,000 INR</li>
+            <li>ROI: (−15,00,000 / 25,00,000) × 100% = −60%</li>
+          </ul>
+          <li><strong>Full Automation</strong></li>
+          <ul>
+            <li>Investment Cost: INR 50 Lakhs</li>
+            <li>Revenue Savings: INR 40 Lakhs</li>
+            <li>Net Profit: 40,00,000 − 50,00,000 = −10,00,000 INR</li>
+            <li>ROI: (−10,00,000 / 50,00,000) × 100% = −20%</li>
+          </ul>
+        </ul>
+
+        <!-- Concept 3 -->
+        <h3>3. Risk Assessment and Mitigation</h3>
+        <p>
+          Risk Assessment is the process of identifying, assessing, and developing plans to manage potential risks. Mitigation Strategies are then developed to minimize the impact of these risks on the project’s success.
+        </p>
+        <p>
+          Executives implement risk assessment tools before committing to a process. They establish risk mitigation strategies to minimize potential losses and regularly monitor risks throughout the bidding and project execution phases.
+        </p>
+        <p><strong>Application:</strong></p>
+        <ul>
+          <li><strong>Risk Identification:</strong> Recognize risks like not winning the bid, overrunning costs, or conflicts in partnerships.</li>
+          <li><strong>Risk Score = Probability × Impact</strong></li>
+          <li><strong>Risk Assessment:</strong> Evaluate the likelihood and impact of each risk on the project's success.</li>
+          <li><strong>Expected Monetary Value (EMV): ∑ (Probability of Risk × Impact of Risk)</strong></li>
+          <li><strong>Mitigation Plans:</strong> Develop strategies such as contingency budgets, clear partnership agreements, or alternative opportunities.</li>
+        </ul>
+        <p><strong>Identified Risks:</strong></p>
+        <ul>
+          <li>Technological Obsolescence: High probability, high impact.</li>
+          <li>Market Demand Fluctuations: Medium probability, high impact.</li>
+          <li>Supplier Reliability: Low probability, medium impact.</li>
+        </ul>
+        <p><strong>Risk Mitigation Strategies:</strong></p>
+        <ul>
+          <li>Technological Obsolescence: Invest in scalable and upgradable machinery.</li>
+          <li>Market Demand Fluctuations: Diversify product lines to reduce dependency on a single market segment.</li>
+          <li>Supplier Reliability: Establish multiple supplier relationships to ensure continuity.</li>
+        </ul>
+        <p>
+          <strong>Partial Automation and Negotiation</strong>
+        </p>
+        <ul>
+          <li>Risk: Continued labor unrest</li>
+          <li>Probability: 0.4</li>
+          <li>Impact: INR 10 Lakhs loss in production</li>
+          <li>Risk Score = 0.4 × 10,00,000 = 4,00,000 INR</li>
+          <li>Risk: Implementation delays</li>
+          <li>Probability: 0.3</li>
+          <li>Impact: INR 5 Lakhs additional costs</li>
+          <li>Risk Score = 0.3 × 5,00,000 = 1,50,000 INR</li>
+        </ul>
+        <p>
+          <strong>Full Automation</strong>
+        </p>
+        <ul>
+          <li>Risk: Technological obsolescence</li>
+          <li>Probability: 0.2</li>
+          <li>Impact: INR 15 Lakhs loss due to outdated machinery</li>
+          <li>Risk Score = 0.2 × 15,00,000 = 3,00,000 INR</li>
+          <li>Risk: High upfront costs strain finances</li>
+          <li>Probability: 0.3</li>
+          <li>Impact: INR 10 Lakhs additional financing costs</li>
+          <li>Risk Score = 0.3 × 10,00,000 = 3,00,000 INR</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="footer-buttons">
+      <a href="page1.html" class="btn btn-next">Proceed to Scenario 1</a>
+    </div>
+  </div>
+
+  <!-- External JavaScript Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- External JavaScript File -->
+  <script src="../../js/concepts.js"></script>
+</body>
+
+</html>
