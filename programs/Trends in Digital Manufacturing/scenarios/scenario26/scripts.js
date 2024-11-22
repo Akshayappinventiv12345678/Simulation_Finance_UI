@@ -1,3 +1,209 @@
+// scripts.js
+
+// Accounting entries data
+const accountingEntries = {
+  implement: `
+Accounting Entries for
+
+Implement Digital Twin
+
+Entry 1: Digital Twin Software Licensing
+Debit: 17 Intangible Assets - Software INR 10,00,000
+Credit: 12 Cash/Bank INR 10,00,000
+Entry 2: Hardware Upgrades for Integration
+Debit: 16 Property, Plant & Equipment INR 7,00,000
+Credit: 12 Cash/Bank INR 7,00,000
+Entry 3: Installation and Setup
+Debit: 16 Property, Plant & Equipment INR 2,00,000
+Credit: 12 Cash/Bank INR 2,00,000
+Entry 4: Staff Training Programs
+Debit: 70 Administrative Expenses INR 2,00,000
+Credit: 12 Cash/Bank INR 2,00,000
+Entry 5: Technical Support and Maintenance
+Debit: 70 Administrative Expenses INR 2,00,000
+Credit: 12 Cash/Bank INR 2,00,000
+Entry 6: Enhanced Process Optimization
+Debit: 13 Accounts Receivable INR 10,00,000
+Credit: 40 Sales Revenue INR 10,00,000
+Entry 7: Reduced Lead Times
+Debit: 13 Accounts Receivable INR 8,00,000
+Credit: 40 Sales Revenue INR 8,00,000
+Entry 8: Improved Quality Control
+Debit: 50 Cost of Goods Sold (COGS) INR 12,00,000 (Reduction in COGS)
+Credit: 12 Cash/Bank INR 12,00,000
+Entry 9: Cost Savings on Prototyping
+Debit: 50 Cost of Goods Sold (COGS) INR 5,00,000 (Reduction in COGS)
+Credit: 12 Cash/Bank INR 5,00,000
+Entry 10: Cash received from customer for sales done
+Debit: 12 Cash/Bank INR 18,00,000
+Credit: 13 Accounts Receivable INR 18,00,000
+Closing Entries
+Entry 11: Closing Revenue Accounts, transferring the total revenue to Retained Earnings
+Debit: 40 Sales Revenue INR 18,00,000
+Credit: 27 Retained Earnings INR 18,00,000
+Entry 12: Closing Expense Accounts, transferring total expenses to Retained Earnings
+Debit: 27 Retained Earnings INR 13,00,000
+Debit: 70 Administrative Expenses INR 4,00,000
+Credit: 50 Cost of Goods Sold (COGS) INR 17,00,000
+  `,
+  delay: `
+Accounting Entries for
+
+Enhance Quality Control
+
+Entry 1: Automated Inspection Equipment
+Debit: 16 Property, Plant & Equipment INR 10,00,000
+Credit: 12 Cash/Bank INR 10,00,000
+Entry 2: Software Licensing
+Debit: 17 Intangible Assets - Software INR 2,00,000
+Credit: 12 Cash/Bank INR 2,00,000
+Entry 3: Installation and Calibration
+Debit: 16 Property, Plant & Equipment INR 3,00,000
+Credit: 12 Cash/Bank INR 3,00,000
+Entry 4: Staff Training Programs
+Debit: 70 Administrative Expenses INR 1,00,000
+Credit: 12 Cash/Bank INR 1,00,000
+Entry 5: Maintenance Contracts
+Debit: 70 Administrative Expenses INR 1,00,000
+Credit: 12 Cash/Bank INR 1,00,000
+Entry 6: Real-Time Defect Detection
+Debit: 50 Cost of Goods Sold (COGS) INR 13,00,000 (Reduction in COGS)
+Credit: 12 Cash/Bank INR 13,00,000
+Entry 7: Consistency in Quality
+Debit: 13 Accounts Receivable INR 8,00,000
+Credit: 40 Sales Revenue INR 8,00,000
+Entry 8: Operational Efficiency
+Debit: 70 Administrative Expenses INR 6,00,000 (Reduction in Expenses)
+Credit: 12 Cash/Bank INR 6,00,000
+Entry 9: Reduced Rework Costs
+Debit: 50 Cost of Goods Sold (COGS) INR 3,00,000 (Reduction in COGS)
+Credit: 12 Cash/Bank INR 3,00,000
+Entry 10: Cash received from customer for sales done
+Debit: 12 Cash/Bank INR 8,00,000
+Credit: 13 Accounts Receivable INR 8,00,000
+Closing Entries
+Entry 11: Closing Revenue Accounts, transferring the total revenue to Retained Earnings
+Debit: 40 Sales Revenue INR 8,00,000
+Credit: 27 Retained Earnings INR 8,00,000
+Entry 12: Closing Expense Accounts, transferring total expenses to Retained Earnings
+Debit: 27 Retained Earnings INR 20,00,000
+Credit: 50 Cost of Goods Sold (COGS) INR 16,00,000
+Credit: 70 Administrative Expenses INR 4,00,000 (6-1-1)
+  `
+};
+
+// Function to show the modal with the appropriate entries
+function showModal(option) {
+  const modal = document.getElementById('accounting-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalEntries = document.getElementById('modal-entries');
+  const closeButton = document.querySelector('.close-button');
+
+  // Clear any existing countdown timer elements
+  modalEntries.parentNode.querySelectorAll('div').forEach(el => {
+    if (el.style && el.style.fontWeight === 'bold') {
+      el.remove();
+    }
+  });
+
+  // Set the modal title and entries based on the option
+  if (option === 'implement') {
+    modalTitle.textContent = 'Accounting Entries for Implement Digital Twin';
+    modalEntries.textContent = accountingEntries.implement;
+    // Update financials and chart
+    updateFinancials('implement');
+  } else if (option === 'delay') {
+    modalTitle.textContent = 'Accounting Entries for Enhance Quality Control';
+    modalEntries.textContent = accountingEntries.delay;
+    // Update financials and chart
+    updateFinancials('delay');
+  }
+
+  // Display the modal
+  modal.style.display = 'block';
+
+  // Disable scrolling on the body
+  document.body.style.overflow = 'hidden';
+
+  // Start a 30-second timer before redirecting
+  const redirectTimer = setTimeout(() => {
+    window.location.href = 'page2.html';
+  }, 30000); // 30000 milliseconds = 30 seconds
+
+  // Optional: Display a countdown timer inside the modal
+  let countdown = 30;
+  const timerElement = document.createElement('div');
+  timerElement.style.marginTop = '20px';
+  timerElement.style.fontWeight = 'bold';
+  timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+  modalEntries.parentNode.appendChild(timerElement);
+
+  const countdownInterval = setInterval(() => {
+    countdown--;
+    timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+    if (countdown <= 0) {
+      clearInterval(countdownInterval);
+    }
+  }, 1000);
+
+  // Close the modal when the close button is clicked
+  closeButton.onclick = function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+    clearInterval(countdownInterval);
+  };
+
+  // Close the modal when the user clicks outside of the modal content
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+
+  // Handle Esc key to close the modal
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+}
+
+// Function to update financial tables based on option
+function updateFinancials(option) {
+  if (option === 'implement') {
+    // Update chart data and financial tables for Implement Digital Twin
+    revenueChart.data.datasets[0].data[1] = 460; // Example value after implementation
+    revenueChart.options.plugins.title.text = 'After Implementing Digital Twin';
+    revenueChart.update();
+    // Update progress bar as an example
+    const progressBarInner = document.getElementById('progress-bar-inner');
+    if (progressBarInner) {
+      progressBarInner.style.width = '50%';
+    }
+    console.log('Financials updated for option: Implement Digital Twin');
+  } else if (option === 'delay') {
+    // Update chart data and financial tables for Enhance Quality Control
+    revenueChart.data.datasets[0].data[1] = 440; // Example value after implementation
+    revenueChart.options.plugins.title.text = 'After Enhancing Quality Control';
+    revenueChart.update();
+    // Update progress bar as an example
+    const progressBarInner = document.getElementById('progress-bar-inner');
+    if (progressBarInner) {
+      progressBarInner.style.width = '50%';
+    }
+    console.log('Financials updated for option: Enhance Quality Control');
+  }
+}
+
+// Rest of your existing code
+
 // Countdown Timer with Circular Progress
 const countdownDuration = 5 * 60; // 5 minutes in seconds
 let remainingTime = countdownDuration;
@@ -117,28 +323,6 @@ const revenueChart = new Chart(ctx, {
       }
     }
   }
-});
-
-// Button Click Animations and Chart Updates
-document.querySelectorAll('.footer-buttons .end-button, .footer-buttons .next-button').forEach(button => {
-  button.addEventListener('click', () => {
-    // Example: Update chart data based on button clicked
-    if (button.textContent.includes('Proceed')) {
-      // Proceed with Implementation selected
-      revenueChart.data.datasets[0].data[1] = 460; // Example value after implementation
-    } else if (button.textContent.includes('Delay')) {
-      // Delay Implementation selected
-      revenueChart.data.datasets[0].data[1] = 400; // No change in revenue
-    } else if (button.textContent.includes('End')) {
-      // End Simulation button clicked
-      // Perform any necessary cleanup or redirection
-      window.location.href = "index.html"; // Redirect to index or desired action
-    }
-    revenueChart.update();
-
-    // Update progress bar as an example
-    progressBarInner.style.width = '50%';
-  });
 });
 
 // Accessibility: Keyboard Navigation for Buttons

@@ -89,8 +89,17 @@
 
         <!-- Buttons for Adjust Marketing Budget and Introduce New Product Line -->
         <div class="footer-buttons">
-          <a href="page2.html" class="next-button">Adjust Marketing Budget</a>
-          <a href="page2.html" class="next-button">Introduce New Product Line</a>
+          <a href="#" class="next-button" onclick="showModal('adjustMarketing')">Adjust Marketing Budget</a>
+          <a href="#" class="next-button" onclick="showModal('introduceProduct')">Introduce New Product Line</a>
+        </div>
+        
+        <!-- Modal Structure -->
+        <div id="accounting-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" tabindex="0">&times;</span>
+            <h2 id="modal-title">Accounting Entries for</h2>
+            <pre id="modal-entries"></pre>
+          </div>
         </div>
       </div>
 

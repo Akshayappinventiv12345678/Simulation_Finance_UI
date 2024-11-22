@@ -89,8 +89,18 @@
 
         <!-- Buttons for High-Value Proposal and Value-Added Services -->
         <div class="footer-buttons">
-          <a href="page2.html?option=high-value" class="next-button">High-Value Proposal</a>
-          <a href="page2.html?option=value-added" class="next-button">Value-Added Services</a>
+          <a href="#" class="next-button" onclick="showModal('highValue')">High-Value Proposal</a>
+          <a href="#" class="next-button" onclick="showModal('valueAdded')">Value-Added Services</a>
+        </div>
+        
+        <!-- Modal Structure -->
+        <!-- Modal Structure -->
+        <div id="accounting-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" tabindex="0">&times;</span>
+            <h2 id="modal-title">Accounting Entries for</h2>
+            <pre id="modal-entries"></pre>
+          </div>
         </div>
       </div>
 
