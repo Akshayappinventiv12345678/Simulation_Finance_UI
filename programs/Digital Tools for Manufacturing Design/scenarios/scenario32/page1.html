@@ -98,10 +98,21 @@
         </div>
 
         <!-- Buttons for Options -->
-        <div class="footer-buttons">
-          <a href="page2.html" class="next-button" >Fully Integrate 3D Printing</a>
-          <a href="page2.html" class="next-button" >Explore Specific Applications</a>
-        </div>
+<!-- Buttons for Options -->
+<div class="footer-buttons">
+  <a href="#" class="next-button" onclick="showModal('integrate')">Fully Integrate 3D Printing</a>
+  <a href="#" class="next-button" onclick="showModal('explore')">Explore Specific Applications</a>
+</div>
+
+<!-- Modal Structure -->
+<div id="accounting-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-button" tabindex="0">&times;</span>
+    <h2 id="modal-title">Accounting Entries for</h2>
+    <pre id="modal-entries"></pre>
+  </div>
+</div>
+
       </div>
 
       <!-- Right column: Tables and Charts -->

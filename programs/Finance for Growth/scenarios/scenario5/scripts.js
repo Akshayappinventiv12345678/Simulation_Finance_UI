@@ -1,9 +1,11 @@
+// page1.js
+
 // Countdown Timer with Circular Progress
 const countdownDuration = 5 * 60; // 5 minutes in seconds
 let remainingTime = countdownDuration;
 const timerElement = document.getElementById('countdown-timer');
 const progressCircle = document.querySelector('.progress');
-const totalDash = 2 * Math.PI * 36; // Circumference for r=36
+const totalDash = 2 * Math.PI * 36; // Circumference for r=36 ≈ 226
 
 function updateTimer() {
   const minutes = Math.floor(remainingTime / 60);
@@ -34,8 +36,8 @@ function updateTimer() {
 }
 
 // Initialize the timer
-progressCircle.style.strokeDasharray = totalDash;
-progressCircle.style.strokeDashoffset = totalDash;
+progressCircle.style.strokeDasharray = `${totalDash}`;
+progressCircle.style.strokeDashoffset = `${totalDash}`;
 updateTimer(); // Initial call
 const timerInterval = setInterval(updateTimer, 1000);
 
@@ -116,34 +118,190 @@ const revenueChart = new Chart(ctx, {
   }
 });
 
-// Button Click Animations and Chart Updates
-document.querySelectorAll('.footer-buttons .end-button, .footer-buttons .next-button').forEach(button => {
-  button.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevent default action
+// Remove old function to handle option selection (if any)
 
-    if (button.classList.contains('next-button')) {
-      if (button.textContent.trim() === 'Product Showcase') {
-        // Product Showcase selected
-        revenueChart.data.datasets[0].data[1] = 25; // INR 25,00,000 represented as 25
-        revenueChart.options.plugins.title.text = 'Revenue After Product Showcase';
-      } else if (button.textContent.trim() === 'Co-host with Customer') {
-        // Co-host with Customer selected
-        revenueChart.data.datasets[0].data[1] = 15; // INR 15,00,000 represented as 15
-        revenueChart.options.plugins.title.text = 'Revenue After Co-hosting Event';
-      }
-      revenueChart.update();
+// --- New code for modal functionality starts here ---
 
-      // Update progress bar
-      progressBarInner.style.width = '50%';
+// Accounting entries data
+const accountingEntries = {
+  productShowcase: `
+Accounting Entries for
+Product Showcase and Discounts
 
-      // Navigate to the next page
-      window.location.href = button.getAttribute('href');
-    } else if (button.classList.contains('end-button')) {
-      // End Simulation button clicked
-      window.location.href = "../../index.html"; // Adjust the path as needed
+Entry 1: Event Costs (Sales Day)
+Debit: 70 Event Expenses INR 2,00,000
+Credit: 12 Cash/Bank INR 2,00,000
+(Costs for organizing the Sales Day event at the customer location.)
+
+Entry 2: Revenue from Orders Placed During Sales Day
+Debit: 13 Accounts Receivable INR 25,00,000
+Credit: 40 Sales Revenue INR 25,00,000
+(Revenue booked from sales generated at the event.)
+
+Entry 3: Increase in inventory to meet higher demand
+Debit: 14 Inventory INR 12,50,000
+Credit: 12 Cash/Bank INR 12,50,000
+
+Entry 4: Production Costs Due to Event Orders
+Debit: 50 Cost of Goods Sold (COGS) (P&L) INR 12,50,000
+Credit: 14 Inventory (Balance Sheet) INR 12,50,000
+
+Entry 5: Customer Payment (Next Quarter)
+Debit: 12 Cash/Bank (Cash Flow) INR 25,00,000
+Credit: 13 Accounts Receivable (Balance Sheet) INR 25,00,000
+
+Closing Entries:
+Entry 6: Closing Revenue Accounts, transferring the total revenue to Retained Earnings
+Debit: 40 Sales Revenue (P&L) INR 25,00,000
+Credit: 27 Retained Earnings (Equity) INR 25,00,000
+
+Entry 7: Closing Expense Accounts, transferring total expenses to Retained Earnings
+Debit: 27 Retained Earnings (Equity) INR (Administrative Expenses + COGS) 14,50,000
+Credit: 70 Administrative Expenses (P&L) INR 2,00,000
+Credit: 50 COGS (P&L) INR 12,50,000
+  `,
+  coHostCustomer: `
+Accounting Entries for
+Collaborated Event
+
+Entry 1: Shared Costs with Customer
+Debit: 70 Event Expenses INR 1,00,000
+Credit: 12 Cash/Bank INR 1,00,000
+(Only half of the event costs are borne by the company.)
+
+Entry 2: Revenue from Collaborated Sales Day Event
+Debit: 13 Accounts Receivable INR 15,00,000
+Credit: 40 Sales Revenue INR 15,00,000
+(Revenue booked from sales generated at the event.)
+
+Entry 3: Increase in inventory to meet higher demand
+Debit: 14 Inventory INR 7,50,000
+Credit: 12 Cash/Bank INR 7,50,000
+
+Entry 4: Production Costs Due to Collaborated Sales Day Event
+Debit: 50 Cost of Goods Sold (COGS) (P&L) INR 7,50,000
+Credit: 14 Inventory (Balance Sheet) INR 7,50,000
+
+Entry 5: Customer Payment (Next Quarter)
+Debit: 12 Cash/Bank (Cash Flow) INR 15,00,000
+Credit: 13 Accounts Receivable (Balance Sheet) INR 15,00,000
+
+Closing Entries:
+Entry 6: Closing Revenue Accounts, transferring the total revenue to Retained Earnings
+Debit: 40 Sales Revenue (P&L) INR 15,00,000
+Credit: 27 Retained Earnings (Equity) INR 15,00,000
+
+Entry 7: Closing Expense Accounts, transferring total expenses to Retained Earnings
+Debit: 27 Retained Earnings (Equity) INR (Administrative Expenses + COGS) 8,50,000
+Credit: 70 Administrative Expenses (P&L) INR 1,00,000
+Credit: 50 COGS (P&L) INR 7,50,000
+  `
+};
+
+// Function to show the modal with the appropriate entries
+function showModal(option) {
+  const modal = document.getElementById('accounting-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalEntries = document.getElementById('modal-entries');
+  const closeButton = document.querySelector('.close-button');
+
+  // Clear previous entries and countdown timer if any
+  modalEntries.textContent = '';
+  const existingTimer = modal.querySelector('.modal-timer');
+  if (existingTimer) {
+    existingTimer.remove();
+  }
+
+  // Set the modal title and entries based on the option
+  if (option === 'productShowcase') {
+    modalTitle.textContent = 'Accounting Entries for Product Showcase and Discounts';
+    modalEntries.textContent = accountingEntries.productShowcase;
+    // Update financials and chart
+    updateFinancials('productShowcase');
+  } else if (option === 'coHostCustomer') {
+    modalTitle.textContent = 'Accounting Entries for Collaborated Event';
+    modalEntries.textContent = accountingEntries.coHostCustomer;
+    // Update financials and chart
+    updateFinancials('coHostCustomer');
+  }
+
+  // Display the modal
+  modal.style.display = 'block';
+
+  // Disable scrolling on the body
+  document.body.style.overflow = 'hidden';
+
+  // Start a 30-second timer before redirecting
+  const redirectTimer = setTimeout(() => {
+    window.location.href = 'page2.html';
+  }, 30000); // 30000 milliseconds = 30 seconds
+
+  // Optional: Display a countdown timer inside the modal
+  let countdown = 30;
+  const timerElement = document.createElement('div');
+  timerElement.classList.add('modal-timer'); // For easier removal if needed
+  timerElement.style.marginTop = '20px';
+  timerElement.style.fontWeight = 'bold';
+  timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+  modalEntries.parentNode.appendChild(timerElement);
+
+  const countdownInterval = setInterval(() => {
+    countdown--;
+    timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+    if (countdown <= 0) {
+      clearInterval(countdownInterval);
     }
-  });
-});
+  }, 1000);
+
+  // Close the modal when the close button is clicked
+  closeButton.onclick = function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+    clearInterval(countdownInterval);
+  };
+
+  // Close the modal when the user clicks outside of the modal content
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+
+  // Handle Esc key to close the modal
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+}
+
+// Function to update financial tables based on option
+function updateFinancials(option) {
+  if (option === 'productShowcase') {
+    // Update chart data and financial tables for Product Showcase
+    revenueChart.data.datasets[0].data[1] = 25; // INR 25,00,000 represented as 25
+    revenueChart.options.plugins.title.text = 'Revenue After Product Showcase and Discounts';
+    revenueChart.update();
+    // Update progress bar as an example
+    progressBarInner.style.width = '50%';
+    console.log('Financials updated for option: Product Showcase and Discounts');
+  } else if (option === 'coHostCustomer') {
+    // Update chart data and financial tables for Co-host with Customer
+    revenueChart.data.datasets[0].data[1] = 15; // INR 15,00,000 represented as 15
+    revenueChart.options.plugins.title.text = 'Revenue After Collaborated Event';
+    revenueChart.update();
+    // Update progress bar as an example
+    progressBarInner.style.width = '50%';
+    console.log('Financials updated for option: Collaborated Event');
+  }
+}
 
 // Accessibility: Keyboard Navigation for Buttons
 const buttons = document.querySelectorAll('.footer-buttons .end-button, .footer-buttons .next-button');
@@ -161,3 +319,5 @@ buttons.forEach(button => {
 window.onload = () => {
   document.body.classList.add('loaded');
 };
+
+// --- End of new code for modal functionality ---

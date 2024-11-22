@@ -116,33 +116,178 @@ const revenueChart = new Chart(ctx, {
   }
 });
 
-// Button Click Animations and Chart Updates
-document.querySelectorAll('.footer-buttons .end-button, .footer-buttons .next-button').forEach(button => {
-  button.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevent default navigation
+// Remove old button click event listeners (if any)
 
-    // Determine which button was clicked
-    if (button.classList.contains('end-button')) {
-      // End Simulation button clicked
-      window.location.href = "../../index.html";
-    } else if (button.textContent.trim() === 'Re-engagement Campaign') {
-      // Re-engagement Campaign selected
-      revenueChart.data.datasets[0].data[1] = 10; // INR 10,00,000 represented as 10 (Lakhs)
-      revenueChart.options.plugins.title.text = 'After Re-engagement Campaign Scenario';
-    } else if (button.textContent.trim() === 'Personalized Sales Visits') {
-      // Personalized Sales Visits selected
-      revenueChart.data.datasets[0].data[1] = 20; // INR 20,00,000 represented as 20 (Lakhs)
-      revenueChart.options.plugins.title.text = 'After Personalized Sales Visits Scenario';
+// --- New code for modal functionality starts here ---
+
+// Accounting entries data
+const accountingEntries = {
+  reEngagement: `
+  Accounting Entries for
+  Re-engagement Campaign
+
+  Entry 1: Sales Call and Campaign (including calls and emails) Costs
+  Debit: 70 Marketing Expenses INR 50,000
+  Credit: 12 Cash/Bank INR 50,000
+
+  Entry 2: Revenue from Re-engaged Customers
+  Debit: 13 Accounts Receivable INR 10,00,000
+  Credit: 40 Sales Revenue INR 10,00,000
+
+  Entry 3: Increase in inventory to meet higher demand
+  Debit: 14 Inventory INR 5,00,000
+  Credit: 12 Cash/Bank INR 5,00,000
+
+  Entry 4: Production Costs for sales delivery
+  Debit: 50 Cost of Goods Sold (COGS) (P&L) INR 5,00,000
+  Credit: 14 Inventory (Balance Sheet) INR 5,00,000
+
+  Entry 5: Customer Payment (Next Quarter)
+  Debit: 12 Cash/Bank (Cash Flow) INR 10,00,000
+  Credit: 13 Accounts Receivable (Balance Sheet) INR 10,00,000
+
+  Closing Entries:
+  Entry 6: Closing Revenue Accounts, transferring the total revenue to Retained Earnings
+  Debit: 40 Sales Revenue (P&L) INR 10,00,000
+  Credit: 27 Retained Earnings (Equity) INR 10,00,000
+
+  Entry 7: Closing Expense Accounts, transferring total expenses to Retained Earnings
+  Debit: 27 Retained Earnings (Equity) INR 5,50,000
+  Credit: 70 Marketing Expenses (P&L) INR 50,000
+  Credit: 50 COGS (P&L) INR 5,00,000
+  `,
+  personalizedVisits: `
+  Accounting Entries for
+  Personalized Sales Visits
+
+  Entry 1: Higher Investment in Personalized Sales Visits
+  Debit: 70 Sales Expenses INR 1,50,000
+  Credit: 12 Cash/Bank INR 1,50,000
+
+  Entry 2: Revenue from Re-engaged Customers
+  Debit: 13 Accounts Receivable INR 20,00,000
+  Credit: 40 Sales Revenue INR 20,00,000
+
+  Entry 3: Increase in inventory to meet higher demand
+  Debit: 14 Inventory INR 10,00,000
+  Credit: 12 Cash/Bank INR 10,00,000
+
+  Entry 4: Production Costs for sales delivery
+  Debit: 50 Cost of Goods Sold (COGS) (P&L) INR 10,00,000
+  Credit: 14 Inventory (Balance Sheet) INR 10,00,000
+
+  Entry 5: Customer Payment (Next Quarter)
+  Debit: 12 Cash/Bank (Cash Flow) INR 20,00,000
+  Credit: 13 Accounts Receivable (Balance Sheet) INR 20,00,000
+
+  Closing Entries:
+  Entry 6: Closing Revenue Accounts, transferring the total revenue to Retained Earnings
+  Debit: 40 Sales Revenue (P&L) INR 20,00,000
+  Credit: 27 Retained Earnings (Equity) INR 20,00,000
+
+  Entry 7: Closing Expense Accounts, transferring total expenses to Retained Earnings
+  Debit: 27 Retained Earnings (Equity) INR 11,50,000
+  Credit: 70 Sales Expenses (P&L) INR 1,50,000
+  Credit: 50 COGS (P&L) INR 10,00,000
+  `
+};
+
+// Function to show the modal with the appropriate entries
+function showModal(option) {
+  const modal = document.getElementById('accounting-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalEntries = document.getElementById('modal-entries');
+  const closeButton = document.querySelector('.close-button');
+
+  // Set the modal title and entries based on the option
+  if (option === 'reEngagement') {
+    modalTitle.textContent = 'Accounting Entries for Re-engagement Campaign';
+    modalEntries.textContent = accountingEntries.reEngagement;
+    // Update financials and chart
+    updateFinancials('reEngagement');
+  } else if (option === 'personalizedVisits') {
+    modalTitle.textContent = 'Accounting Entries for Personalized Sales Visits';
+    modalEntries.textContent = accountingEntries.personalizedVisits;
+    // Update financials and chart
+    updateFinancials('personalizedVisits');
+  }
+
+  // Display the modal
+  modal.style.display = 'block';
+
+  // Disable scrolling on the body
+  document.body.style.overflow = 'hidden';
+
+  // Start a 30-second timer before redirecting
+  const redirectTimer = setTimeout(() => {
+    window.location.href = 'page2.html';
+  }, 30000); // 30000 milliseconds = 30 seconds
+
+  // Optional: Display a countdown timer inside the modal
+  let countdown = 30;
+  const timerElement = document.createElement('div');
+  timerElement.style.marginTop = '20px';
+  timerElement.style.fontWeight = 'bold';
+  timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+  modalEntries.parentNode.appendChild(timerElement);
+
+  const countdownInterval = setInterval(() => {
+    countdown--;
+    timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+    if (countdown <= 0) {
+      clearInterval(countdownInterval);
     }
-    revenueChart.update();
+  }, 1000);
 
+  // Close the modal when the close button is clicked
+  closeButton.onclick = function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+    clearInterval(countdownInterval);
+  };
+
+  // Close the modal when the user clicks outside of the modal content
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+
+  // Handle Esc key to close the modal
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+}
+
+// Function to update financial tables and chart based on option
+function updateFinancials(option) {
+  if (option === 'reEngagement') {
+    // Update chart data and financial tables for Re-engagement Campaign
+    revenueChart.data.datasets[0].data[1] = 10; // INR 10,00,000 represented as 10 (Lakhs)
+    revenueChart.options.plugins.title.text = 'After Re-engagement Campaign Scenario';
+    revenueChart.update();
     // Update progress bar as an example
     progressBarInner.style.width = '50%';
-
-    // Optionally navigate to the next page
-    window.location.href = button.getAttribute('href');
-  });
-});
+    console.log('Financials updated for option: Re-engagement Campaign');
+  } else if (option === 'personalizedVisits') {
+    // Update chart data and financial tables for Personalized Sales Visits
+    revenueChart.data.datasets[0].data[1] = 20; // INR 20,00,000 represented as 20 (Lakhs)
+    revenueChart.options.plugins.title.text = 'After Personalized Sales Visits Scenario';
+    revenueChart.update();
+    // Update progress bar as an example
+    progressBarInner.style.width = '50%';
+    console.log('Financials updated for option: Personalized Sales Visits');
+  }
+}
 
 // Accessibility: Keyboard Navigation for Buttons
 const buttons = document.querySelectorAll('.footer-buttons .end-button, .footer-buttons .next-button');
@@ -155,3 +300,5 @@ buttons.forEach(button => {
     }
   });
 });
+
+// --- End of new code for modal functionality ---

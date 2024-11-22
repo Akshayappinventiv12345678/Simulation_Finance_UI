@@ -116,29 +116,234 @@ const revenueChart = new Chart(ctx, {
   }
 });
 
-// Function to handle option selection
-function chooseOption(option) {
+// Accounting entries data
+const accountingEntries = {
+  invest: `
+  Accounting Entries for
+  Invest in Advanced Tools
+
+  Entry 1: Advanced CAD/CAM Software Acquisition
+  Debit: 17 Intangible Assets - Software INR 12,00,000
+  Credit: 12 Cash/Bank INR 12,00,000
+
+  Entry 2: Simulation Tools Acquisition
+  Debit: 17 Intangible Assets - Software INR 8,00,000
+  Credit: 12 Cash/Bank INR 8,00,000
+
+  Entry 3: Hardware Upgrades
+  Debit: 16 Property, Plant & Equipment INR 5,00,000
+  Credit: 12 Cash/Bank INR 5,00,000
+
+  Entry 4: Installation and Integration
+  Debit: 70 Administrative Expenses INR 4,00,000
+  Credit: 12 Cash/Bank INR 4,00,000
+
+  Entry 5: Staff Training Programs
+  Debit: 70 Administrative Expenses INR 3,00,000
+  Credit: 12 Cash/Bank INR 3,00,000
+
+  Entry 6: Consulting Services
+  Debit: 70 Administrative Expenses INR 6,00,000
+  Credit: 12 Cash/Bank INR 6,00,000
+
+  Entry 7: Maintenance and Support
+  Debit: 70 Administrative Expenses INR 2,00,000
+  Credit: 12 Cash/Bank INR 2,00,000
+
+  Output Gained Entries:
+  Entry 8: Accelerated Design Cycles
+  Debit: 13 Accounts Receivable INR 15,00,000
+  Credit: 40 Sales Revenue INR 15,00,000
+
+  Entry 9: Improved Design Accuracy
+  Debit: 12 Cash/Bank INR 10,00,000
+  Credit: 50 Cost of Goods Sold (COGS) INR 10,00,000
+
+  Entry 10: Reduced Prototyping Costs
+  Debit: 12 Cash/Bank INR 8,00,000
+  Credit: 50 Cost of Goods Sold (COGS) INR 8,00,000
+
+  Entry 11: Enhanced Innovation Capability
+  Debit: 13 Accounts Receivable INR 7,00,000
+  Credit: 40 Sales Revenue INR 7,00,000
+
+  Entry 12: Increased Productivity
+  Debit: 13 Accounts Receivable INR 5,00,000
+  Credit: 40 Sales Revenue INR 5,00,000
+
+  Entry 13: Cash Received from customers against sales
+  Debit: 12 Cash/Bank INR 27,00,000
+  Credit: 13 Accounts Receivable INR 27,00,000 (15+7+5)
+
+  Closing Entries
+  Entry 14: Close Sales Revenue to Retained Earnings
+  Debit: 40 Sales Revenue INR 27,00,000 (15 + 7 + 5)
+  Credit: 27 Retained Earnings INR 27,00,000
+
+  Entry 15: Close Cost of Goods Sold (COGS) to Retained Earnings
+  Debit: 50 Cost of Goods Sold (COGS) INR 18,00,000 (10 + 8)
+  Credit: 70 Administrative Expenses INR 15,00,000 (4 + 3 + 6 + 2)
+  Credit: 27 Retained Earnings INR 3,00,000
+  `,
+  optimize: `
+  Accounting Entries for
+  Optimize Existing Tools and Focus on Training
+
+  Entry 1: Enhanced Training Programs
+  Debit: 70 Administrative Expenses INR 6,00,000
+  Credit: 12 Cash/Bank INR 6,00,000
+
+  Entry 2: Software Upgrades and Updates
+  Debit: 17 Intangible Assets - Software INR 4,00,000
+  Credit: 12 Cash/Bank INR 4,00,000
+
+  Entry 3: Process Optimization Consulting
+  Debit: 70 Administrative Expenses INR 5,00,000
+  Credit: 12 Cash/Bank INR 5,00,000
+
+  Entry 4: Internal Workshops and Seminars
+  Debit: 70 Administrative Expenses INR 3,00,000
+  Credit: 12 Cash/Bank INR 3,00,000
+
+  Entry 5: Minor Hardware Upgrades
+  Debit: 16 Property, Plant & Equipment INR 2,00,000
+  Credit: 12 Cash/Bank INR 2,00,000
+
+  Entry 6: Employee Incentive Programs
+  Debit: 70 Administrative Expenses INR 2,00,000
+  Credit: 12 Cash/Bank INR 2,00,000
+
+  Entry 7: Increased Tool Proficiency
+  Debit: 13 Accounts Receivable INR 10,00,000
+  Credit: 40 Sales Revenue INR 10,00,000
+
+  Entry 8: Improved Workflow Efficiency
+  Debit: 12 Cash/Bank INR 8,00,000
+  Credit: 50 Cost of Goods Sold (COGS) INR 8,00,000
+
+  Entry 9: Enhanced Product Quality
+  Debit: 12 Cash/Bank INR 7,00,000
+  Credit: 50 Cost of Goods Sold (COGS) INR 7,00,000
+
+  Entry 10: Cost Savings on New Investments
+  Debit: 12 Cash/Bank INR 5,00,000
+  Credit: 50 Cost of Goods Sold (COGS) INR 5,00,000
+
+  Entry 11: Higher Employee Satisfaction
+  Debit: 13 Accounts Receivable INR 4,00,000
+  Credit: 40 Sales Revenue INR 4,00,000
+
+  Entry 12: Cash Received from customers against sales
+  Debit: 12 Cash/Bank INR 14,00,000
+  Credit: 13 Accounts Receivable INR 14,00,000 (10+4)
+
+  Entry 13: Close Sales Revenue to Retained Earnings
+  Debit: 40 Sales Revenue INR 14,00,000 (10 + 4)
+  Credit: 27 Retained Earnings INR 14,00,000
+
+  Entry 14: Close Cost of Goods Sold (COGS) to Retained Earnings
+  Debit: 50 Cost of Goods Sold (COGS) INR 20,00,000
+  Credit: 27 Retained Earnings INR 20,00,000 (8 + 7 + 5)
+
+  Entry 15: Close Administrative Expenses to Retained Earnings
+  Debit: 27 Retained Earnings INR 16,00,000 (6 + 5 + 3 + 2)
+  Credit: 70 Administrative Expenses INR 16,00,000
+  `
+};
+
+// Function to show the modal with the appropriate entries
+function showModal(option) {
+  const modal = document.getElementById('accounting-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalEntries = document.getElementById('modal-entries');
+  const closeButton = document.querySelector('.close-button');
+
+  // Set the modal title and entries based on the option
   if (option === 'invest') {
-    // Invest in Advanced Tools selected
-    revenueChart.data.datasets[0].data[1] = 530; // Example value after implementation
-    // Update financial tables accordingly
+    modalTitle.textContent = 'Accounting Entries for Invest in Advanced Tools';
+    modalEntries.textContent = accountingEntries.invest;
+    // Update financials and chart
     updateFinancials('invest');
   } else if (option === 'optimize') {
-    // Optimize Existing Tools selected
-    revenueChart.data.datasets[0].data[1] = 500; // Example value after implementation
-    // Update financial tables accordingly
+    modalTitle.textContent = 'Accounting Entries for Optimize Existing Tools';
+    modalEntries.textContent = accountingEntries.optimize;
+    // Update financials and chart
     updateFinancials('optimize');
   }
-  revenueChart.update();
-  // Update progress bar as an example
-  progressBarInner.style.width = '50%';
+
+  // Display the modal
+  modal.style.display = 'block';
+
+  // Disable scrolling on the body
+  document.body.style.overflow = 'hidden';
+
+  // Start a 30-second timer before redirecting
+  const redirectTimer = setTimeout(() => {
+    window.location.href = 'page2.html';
+  }, 30000); // 30000 milliseconds = 30 seconds
+
+  // Optional: Display a countdown timer inside the modal
+  let countdown = 30;
+  const timerElement = document.createElement('div');
+  timerElement.style.marginTop = '20px';
+  timerElement.style.fontWeight = 'bold';
+  timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+  modalEntries.parentNode.appendChild(timerElement);
+
+  const countdownInterval = setInterval(() => {
+    countdown--;
+    timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+    if (countdown <= 0) {
+      clearInterval(countdownInterval);
+    }
+  }, 1000);
+
+  // Close the modal when the close button is clicked
+  closeButton.onclick = function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+    clearInterval(countdownInterval);
+  };
+
+  // Close the modal when the user clicks outside of the modal content
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+
+  // Handle Esc key to close the modal
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
 }
 
 // Function to update financial tables based on option
 function updateFinancials(option) {
-  // This function would update the financial tables with new data based on the selected option
-  // For demonstration purposes, we'll just log the selected option
-  console.log('Financials updated for option:', option);
+  if (option === 'invest') {
+    // Update chart data and financial tables for Invest in Advanced Tools
+    revenueChart.data.datasets[0].data[1] = 530; // Example value after implementation
+    revenueChart.update();
+    // Update progress bar as an example
+    progressBarInner.style.width = '50%';
+    console.log('Financials updated for option: Invest in Advanced Tools');
+  } else if (option === 'optimize') {
+    // Update chart data and financial tables for Optimize Existing Tools
+    revenueChart.data.datasets[0].data[1] = 500; // Example value after implementation
+    revenueChart.update();
+    // Update progress bar as an example
+    progressBarInner.style.width = '50%';
+    console.log('Financials updated for option: Optimize Existing Tools');
+  }
 }
 
 // Accessibility: Keyboard Navigation for Buttons
@@ -157,3 +362,5 @@ buttons.forEach(button => {
 window.onload = () => {
   document.body.classList.add('loaded');
 };
+
+// --- End of new code for modal functionality ---

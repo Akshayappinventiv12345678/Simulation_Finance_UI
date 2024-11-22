@@ -59,7 +59,60 @@ body {
     height: 80px;
     animation: bounceIn 1s ease-out;
   }
-  
+  /* ... existing CSS styles ... */
+
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 800px;
+  position: relative;
+  animation: modalFadeIn 0.5s;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#modal-entries {
+  background-color: #f9f9f9;
+  padding: 15px;
+  overflow: auto;
+  max-height: 60vh;
+  white-space: pre-wrap; /* Ensure text wraps within the modal */
+}
+
   /* Timer Styles */
   .timer-container {
     position: relative;

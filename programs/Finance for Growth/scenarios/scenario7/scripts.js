@@ -1,9 +1,11 @@
+// page1.js
+
 // Countdown Timer with Circular Progress
 const countdownDuration = 5 * 60; // 5 minutes in seconds
 let remainingTime = countdownDuration;
 const timerElement = document.getElementById('countdown-timer');
 const progressCircle = document.querySelector('.progress');
-const totalDash = 251; // Circumference for r=40 (2 * π * 40 ≈ 251)
+const totalDash = 2 * Math.PI * 36; // Circumference for r=36 ≈ 226
 
 function updateTimer() {
   const minutes = Math.floor(remainingTime / 60);
@@ -29,13 +31,13 @@ function updateTimer() {
     clearInterval(timerInterval);
     clearInterval(progressInterval);
     alert('Time is up! The simulation will now end.');
-    window.location.href = "index.html"; // Redirect to index or desired action
+    window.location.href = "page2.html"; // Redirect to page2.html or desired action
   }
 }
 
 // Initialize the timer
-progressCircle.style.strokeDasharray = totalDash;
-progressCircle.style.strokeDashoffset = totalDash;
+progressCircle.style.strokeDasharray = `${totalDash}`;
+progressCircle.style.strokeDashoffset = `${totalDash}`;
 updateTimer(); // Initial call
 const timerInterval = setInterval(updateTimer, 1000);
 
@@ -116,29 +118,193 @@ const revenueChart = new Chart(ctx, {
   }
 });
 
-// Function to handle option selection
-function chooseOption(option) {
-  if (option === 'flexible') {
-    // Flexible Manufacturing selected
-    revenueChart.data.datasets[0].data[1] = 500; // Example value after implementation
-    // Update financial tables accordingly
-    updateFinancials('flexible');
-  } else if (option === 'portfolio') {
-    // Expand Product Portfolio selected
-    revenueChart.data.datasets[0].data[1] = 480; // Example value after implementation
-    // Update financial tables accordingly
-    updateFinancials('portfolio');
+// Remove old function to handle option selection (if any)
+
+// --- New code for modal functionality starts here ---
+
+// Accounting entries data
+const accountingEntries = {
+  expandSales: `
+Accounting Entries for
+Expand the Sales Team
+
+Entry 1: Sales Team Expansion and training new hires Costs
+Debit: 60 Salary & Wages INR 5,00,000
+Debit: 70 Training Expenses INR 1,00,000
+Credit: 12 Cash/Bank INR 6,00,000
+
+Entry 2: Sales Commission Expense (assuming 5% commission on new sales)
+Debit: 70 Sales Commission Expense (P&L) INR 2,00,000
+Credit: 21 Accrued Commissions (Balance Sheet) INR 2,00,000
+
+Entry 3: Revenue from New Clients Acquired by Expanded Sales Team
+Debit: 13 Accounts Receivable INR 40,00,000
+Credit: 40 Sales Revenue INR 40,00,000
+
+Entry 4: Increase in inventory to meet higher demand
+Debit: 14 Inventory INR 20,00,000
+Credit: 12 Cash/Bank INR 20,00,000
+
+Entry 5: Production Costs Due to New clients from RFP contract
+Debit: 50 Cost of Goods Sold (COGS) (P&L) INR 20,00,000
+Credit: 14 Inventory (Balance Sheet) INR 20,00,000
+
+Entry 6: Customer Payment (Next Quarter)
+Debit: 12 Cash/Bank (Cash Flow) INR 40,00,000
+Credit: 13 Accounts Receivable (Balance Sheet) INR 40,00,000
+
+Closing Entries:
+Entry 7: Closing Revenue Accounts, transferring the total revenue to Retained Earnings
+Debit: 40 Sales Revenue (P&L) INR 40,00,000
+Credit: 27 Retained Earnings (Equity) INR 40,00,000
+
+Entry 8: Closing Expense Accounts, transferring total expenses to Retained Earnings
+Debit: 27 Retained Earnings (Equity) INR 28,00,000
+Credit: 70 Administrative Expenses (P&L) INR 3,00,000
+Credit: 60 Salary & Wages INR 5,00,000
+Credit: 50 COGS (P&L) INR 20,00,000
+`,
+
+  investDigital: `
+Accounting Entries for
+Investment in Digital Tools for Existing Sales Team
+
+Entry 1: CRM and Digital Sales Tools Purchased and capitalized
+Debit: 17 Intangible Assets INR 3,00,000
+Credit: 12 Cash/Bank INR 3,00,000
+
+Entry 2: Amortization of Digital Tools over the useful life of software (assuming a 3-year useful life)
+Debit: 71 Depreciation and Amortization Expense (P&L) INR 1,00,000 (annually)
+Credit: 16 Accumulated Amortization (Balance Sheet) INR 1,00,000 (annually)
+
+Entry 3: Revenue from Enhanced Productivity
+Debit: 13 Accounts Receivable INR 30,00,000
+Credit: 40 Sales Revenue INR 30,00,000
+
+Entry 4: Increase in inventory to meet higher demand
+Debit: 14 Inventory INR 15,00,000
+Credit: 12 Cash/Bank INR 15,00,000
+
+Entry 5: Production Costs Due to enhanced Productivity
+Debit: 50 Cost of Goods Sold (COGS) (P&L) INR 15,00,000
+Credit: 14 Inventory (Balance Sheet) INR 15,00,000
+
+Entry 6: Customer Payment (Next Quarter)
+Debit: 12 Cash/Bank (Cash Flow) INR 30,00,000
+Credit: 13 Accounts Receivable (Balance Sheet) INR 30,00,000
+
+Closing Entries:
+Entry 7: Closing Revenue Accounts, transferring the total revenue to Retained Earnings
+Debit: 40 Sales Revenue (P&L) INR 30,00,000
+Credit: 27 Retained Earnings (Equity) INR 30,00,000
+
+Entry 8: Closing Expense Accounts, transferring total expenses to Retained Earnings
+Debit: 27 Retained Earnings (Equity) INR 16,00,000
+Credit: 71 Depreciation and Amortization Expense (P&L) INR 1,00,000
+Credit: 50 COGS (P&L) INR 15,00,000
+`
+};
+
+// Function to show the modal with the appropriate entries
+function showModal(option) {
+  const modal = document.getElementById('accounting-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalEntries = document.getElementById('modal-entries');
+  const closeButton = document.querySelector('.close-button');
+
+  // Clear any existing countdown timer elements
+  modalEntries.parentNode.querySelectorAll('div').forEach(el => {
+    if (el.style && el.style.fontWeight === 'bold') {
+      el.remove();
+    }
+  });
+
+  // Set the modal title and entries based on the option
+  if (option === 'expandSales') {
+    modalTitle.textContent = 'Accounting Entries for Expand the Sales Team';
+    modalEntries.textContent = accountingEntries.expandSales;
+    // Update financials and chart
+    updateFinancials('expandSales');
+  } else if (option === 'investDigital') {
+    modalTitle.textContent = 'Accounting Entries for Investment in Digital Tools for Existing Sales Team';
+    modalEntries.textContent = accountingEntries.investDigital;
+    // Update financials and chart
+    updateFinancials('investDigital');
   }
-  revenueChart.update();
-  // Update progress bar as an example
-  progressBarInner.style.width = '50%';
+
+  // Display the modal
+  modal.style.display = 'block';
+
+  // Disable scrolling on the body
+  document.body.style.overflow = 'hidden';
+
+  // Start a 30-second timer before redirecting
+  const redirectTimer = setTimeout(() => {
+    window.location.href = 'page2.html';
+  }, 30000); // 30000 milliseconds = 30 seconds
+
+  // Optional: Display a countdown timer inside the modal
+  let countdown = 30;
+  const timerElement = document.createElement('div');
+  timerElement.style.marginTop = '20px';
+  timerElement.style.fontWeight = 'bold';
+  timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+  modalEntries.parentNode.appendChild(timerElement);
+
+  const countdownInterval = setInterval(() => {
+    countdown--;
+    timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+    if (countdown <= 0) {
+      clearInterval(countdownInterval);
+    }
+  }, 1000);
+
+  // Close the modal when the close button is clicked
+  closeButton.onclick = function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+    clearInterval(countdownInterval);
+  };
+
+  // Close the modal when the user clicks outside of the modal content
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+
+  // Handle Esc key to close the modal
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
 }
 
 // Function to update financial tables based on option
 function updateFinancials(option) {
-  // This function would update the financial tables with new data based on the selected option
-  // For demonstration purposes, we'll just log the selected option
-  console.log('Financials updated for option:', option);
+  if (option === 'expandSales') {
+    // Update chart data and financial tables for Expand Sales Team
+    revenueChart.data.datasets[0].data[1] = 600; // Example value after implementation
+    revenueChart.update();
+    // Update progress bar as an example
+    progressBarInner.style.width = '50%';
+    console.log('Financials updated for option: Expand Sales Team');
+  } else if (option === 'investDigital') {
+    // Update chart data and financial tables for Invest in Digital Tools
+    revenueChart.data.datasets[0].data[1] = 550; // Example value after implementation
+    revenueChart.update();
+    // Update progress bar as an example
+    progressBarInner.style.width = '50%';
+    console.log('Financials updated for option: Invest in Digital Tools');
+  }
 }
 
 // Accessibility: Keyboard Navigation for Buttons
@@ -157,3 +323,5 @@ buttons.forEach(button => {
 window.onload = () => {
   document.body.classList.add('loaded');
 };
+
+// --- End of new code for modal functionality ---

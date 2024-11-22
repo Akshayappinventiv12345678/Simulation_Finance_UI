@@ -87,9 +87,19 @@
 
         <!-- Buttons for Re-engagement Campaign and Personalized Sales Visits -->
         <div class="footer-buttons">
-          <a href="page2.html" class="next-button">Re-engagement Campaign</a>
-          <a href="page2.html" class="next-button">Personalized Sales Visits</a>
+          <a href="#" class="next-button" onclick="showModal('reEngagement')">Re-engagement Campaign</a>
+          <a href="#" class="next-button" onclick="showModal('personalizedVisits')">Personalized Sales Visits</a>
         </div>
+        
+        <!-- Modal Structure -->
+        <div id="accounting-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" tabindex="0">&times;</span>
+            <h2 id="modal-title">Accounting Entries for</h2>
+            <pre id="modal-entries"></pre>
+          </div>
+        </div>
+        
       </div>
 
       <!-- Right column: Tables and Charts -->

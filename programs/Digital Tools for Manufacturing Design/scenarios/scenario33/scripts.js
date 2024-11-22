@@ -118,29 +118,211 @@ const revenueChart = new Chart(ctx, {
   }
 });
 
-// Function to handle option selection
-function chooseOption(option) {
+// Remove old function to handle option selection (if any)
+
+// --- New code for modal functionality starts here ---
+
+// Accounting entries data
+const accountingEntries = {
+  dfm: `
+Accounting Entries for
+Prioritize Aesthetic Design with Enhanced DFM Adjustments
+
+Entry 1: Advanced CAD/CAM Software Acquisition
+Debit: 17 Intangible Assets - Software INR 10,00,000
+Credit: 12 Cash/Bank INR 10,00,000
+Entry 2: Simulation and Modeling Tools Acquisition
+Debit: 17 Intangible Assets - Software INR 8,00,000
+Credit: 12 Cash/Bank INR 8,00,000
+Entry 3: Design Optimization Workshops
+Debit: 70 Administrative Expenses INR 4,00,000
+Credit: 12 Cash/Bank INR 4,00,000
+Entry 4: Prototyping Equipment Acquisition
+Debit: 16 Property, Plant & Equipment INR 6,00,000
+Credit: 12 Cash/Bank INR 6,00,000
+Entry 5: Consulting Services
+Debit: 70 Administrative Expenses INR 5,00,000
+Credit: 12 Cash/Bank INR 5,00,000
+Entry 6: Workforce Training Programs
+Debit: 70 Administrative Expenses INR 3,00,000
+Credit: 12 Cash/Bank INR 3,00,000
+Entry 7: Maintenance and Support Contracts
+Debit: 70 Administrative Expenses INR 2,00,000
+Credit: 12 Cash/Bank INR 2,00,000
+Entry 8: Enhanced Product Aesthetics
+Debit: 13 Accounts Receivable INR 15,00,000
+Credit: 40 Sales Revenue INR 15,00,000
+Entry 9: Optimized Manufacturability
+Debit: 12 Cash/Bank INR 12,00,000
+Credit: 50 Cost of Goods Sold (COGS) INR 12,00,000
+Entry 10: Reduced Design Iterations
+Debit: 13 Accounts Receivable INR 10,00,000
+Credit: 40 Sales Revenue INR 10,00,000
+Entry 11: Improved Product Quality
+Debit: 12 Cash/Bank INR 8,00,000
+Credit: 50 Cost of Goods Sold (COGS) INR 8,00,000
+Entry 12: Increased Market Competitiveness
+Debit: 13 Accounts Receivable INR 7,00,000
+Credit: 40 Sales Revenue INR 7,00,000
+Entry 13: Cash Received from customers against sales
+Debit: 12 Cash/Bank INR 32,00,000
+Credit: 13 Accounts Receivable INR 32,00,000 (15+10+7)
+Closing Entry
+Entry 14: Sales Revenue to Retained Earnings
+Debit: 40 Sales Revenue INR 32,00,000 (15 + 10 + 7)
+Credit: 27 Retained Earnings INR 32,00,000
+Entry 15: Close Cost of Goods Sold (COGS) to Retained Earnings
+Debit: 50 Cost of Goods Sold (COGS) INR 20,00,000 (12 + 8)
+Credit: 27 Retained Earnings INR 20,00,000 
+Entry 16: Close Administrative Expenses to Retained Earnings
+Debit: 27 Retained Earnings INR 14,00,000 (4 + 5 + 3 + 2)
+Credit: 70 Administrative Expenses INR 14,00,000
+`,
+  simplify: `
+Accounting Entries for
+Simplify Designs for Manufacturability While Maintaining Essential Aesthetic Features
+
+Entry 1: Design Simplification Tools Acquisition
+Debit: 17 Intangible Assets - Software INR 6,00,000
+Credit: 12 Cash/Bank INR 6,00,000
+Entry 2: Basic Simulation Software Acquisition
+Debit: 17 Intangible Assets - Software INR 5,00,000
+Credit: 12 Cash/Bank INR 5,00,000
+Entry 3: Staff Training Programs
+Debit: 70 Administrative Expenses INR 4,00,000
+Credit: 12 Cash/Bank INR 4,00,000
+Entry 4: Process Optimization Consulting
+Debit: 70 Administrative Expenses INR 5,00,000
+Credit: 12 Cash/Bank INR 5,00,000
+Entry 5: Minimal Prototyping Equipment Acquisition
+Debit: 16 Property, Plant & Equipment INR 3,00,000
+Credit: 12 Cash/Bank INR 3,00,000
+Entry 6: Internal Workshops and Seminars
+Debit: 70 Administrative Expenses INR 2,00,000
+Credit: 12 Cash/Bank INR 2,00,000
+Entry 7: Maintenance and Support Contracts
+Debit: 70 Administrative Expenses INR 2,00,000
+Credit: 12 Cash/Bank INR 2,00,000
+Entry 8: Cost-Effective Production
+Debit: 12 Cash/Bank INR 12,00,000
+Credit: 50 Cost of Goods Sold (COGS) INR 12,00,000
+Entry 9: Faster Time-to-Market
+Debit: 13 Accounts Receivable INR 10,00,000
+Credit: 40 Sales Revenue INR 10,00,000
+Entry 10: Maintained Aesthetic Appeal
+Debit: 13 Accounts Receivable INR 8,00,000
+Credit: 40 Sales Revenue INR 8,00,000
+Entry 11: Improved Product Reliability
+Debit: 12 Cash/Bank INR 7,00,000
+Credit: 50 Cost of Goods Sold (COGS) INR 7,00,000
+Entry 12: Higher Employee Efficiency
+Debit: 13 Accounts Receivable INR 5,00,000
+Credit: 40 Sales Revenue INR 5,00,000
+Entry 13: Cash Received from customers against sales
+Debit: 12 Cash/Bank INR 23,00,000
+Credit: 13 Accounts Receivable INR 23,00,000 (10+8+5)
+Closing Entry
+Entry 14: Close Sales Revenue to Retained Earnings
+Debit: 40 Sales Revenue INR 23,00,000 (10 + 8 + 5)
+Credit: 27 Retained Earnings INR 23,00,000
+Entry 15: Close Cost of Goods Sold (COGS) to Retained Earnings
+Debit: 50 Cost of Goods Sold (COGS) INR 19,00,000
+Credit: 27 Retained Earnings INR 19,00,000 (12 + 7)
+Entry 16: Close Administrative Expenses to Retained Earnings
+Debit: 27 Retained Earnings INR 13,00,000 (4 + 5 + 2 + 2 + 3)
+Credit: 70 Administrative Expenses INR 13,00,000
+`
+};
+
+// Function to show the modal with the appropriate entries
+function showModal(option) {
+  const modal = document.getElementById('accounting-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalEntries = document.getElementById('modal-entries');
+  const closeButton = document.querySelector('.close-button');
+
+  // Set the modal title and entries based on the option
   if (option === 'dfm') {
-    // Enhanced DFM Adjustments selected
-    revenueChart.data.datasets[0].data[1] = 550; // Example value after implementation
-    // Update financial tables accordingly
+    modalTitle.textContent = 'Accounting Entries for Enhanced DFM Adjustments';
+    modalEntries.textContent = accountingEntries.dfm;
+    // Update financials and chart
     updateFinancials('dfm');
   } else if (option === 'simplify') {
-    // Simplify Designs selected
-    revenueChart.data.datasets[0].data[1] = 520; // Example value after implementation
-    // Update financial tables accordingly
+    modalTitle.textContent = 'Accounting Entries for Simplify Designs for Manufacturability';
+    modalEntries.textContent = accountingEntries.simplify;
+    // Update financials and chart
     updateFinancials('simplify');
   }
-  revenueChart.update();
-  // Optionally, update progress bar or other elements as needed
+
+  // Display the modal
+  modal.style.display = 'block';
+
+  // Disable scrolling on the body
+  document.body.style.overflow = 'hidden';
+
+  // Start a 30-second timer before redirecting
+  const redirectTimer = setTimeout(() => {
+    window.location.href = 'page2.html';
+  }, 30000); // 30000 milliseconds = 30 seconds
+
+  // Optional: Display a countdown timer inside the modal
+  let countdown = 30;
+  const timerElement = document.createElement('div');
+  timerElement.style.marginTop = '20px';
+  timerElement.style.fontWeight = 'bold';
+  timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+  modalEntries.parentNode.appendChild(timerElement);
+
+  const countdownInterval = setInterval(() => {
+    countdown--;
+    timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+    if (countdown <= 0) {
+      clearInterval(countdownInterval);
+    }
+  }, 1000);
+
+  // Close the modal when the close button is clicked
+  closeButton.onclick = function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+    clearInterval(countdownInterval);
+  };
+
+  // Close the modal when the user clicks outside of the modal content
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+
+  // Handle Esc key to close the modal
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
 }
 
 // Function to update financial tables based on option
 function updateFinancials(option) {
-  // This function would update the financial tables with new data based on the selected option
-  // For demonstration purposes, we'll just log the selected option
-  console.log('Financials updated for option:', option);
-  // Implement actual updates to the tables here as needed
+  if (option === 'dfm') {
+    // Update chart data and financial tables for Enhanced DFM Adjustments
+    revenueChart.data.datasets[0].data[1] = 550; // Example value after implementation
+    revenueChart.update();
+    console.log('Financials updated for option: Enhanced DFM Adjustments');
+  } else if (option === 'simplify') {
+    // Update chart data and financial tables for Simplify Designs for Manufacturability
+    revenueChart.data.datasets[0].data[1] = 520; // Example value after implementation
+    revenueChart.update();
+    console.log('Financials updated for option: Simplify Designs for Manufacturability');
+  }
 }
 
 // Accessibility: Keyboard Navigation for Buttons
@@ -159,3 +341,5 @@ buttons.forEach(button => {
 window.onload = () => {
   document.body.classList.add('loaded');
 };
+
+// --- End of new code for modal functionality ---
