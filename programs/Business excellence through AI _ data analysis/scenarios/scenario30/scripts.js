@@ -157,3 +157,217 @@ buttons.forEach(button => {
 window.onload = () => {
   document.body.classList.add('loaded');
 };
+
+// --- New code for modal functionality starts here ---
+
+// Accounting entries data
+const accountingEntries = {
+  adopt: `
+Accounting Entries for
+Fully Adopt Technologies
+
+Entry 1: Cutting-Edge Manufacturing Equipment Acquisition
+Debit: 16 Property, Plant & Equipment INR 20,00,000
+Credit: 12 Cash/Bank INR 20,00,000
+
+Entry 2: AI Integration Software Acquisition
+Debit: 17 Intangible Assets - Software INR 15,00,000
+Credit: 12 Cash/Bank INR 15,00,000
+
+Entry 3: Installation and Integration Costs
+Debit: 16 Property, Plant & Equipment INR 10,00,000
+Credit: 12 Cash/Bank INR 10,00,000
+
+Entry 4: Workforce Training Programs
+Debit: 70 Administrative Expenses INR 5,00,000
+Credit: 12 Cash/Bank INR 5,00,000
+
+Entry 5: Consulting and Implementation Services
+Debit: 70 Administrative Expenses INR 8,00,000
+Credit: 12 Cash/Bank INR 8,00,000
+
+Entry 6: Maintenance and Support Contracts
+Debit: 70 Administrative Expenses INR 4,00,000
+Credit: 12 Cash/Bank INR 4,00,000
+
+Entry 7: Increased Production Capabilities
+Debit: 13 Accounts Receivable INR 25,00,000
+Credit: 40 Sales Revenue INR 25,00,000
+
+Entry 8: Enhanced Operational Efficiency
+Debit: 12 Cash/Bank INR 20,00,000
+Credit: 50 Cost of Goods Sold (COGS) INR 20,00,000
+
+Entry 9: Improved Quality Assurance
+Debit: 12 Cash/Bank INR 15,00,000
+Credit: 50 Cost of Goods Sold (COGS) INR 15,00,000
+
+Entry 10: Reduced Downtime
+Debit: 12 Cash/Bank INR 10,00,000
+Credit: 50 Cost of Goods Sold (COGS) INR 10,00,000
+
+Entry 11: Technological Leadership
+Debit: 13 Accounts Receivable INR 8,00,000
+Credit: 40 Sales Revenue INR 8,00,000
+
+Entry 12: Cash Received from customers against sales
+Debit: 12 Cash/Bank INR 33,00,000
+Credit: 13 Accounts Receivable INR 33,00,000 (25+8)
+
+Closing Entry
+Entry 13: Close Sales Revenue to Retained Earnings
+Debit: 40 Sales Revenue INR 33,00,000 (25 + 8)
+Credit: 27 Retained Earnings INR 33,00,000
+
+Entry 14: Close Cost of Goods Sold (COGS) to Retained Earnings
+Debit: 27 Retained Earnings INR 45,00,000 (20 + 15 + 10)
+Credit: 50 Cost of Goods Sold (COGS) INR 45,00,000
+
+Entry 15: Close Administrative Expenses to Retained Earnings
+Debit: 27 Retained Earnings INR 17,00,000 (5 + 8 + 4)
+Credit: 70 Administrative Expenses INR 17,00,000
+`,
+  enhancement: `
+Accounting Entries for
+Gradual Enhancement
+
+Entry 1: Selective Technology Upgrades
+Debit: 16 Property, Plant & Equipment INR 12,00,000
+Credit: 12 Cash/Bank INR 12,00,000
+
+Entry 2: AI Software Enhancements
+Debit: 17 Intangible Assets - Software INR 10,00,000
+Credit: 12 Cash/Bank INR 10,00,000
+
+Entry 3: IoT Sensors Installation
+Debit: 16 Property, Plant & Equipment INR 7,00,000
+Credit: 12 Cash/Bank INR 7,00,000
+
+Entry 4: Data Infrastructure Enhancements
+Debit: 16 Property, Plant & Equipment INR 6,00,000
+Credit: 12 Cash/Bank INR 6,00,000
+
+Entry 5: Staff Training Programs
+Debit: 70 Administrative Expenses INR 4,00,000
+Credit: 12 Cash/Bank INR 4,00,000
+
+Entry 6: Consulting and Implementation Services
+Debit: 70 Administrative Expenses INR 5,00,000
+Credit: 12 Cash/Bank INR 5,00,000
+
+Entry 7: Maintenance and Support Contracts
+Debit: 70 Administrative Expenses INR 3,00,000
+Credit: 12 Cash/Bank INR 3,00,000
+
+Entry 8: Optimized Workflows
+Debit: 13 Accounts Receivable INR 18,00,000
+Credit: 40 Sales Revenue INR 18,00,000
+
+Entry 9: Enhanced Quality Control
+Debit: 12 Cash/Bank INR 12,00,000
+Credit: 50 Cost of Goods Sold (COGS) INR 12,00,000
+
+Entry 10: Increased Productivity
+Debit: 13 Accounts Receivable INR 10,00,000
+Credit: 40 Sales Revenue INR 10,00,000
+
+Entry 11: Reduced Operational Costs
+Debit: 12 Cash/Bank INR 8,00,000
+Credit: 50 Cost of Goods Sold (COGS) INR 8,00,000
+
+Entry 12: Sustained Operational Stability
+Debit: 13 Accounts Receivable INR 6,00,000
+Credit: 40 Sales Revenue INR 6,00,000
+
+Entry 13: Cash Received from customers against sales
+Debit: 12 Cash/Bank INR 34,00,000
+Credit: 13 Accounts Receivable INR 34,00,000 (18+10+6)
+
+Closing Entries
+Entry 14: Close Sales Revenue to Retained Earnings
+Debit: 40 Sales Revenue INR 34,00,000 (18 + 10 + 6)
+Credit: 27 Retained Earnings INR 34,00,000
+
+Entry 15: Close Cost of Goods Sold (COGS) to Retained Earnings
+Debit: 50 Cost of Goods Sold (COGS) INR 20,00,000 (12 + 8)
+Credit: 27 Retained Earnings INR 20,00,000
+
+Entry 16: Close Administrative Expenses to Retained Earnings
+Debit: 27 Retained Earnings INR 12,00,000 (4 + 5 + 3)
+Credit: 70 Administrative Expenses INR 12,00,000
+`
+};
+
+// Function to show the modal with the appropriate entries
+function showModal(option) {
+  const modal = document.getElementById('accounting-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalEntries = document.getElementById('modal-entries');
+  const closeButton = document.querySelector('.close-button');
+
+  // Set the modal title and entries based on the option
+  if (option === 'adopt') {
+    modalTitle.textContent = 'Accounting Entries for Fully Adopt Technologies';
+    modalEntries.textContent = accountingEntries.adopt;
+  } else if (option === 'enhancement') {
+    modalTitle.textContent = 'Accounting Entries for Gradual Enhancement';
+    modalEntries.textContent = accountingEntries.enhancement;
+  }
+
+  // Display the modal
+  modal.style.display = 'block';
+
+  // Disable scrolling on the body
+  document.body.style.overflow = 'hidden';
+
+  // Start a 30-second timer before redirecting
+  const redirectTimer = setTimeout(() => {
+    window.location.href = 'page2.html';
+  }, 30000); // 30000 milliseconds = 30 seconds
+
+  // Optional: Display a countdown timer inside the modal
+  let countdown = 30;
+  const timerElement = document.createElement('div');
+  timerElement.style.marginTop = '20px';
+  timerElement.style.fontWeight = 'bold';
+  timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+  modalEntries.parentNode.appendChild(timerElement);
+
+  const countdownInterval = setInterval(() => {
+    countdown--;
+    timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+    if (countdown <= 0) {
+      clearInterval(countdownInterval);
+    }
+  }, 1000);
+
+  // Close the modal when the close button is clicked
+  closeButton.onclick = function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+    clearInterval(countdownInterval);
+  };
+
+  // Close the modal when the user clicks outside of the modal content
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+
+  // Handle Esc key to close the modal
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+}
+
+// --- End of new code for modal functionality ---

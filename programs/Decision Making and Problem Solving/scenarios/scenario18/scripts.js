@@ -116,37 +116,138 @@ const revenueChart = new Chart(ctx, {
   }
 });
 
-// Button Click Animations and Chart Updates
-document.querySelectorAll('.footer-buttons .end-button, .footer-buttons .next-button').forEach(button => {
-  button.addEventListener('click', () => {
-    // Example: Update chart data based on button clicked
-    if (button.textContent.includes('Purchase')) {
-      // Purchase machinery selected
-      revenueChart.data.datasets[0].data[1] = 450; // Example value
-    } else if (button.textContent.includes('Lease')) {
-      // Lease machinery selected
-      revenueChart.data.datasets[0].data[1] = 400; // Example value
-    }
-    revenueChart.update();
+// Remove old button click event listeners
+// (Comment out or remove the old event listeners since we're using onclick in HTML)
 
+// --- New code for modal functionality starts here ---
+
+// Accounting entries data
+const accountingEntries = {
+  buyMachines: `
+Accounting Entries for
+Invest Capital to Buy New Machines
+
+Entry 1: Outright Capital investment for new machinery Purchase
+Debit: 16 Property, Plant & Equipment INR 40,00,000
+Credit: 12 Cash/Bank INR 40,00,000
+
+Entry 2: Quarterly Depreciation Expense (Straight-line depreciation over 5 years)
+Debit: 70 Depreciation Expense INR 2,00,000
+Credit: 16 Accumulated Depreciation INR 2,00,000
+
+Closing Entries:
+Entry 3: Closing Expense Accounts, transferring total expenses to Retained Earnings
+Debit: 27 Retained Earnings (Equity) INR 2,00,000
+Credit: 70 Depreciation Expense INR 2,00,000
+`,
+  leaseMachines: `
+Accounting Entries for
+Lease Machinery
+
+Entry 1: Quarterly Lease Payments for machinery (INR 5 Lakhs per year)
+Debit: 70 Lease Expense INR 1,25,000
+Credit: 12 Cash/Bank INR 1,25,000
+
+Closing Entries:
+Entry 2: Closing Expense Accounts, transferring total expenses to Retained Earnings
+Debit: 27 Retained Earnings (Equity) INR 1,25,000
+Credit: 70 Lease Expense INR 1,25,000
+`
+};
+
+// Function to show the modal with the appropriate entries
+function showModal(option) {
+  const modal = document.getElementById('accounting-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalEntries = document.getElementById('modal-entries');
+  const closeButton = document.querySelector('.close-button');
+
+  // Set the modal title and entries based on the option
+  if (option === 'buyMachines') {
+    modalTitle.textContent = 'Accounting Entries for Invest Capital to Buy New Machines';
+    modalEntries.textContent = accountingEntries.buyMachines;
+    // Update financials and chart
+    updateFinancials('buyMachines');
+  } else if (option === 'leaseMachines') {
+    modalTitle.textContent = 'Accounting Entries for Lease Machinery';
+    modalEntries.textContent = accountingEntries.leaseMachines;
+    // Update financials and chart
+    updateFinancials('leaseMachines');
+  }
+
+  // Display the modal
+  modal.style.display = 'block';
+
+  // Disable scrolling on the body
+  document.body.style.overflow = 'hidden';
+
+  // Start a 30-second timer before redirecting
+  const redirectTimer = setTimeout(() => {
+    window.location.href = 'page2.html';
+  }, 30000); // 30000 milliseconds = 30 seconds
+
+  // Optional: Display a countdown timer inside the modal
+  let countdown = 30;
+  const timerElement = document.createElement('div');
+  timerElement.style.marginTop = '20px';
+  timerElement.style.fontWeight = 'bold';
+  timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+  modalEntries.parentNode.appendChild(timerElement);
+
+  const countdownInterval = setInterval(() => {
+    countdown--;
+    timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+    if (countdown <= 0) {
+      clearInterval(countdownInterval);
+    }
+  }, 1000);
+
+  // Close the modal when the close button is clicked
+  closeButton.onclick = function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+    clearInterval(countdownInterval);
+  };
+
+  // Close the modal when the user clicks outside of the modal content
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+
+  // Handle Esc key to close the modal
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+}
+
+// Function to update financial tables based on option
+function updateFinancials(option) {
+  if (option === 'buyMachines') {
+    // Update chart data and financial tables for Buying Machines
+    revenueChart.data.datasets[0].data[1] = 450; // Example value
+    revenueChart.update();
     // Update progress bar as an example
     progressBarInner.style.width = '50%';
-  });
-});
+    console.log('Financials updated for option: Buy New Machines');
+  } else if (option === 'leaseMachines') {
+    // Update chart data and financial tables for Leasing Machines
+    revenueChart.data.datasets[0].data[1] = 400; // Example value
+    revenueChart.update();
+    // Update progress bar as an example
+    progressBarInner.style.width = '50%';
+    console.log('Financials updated for option: Lease Machines');
+  }
+}
 
-// Accessibility: Keyboard Navigation for Buttons
-const buttons = document.querySelectorAll('.footer-buttons .end-button, .footer-buttons .next-button');
-buttons.forEach(button => {
-  button.setAttribute('tabindex', '0');
-  button.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      button.click();
-    }
-  });
-});
-
-// Smooth Page Transition (optional)
-window.onload = () => {
-  document.body.classList.add('loaded');
-};
+// --- End of new code for modal functionality ---

@@ -116,23 +116,27 @@ const revenueChart = new Chart(ctx, {
   }
 });
 
-// Button Click Animations and Chart Updates
-document.querySelectorAll('.footer-buttons .end-button, .footer-buttons .next-button').forEach(button => {
-  button.addEventListener('click', () => {
-    // Example: Update chart data based on button clicked
-    if (button.classList.contains('end-button')) {
-      // Competitive Bid selected
-      revenueChart.data.datasets[0].data[1] = 500; // Example value
-    } else if (button.classList.contains('next-button')) {
-      // Joint Bid selected
-      revenueChart.data.datasets[0].data[1] = 250; // Example value
-    }
-    revenueChart.update();
+// Function to handle option selection
+function chooseOption(option) {
+  if (option === 'competitive') {
+    // Competitive Bid selected
+    revenueChart.data.datasets[0].data[1] = 500; // Example value after implementation
+    updateFinancials('competitive');
+  } else if (option === 'joint') {
+    // Joint Bid selected
+    revenueChart.data.datasets[0].data[1] = 250; // Example value after implementation
+    updateFinancials('joint');
+  }
+  revenueChart.update();
+  // Update progress bar as an example
+  progressBarInner.style.width = '50%';
+}
 
-    // Update progress bar as an example
-    progressBarInner.style.width = '50%';
-  });
-});
+// Function to update financial tables based on option
+function updateFinancials(option) {
+  // This function would update the financial tables with new data based on the selected option
+  console.log('Financials updated for option:', option);
+}
 
 // Accessibility: Keyboard Navigation for Buttons
 const buttons = document.querySelectorAll('.footer-buttons .end-button, .footer-buttons .next-button');
@@ -150,3 +154,151 @@ buttons.forEach(button => {
 window.onload = () => {
   document.body.classList.add('loaded');
 };
+
+// --- New code for modal functionality starts here ---
+
+// Accounting entries data
+const accountingEntries = {
+  competitive: `
+Accounting Entries for
+Competitive Bid for the Project
+
+Entry 1: Bid Preparation Costs, including legal and consultant fees
+Debit: 70 Administrative Expenses (P&L) INR 1,50,000
+Credit: 12 Cash/Bank (BS) INR 1,50,000
+
+Entry 2: Revenue from winning bid and Successful execution
+Debit: 13 Accounts Receivable (Balance Sheet) INR 50,00,000
+Credit: 40 Sales Revenue (P&L) INR 50,00,000
+
+Entry 3: Increase in inventory to meet higher demand
+Debit: 14 Inventory INR 25,00,000
+Credit: 12 Cash/Bank INR 25,00,000
+
+Entry 4: Increase in production costs due to higher demand
+Debit: 50 Cost of Goods Sold (COGS) (P&L) INR 25,00,000
+Credit: 14 Inventory (Balance Sheet) INR 25,00,000
+
+Entry 5: Cash inflow from customer payments
+Debit: 12 Cash/Bank (BS) INR 50,00,000
+Credit: 13 Accounts Receivable (Balance Sheet) INR 50,00,000
+
+Closing Entries:
+Entry 6: Closing Revenue Accounts, transferring the total revenue to Retained Earnings
+Debit: 40 Sales Revenue (P&L) INR 50,00,000
+Credit: 27 Retained Earnings (Equity) INR 50,00,000
+
+Entry 7: Closing Expense Accounts, transferring total expenses to Retained Earnings
+Debit: 27 Retained Earnings (Equity) INR 26,50,000
+Credit: 70 Administrative Expenses (P&L) INR 1,50,000
+Credit: 50 COGS (P&L) INR 25,00,000
+`,
+  joint: `
+Accounting Entries for
+Joint Bid
+
+Entry 1: Sharing Bid Costs 50:50 with the partnering firm
+Debit: 70 Administrative Expenses INR 75,000
+Credit: 12 Cash/Bank INR 75,000
+
+Entry 2: Revenue from Successful Bid
+Debit: 13 Accounts Receivable INR 25,00,000
+Credit: 40 Sales Revenue INR 25,00,000
+
+Entry 3: Increase in inventory to meet higher demand
+Debit: 14 Inventory INR 12,50,000
+Credit: 12 Cash/Bank INR 12,50,000
+
+Entry 4: Increase in production costs due to higher demand
+Debit: 50 Cost of Goods Sold (COGS) (P&L) INR 12,50,000
+Credit: 14 Inventory (Balance Sheet) INR 12,50,000
+
+Entry 5: Cash inflow from customer payments
+Debit: 12 Cash/Bank INR 25,00,000
+Credit: 13 Accounts Receivable INR 25,00,000
+
+Closing Entries:
+Entry 6: Closing Revenue Accounts, transferring the total revenue to Retained Earnings
+Debit: 40 Sales Revenue INR 25,00,000
+Credit: 27 Retained Earnings (Equity) INR 25,00,000
+
+Entry 7: Closing Expense Accounts, transferring total expenses to Retained Earnings
+Debit: 27 Retained Earnings (Equity) INR 13,25,000
+Credit: 70 Administrative Expenses (P&L) INR 75,000
+Credit: 50 COGS (P&L) INR 12,50,000
+`
+};
+
+// Function to show the modal with the appropriate entries
+function showModal(option) {
+  const modal = document.getElementById('accounting-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalEntries = document.getElementById('modal-entries');
+  const closeButton = document.querySelector('.close-button');
+
+  // Set the modal title and entries based on the option
+  if (option === 'competitive') {
+    modalTitle.textContent = 'Accounting Entries for Competitive Bid';
+    modalEntries.textContent = accountingEntries.competitive;
+  } else if (option === 'joint') {
+    modalTitle.textContent = 'Accounting Entries for Joint Bid';
+    modalEntries.textContent = accountingEntries.joint;
+  }
+
+  // Display the modal
+  modal.style.display = 'block';
+
+  // Disable scrolling on the body
+  document.body.style.overflow = 'hidden';
+
+  // Start a 30-second timer before redirecting
+  const redirectTimer = setTimeout(() => {
+    window.location.href = 'page2.html';
+  }, 30000); // 30000 milliseconds = 30 seconds
+
+  // Optional: Display a countdown timer inside the modal
+  let countdown = 30;
+  const timerElement = document.createElement('div');
+  timerElement.style.marginTop = '20px';
+  timerElement.style.fontWeight = 'bold';
+  timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+  modalEntries.parentNode.appendChild(timerElement);
+
+  const countdownInterval = setInterval(() => {
+    countdown--;
+    timerElement.textContent = `Redirecting in ${countdown} seconds...`;
+    if (countdown <= 0) {
+      clearInterval(countdownInterval);
+    }
+  }, 1000);
+
+  // Close the modal when the close button is clicked
+  closeButton.onclick = function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+    clearInterval(countdownInterval);
+  };
+
+  // Close the modal when the user clicks outside of the modal content
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+
+  // Handle Esc key to close the modal
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+}
+
+// --- End of new code for modal functionality ---
