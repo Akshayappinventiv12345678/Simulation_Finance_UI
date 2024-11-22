@@ -1,9 +1,11 @@
+// page1.js
+
 // Countdown Timer with Circular Progress
 const countdownDuration = 5 * 60; // 5 minutes in seconds
 let remainingTime = countdownDuration;
 const timerElement = document.getElementById('countdown-timer');
 const progressCircle = document.querySelector('.progress');
-const totalDash = 2 * Math.PI * 40; // Circumference for r=40
+const totalDash = 2 * Math.PI * 40; // Circumference for r=40 ≈ 251.327
 
 function updateTimer() {
   const minutes = Math.floor(remainingTime / 60);
@@ -29,13 +31,13 @@ function updateTimer() {
     clearInterval(timerInterval);
     clearInterval(progressInterval);
     alert('Time is up! The simulation will now end.');
-    window.location.href = "index.html"; // Redirect to index or desired action
+    window.location.href = "page2.html"; // Redirect to page2.html or desired action
   }
 }
 
 // Initialize the timer
-progressCircle.style.strokeDasharray = totalDash;
-progressCircle.style.strokeDashoffset = totalDash;
+progressCircle.style.strokeDasharray = `${totalDash}`;
+progressCircle.style.strokeDashoffset = `${totalDash}`;
 updateTimer(); // Initial call
 const timerInterval = setInterval(updateTimer, 1000);
 
@@ -116,27 +118,215 @@ const revenueChart = new Chart(ctx, {
   }
 });
 
-// Button Click Animations and Chart Updates
-document.querySelectorAll('.footer-buttons .end-button, .footer-buttons .next-button').forEach(button => {
-  button.addEventListener('click', () => {
-    // Example: Update chart data based on button clicked
-    if (button.textContent.includes('Proceed')) {
-      // Proceed with Implementation selected
-      revenueChart.data.datasets[0].data[1] = 420; // Example value after implementation
-      revenueChart.options.plugins.title.text = 'Values After Implementing Predictive Maintenance';
-      revenueChart.data.datasets[0].backgroundColor = ['#4E67EB', '#2ecc71'];
-    } else if (button.textContent.includes('Delay')) {
-      // Delay Implementation selected
-      revenueChart.data.datasets[0].data[1] = 380; // Example value after delaying implementation
-      revenueChart.options.plugins.title.text = 'Values After Delaying Implementation';
-      revenueChart.data.datasets[0].backgroundColor = ['#4E67EB', '#e74c3c'];
-    }
-    revenueChart.update();
+// --- New code for modal functionality starts here ---
 
+// Accounting entries data
+const accountingEntries = {
+  proceedImplementation: `
+Accounting Entries for Proceed with Implementation
+
+**Predictive Maintenance using IoT**
+
+Entry 1: IoT Sensors and Devices
+Debit: 16 Property, Plant & Equipment INR 8,00,000
+Credit: 12 Cash/Bank INR 8,00,000
+
+Entry 2: Data Analytics Platform
+Debit: 17 Intangible Assets - Software INR 10,00,000
+Credit: 12 Cash/Bank INR 10,00,000
+
+Entry 3: Integration Services
+Debit: 16 Property, Plant & Equipment INR 5,00,000
+Credit: 12 Cash/Bank INR 5,00,000
+
+Entry 4: Staff Training Programs
+Debit: 70 Administrative Expenses INR 3,00,000
+Credit: 12 Cash/Bank INR 3,00,000
+
+Entry 5: Maintenance and Support
+Debit: 70 Administrative Expenses INR 2,00,000
+Credit: 12 Cash/Bank INR 2,00,000
+
+Entry 6: Reduced Downtime
+Debit: 50 Cost of Goods Sold (COGS) INR 15,00,000
+Credit: 12 Cash/Bank INR 15,00,000
+
+Entry 7: Cost Savings on Repairs
+Debit: 50 Cost of Goods Sold (COGS) INR 10,00,000
+Credit: 12 Cash/Bank INR 10,00,000
+
+Entry 8: Extended Machinery Lifespan
+Debit: 50 Cost of Goods Sold (COGS) INR 5,00,000
+Credit: 12 Cash/Bank INR 5,00,000
+
+Entry 9: Improved Production Efficiency
+Debit: 50 Cost of Goods Sold (COGS) INR 5,00,000
+Credit: 12 Cash/Bank INR 5,00,000
+
+Closing Entry
+Entry 10: Close Cost of Goods Sold (COGS) to Retained Earnings
+Debit: 27 Retained Earnings INR 40,00,000
+Credit: 50 Cost of Goods Sold (COGS) INR 35,00,000
+Credit: 70 Administrative Expenses INR 5,00,000
+`,
+  delayImplementation: `
+Accounting Entries for Delay Implementation
+
+**Adopt TPM Practices**
+
+Entry 1: Staff Training Programs
+Debit: 70 Administrative Expenses INR 5,00,000
+Credit: 12 Cash/Bank INR 5,00,000
+
+Entry 2: Employee Engagement Initiatives
+Debit: 70 Administrative Expenses INR 3,00,000
+Credit: 12 Cash/Bank INR 3,00,000
+
+Entry 3: Maintenance Tools and Equipment
+Debit: 16 Property, Plant & Equipment INR 4,00,000
+Credit: 12 Cash/Bank INR 4,00,000
+
+Entry 4: Process Re-engineering
+Debit: 70 Administrative Expenses INR 6,00,000
+Credit: 12 Cash/Bank INR 6,00,000
+
+Entry 5: TPM Software or Systems
+Debit: 17 Intangible Assets - Software INR 2,00,000
+Credit: 12 Cash/Bank INR 2,00,000
+
+Entry 6: Enhanced Equipment Reliability
+Debit: 50 Cost of Goods Sold (COGS) INR 12,00,000
+Credit: 12 Cash/Bank INR 12,00,000
+
+Entry 7: Cost Reduction on Maintenance
+Debit: 50 Cost of Goods Sold (COGS) INR 8,00,000
+Credit: 12 Cash/Bank INR 8,00,000
+
+Entry 8: Improved Employee Morale and Engagement
+Debit: 40 Sales Revenue INR 5,00,000
+Credit: 12 Cash/Bank INR 5,00,000
+
+Entry 9: Increased Operational Efficiency
+Debit: 50 Cost of Goods Sold (COGS) INR 5,00,000
+Credit: 12 Cash/Bank INR 5,00,000
+
+Closing Entry
+Entry 10: Close Sales Revenue to Retained Earnings
+Debit: 40 Sales Revenue INR 5,00,000
+Credit: 27 Retained Earnings INR 5,00,000
+
+Entry 11: Close Cost of Goods Sold (COGS) to Retained Earnings
+Debit: 27 Retained Earnings INR 39,00,000
+Credit: 50 Cost of Goods Sold (COGS) INR 25,00,000
+Credit: 70 Administrative Expenses INR 14,00,000
+`
+};
+
+// Function to show the modal with the appropriate entries
+function showModal(option) {
+  const modal = document.getElementById('accounting-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalEntries = document.getElementById('modal-entries');
+  const closeButton = document.querySelector('.close-button');
+
+  // Clear any existing countdown timer elements
+  modalEntries.parentNode.querySelectorAll('div').forEach(el => {
+    if (el.style && el.style.fontWeight === 'bold') {
+      el.remove();
+    }
+  });
+
+  // Set the modal title and entries based on the option
+  if (option === 'proceedImplementation') {
+    modalTitle.textContent = 'Accounting Entries for Proceed with Implementation';
+    modalEntries.textContent = accountingEntries.proceedImplementation;
+    // Update financials and chart
+    updateFinancials('proceedImplementation');
+  } else if (option === 'delayImplementation') {
+    modalTitle.textContent = 'Accounting Entries for Delay Implementation';
+    modalEntries.textContent = accountingEntries.delayImplementation;
+    // Update financials and chart
+    updateFinancials('delayImplementation');
+  }
+
+  // Display the modal
+  modal.style.display = 'block';
+
+  // Disable scrolling on the body
+  document.body.style.overflow = 'hidden';
+
+  // Start a 30-second timer before redirecting
+  const redirectTimer = setTimeout(() => {
+    window.location.href = 'page2.html';
+  }, 30000); // 30000 milliseconds = 30 seconds
+
+  // Optional: Display a countdown timer inside the modal
+  let countdown = 30;
+  const timerDiv = document.createElement('div');
+  timerDiv.style.marginTop = '20px';
+  timerDiv.style.fontWeight = 'bold';
+  timerDiv.textContent = `Redirecting in ${countdown} seconds...`;
+  modalEntries.parentNode.appendChild(timerDiv);
+
+  const countdownInterval = setInterval(() => {
+    countdown--;
+    timerDiv.textContent = `Redirecting in ${countdown} seconds...`;
+    if (countdown <= 0) {
+      clearInterval(countdownInterval);
+    }
+  }, 1000);
+
+  // Close the modal when the close button is clicked
+  closeButton.onclick = function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+    clearInterval(countdownInterval);
+  };
+
+  // Close the modal when the user clicks outside of the modal content
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+
+  // Handle Esc key to close the modal
+  document.onkeydown = function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
+      clearInterval(countdownInterval);
+    }
+  };
+}
+
+// Function to update financial tables based on option
+function updateFinancials(option) {
+  if (option === 'proceedImplementation') {
+    // Update chart data and financial tables for Proceed with Implementation
+    revenueChart.data.datasets[0].data[1] = 420; // Example value after implementation
+    revenueChart.options.plugins.title.text = 'Values After Implementing Predictive Maintenance';
+    revenueChart.data.datasets[0].backgroundColor = ['#4E67EB', '#2ecc71']; // Green for positive change
+    revenueChart.update();
     // Update progress bar as an example
     progressBarInner.style.width = '50%';
-  });
-});
+    console.log('Financials updated for option: Proceed with Implementation');
+  } else if (option === 'delayImplementation') {
+    // Update chart data and financial tables for Delay Implementation
+    revenueChart.data.datasets[0].data[1] = 380; // Example value after delaying implementation
+    revenueChart.options.plugins.title.text = 'Values After Delaying Implementation';
+    revenueChart.data.datasets[0].backgroundColor = ['#4E67EB', '#e74c3c']; // Red for negative change
+    revenueChart.update();
+    // Update progress bar as an example
+    progressBarInner.style.width = '50%';
+    console.log('Financials updated for option: Delay Implementation');
+  }
+}
 
 // Accessibility: Keyboard Navigation for Buttons
 const buttons = document.querySelectorAll('.footer-buttons .end-button, .footer-buttons .next-button');
@@ -154,3 +344,5 @@ buttons.forEach(button => {
 window.onload = () => {
   document.body.classList.add('loaded');
 };
+
+// --- End of new code for modal functionality ---

@@ -19,7 +19,7 @@
       <!-- Countdown Timer -->
       <div class="timer-container">
         <svg>
-          <circle cx="40" cy="40" r="40"></circle>
+          <circle cx="40" cy="40" r="36"></circle>
           <circle class="progress" cx="40" cy="40" r="36"></circle>
         </svg>
         <div class="time" id="countdown-timer">05:00</div>
@@ -69,8 +69,17 @@
 
         <!-- Buttons for Options -->
         <div class="footer-buttons">
-          <a href="page2.html" class="next-button">Proceed with Implementation</a>
-          <a href="page2.html" class="next-button">Delay Implementation</a>
+          <a href="#" class="next-button" onclick="showModal('proceedImplementation')">Proceed with Implementation</a>
+          <a href="#" class="next-button" onclick="showModal('delayImplementation')">Delay Implementation</a>
+        </div>
+        
+        <!-- Modal Structure -->
+        <div id="accounting-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" tabindex="0">&times;</span>
+            <h2 id="modal-title">Accounting Entries for</h2>
+            <pre id="modal-entries"></pre>
+          </div>
         </div>
       </div>
 
