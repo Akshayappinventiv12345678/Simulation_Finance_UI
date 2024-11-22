@@ -1,3 +1,4 @@
+
 # Simulation Finance UI
 
 Welcome to the **Simulation Finance UI** repository. This project is a web-based simulation platform designed to provide interactive scenarios for learning and practicing financial decision-making, problem-solving, and strategic thinking in various business contexts.
@@ -188,3 +189,99 @@ To set up the project locally, follow these steps:
 
    ```bash
    git clone https://github.com/Zenlearn/Simulation_Finance_UI.git
+   ```
+
+2. **Navigate to the Project Directory**
+
+   ```bash
+   cd Simulation_Finance_UI
+   ```
+
+3. **Open the Application**
+
+   - Open `index.html` in your preferred web browser.
+   - Alternatively, you can set up a local web server for better compatibility:
+     ```bash
+     # For Python 3.x
+     python -m http.server 8000
+     ```
+     - Then, navigate to `http://localhost:8000` in your browser.
+
+## Usage
+
+- **Home Page**: Start from the `index.html` file to access the main menu.
+- **Organization Brief**: Learn about the context by visiting `organization_brief.html`.
+- **Program List**: Access `programlist.html` to view all available programs.
+- **Select a Program**: Click on a program to explore its scenarios.
+- **Navigate Scenarios**: Each scenario provides interactive content and decision-making opportunities.
+- **Progress Tracking**: Use the in-built navigation to track your progress through each scenario.
+
+## Contributing
+
+We welcome contributions! To contribute to this project:
+
+1. **Fork the Repository**
+
+   Click the `Fork` button on the top right corner of the repository page.
+
+2. **Clone Your Fork**
+
+   ```bash
+   git clone https://github.com/your-username/Simulation_Finance_UI.git
+   ```
+
+3. **Create a New Branch**
+
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+4. **Make Your Changes**
+
+   - Add new features, fix bugs, or improve documentation.
+   - Ensure your code follows the project's coding standards.
+
+5. **Commit Your Changes**
+
+   ```bash
+   git commit -m "Description of your changes"
+   ```
+
+6. **Push to Your Fork**
+
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+7. **Submit a Pull Request**
+
+   - Go to the original repository on GitHub.
+   - Click on `Pull Requests` and then `New Pull Request`.
+   - Select your fork and branch, and submit the PR for review.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute this software as per the terms of the license.
+
+## Acknowledgements
+
+- **Contributors**: Thank you to all the developers and contributors who have worked on this project.
+- **Resources**: Icons and images are sourced appropriately and are used under fair use guidelines or with permission.
+
+## Contact
+
+For any inquiries or issues, please open an issue on GitHub or contact the project maintainer.
+
+---
+
+**Note**: Replace `your-username` with your actual GitHub username when cloning or pushing to your fork.
+
+---
+
+## Additional Information
+
+If you have any further questions or need assistance with specific parts of the project, feel free to reach out. Enjoy exploring and contributing to the **Simulation Finance UI**!
+
+```
+
+---
