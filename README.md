@@ -282,6 +282,3 @@ For any inquiries or issues, please open an issue on GitHub or contact the proje
 
 If you have any further questions or need assistance with specific parts of the project, feel free to reach out. Enjoy exploring and contributing to the **Simulation Finance UI**!
 
-```
-
----
