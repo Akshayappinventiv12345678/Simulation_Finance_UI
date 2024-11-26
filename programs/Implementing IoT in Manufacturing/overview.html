@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Financial Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <!-- AOS Library -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <!-- Chart.js CDN (if needed for future extensions) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Your Custom CSS File -->
+  <link rel="stylesheet" href="../../assets/css/overview.css">
+</head>
+
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Container -->
+  <div class="container">
+    <!-- Header with Timer, Title, and Logo -->
+    <div class="header">
+      <!-- Countdown Timer -->
+      <div class="timer-container">
+        <svg>
+          <circle cx="40" cy="40" r="36"></circle>
+          <circle class="progress" cx="40" cy="40" r="36"></circle>
+        </svg>
+        <div class="time" id="countdown-timer">05:00</div>
+      </div>
+
+      <!-- Title -->
+      <div class="title">Financial Simulation</div>
+
+      <!-- Logo -->
+      <img alt="ZENLEARN Logo" src="images/logo.png" />
+    </div>
+
+    <!-- Content Section -->
+    <div class="content" data-aos="fade-up">
+      <div class="section">
+        <div class="section-title">
+          <h2>Simulation Brief</h2>
+        </div>
+        <p>
+          This simulation helps apply the concepts learned during the program. By engaging with realistic scenarios,
+          learners will enhance their ability to navigate organizational challenges. These simulation scenarios are
+          meticulously mapped to programs and woven into cohesive mini-case studies centered around a manufacturing
+          organization.
+        </p>
+        <p>
+          <strong>Structure:</strong> The simulation encourages decision-making on market scenarios that CXOs encounter
+          in an organization. Participants are encouraged to discuss the options and choose one option. The financial
+          impact of the selected option will be shown in updated financial statements after each selection.
+        </p>
+        <p>
+          <strong>Duration:</strong> Each scenario is expected to take 10 minutes. One can move to the next scenario or
+          end the simulation to exit. Please download your final statements at the end of the simulation. Data might not
+          be available afterward. You might not be able to return to the previous scenario or the simulation briefs,
+          once you move on to the next scenario.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <h2>Key Assumptions</h2>
+        </div>
+        <p>Below assumptions have been made for the sake of simplicity:</p>
+        <ul>
+          <li>Entries related to accrual / capitalization for bid preparation / proposal cost, unbilled revenue
+            accounting, progress payments, income tax entry, additional sales incentive, or warranty have not been
+            considered to focus on application than possible accounting scenarios.</li>
+          <li>Scenarios assume immediate cash collection. In reality, there might be a delay between sales and cash
+            collection.</li>
+          <li>The entries assume a perpetual inventory system. For the periodic system, adjusting the timing of
+            inventory and COGS entries is required.</li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-title">
+          <h2>Participant Brief</h2>
+        </div>
+        <p>
+          You are the CXO of a manufacturing organization.
+        </p>
+        <p>
+          The Board of Directors and shareholders expect the organization to increase its top line by 30% Year on Year
+          and achieve at least 20% profit after tax.
+        </p>
+        <p>
+          As per market conditions, various scenarios are presented to increase sales, control costs, and improve cash
+          flow. This can be through commercial bidding, investing in new products, expanding to new markets, investing
+          in new capital equipment, or M&A opportunities.
+        </p>
+        <p>
+          Decisions can be taken based on various scenarios that are presented during simulation.
+        </p>
+      </div>
+    </div>
+
+
+
+
+    <!-- Footer Buttons -->
+    <div class="footer-buttons" data-aos="fade-up">
+      <a href="index.html" class="end-button"> End Simulation</a>
+      <a href="organization_brief.html" class="next-button">Let's Start</a>
+    </div>
+  </div>
+  </div>
+
+  <!-- AOS JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- Your Custom JavaScript File -->
+  <script src="../../assets/js/overview.js"></script>
+</body>
+
+</html>
