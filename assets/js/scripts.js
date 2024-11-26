@@ -19,7 +19,7 @@ form.addEventListener('submit', function(e) {
         submitButton.textContent = 'Logging In...';
         submitButton.disabled = true;
         setTimeout(() => {
-            window.location.href = 'overview.html';  // Redirect to overview.html after successful login
+            window.location.href = 'programlist.html';  // Redirect to overview.html after successful login
         }, 1500);
     }
 });
