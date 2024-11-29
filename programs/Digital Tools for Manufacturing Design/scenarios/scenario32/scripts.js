@@ -34,7 +34,15 @@ function updateTimer() {
     window.location.href = "../../index.html"; // Redirect to index or desired action
   }
 }
+// Get the chatbot icon and popup elements
+const chatbotIcon = document.getElementById('chatbot-icon');
+const chatbotPopup = document.getElementById('chatbot-popup');
 
+// Add event listener to the chatbot icon
+chatbotIcon.addEventListener('click', () => {
+  // Toggle the chatbot popup visibility
+  chatbotPopup.style.display = chatbotPopup.style.display === 'block' ? 'none' : 'block';
+});
 // Initialize the timer
 progressCircle.style.strokeDasharray = totalDash;
 progressCircle.style.strokeDashoffset = totalDash;
