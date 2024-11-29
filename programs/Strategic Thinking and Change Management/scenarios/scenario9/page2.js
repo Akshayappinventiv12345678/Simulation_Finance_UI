@@ -32,7 +32,15 @@ function updateTimer() {
         window.location.href = "index.html";
     }
 }
+// Get the chatbot icon and popup elements
+const chatbotIcon = document.getElementById('chatbot-icon');
+const chatbotPopup = document.getElementById('chatbot-popup');
 
+// Add event listener to the chatbot icon
+chatbotIcon.addEventListener('click', () => {
+  // Toggle the chatbot popup visibility
+  chatbotPopup.style.display = chatbotPopup.style.display === 'block' ? 'none' : 'block';
+});
 // Initialize Timer
 progressCircle.style.strokeDasharray = totalDash;
 progressCircle.style.strokeDashoffset = '0';
