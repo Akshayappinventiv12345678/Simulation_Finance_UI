@@ -1,4 +1,12 @@
-// scripts.js - External JavaScript for Scenario 6
+// Get the chatbot icon and popup elements
+const chatbotIcon = document.getElementById('chatbot-icon');
+const chatbotPopup = document.getElementById('chatbot-popup');
+
+// Add event listener to the chatbot icon
+chatbotIcon.addEventListener('click', () => {
+  // Toggle the chatbot popup visibility
+  chatbotPopup.style.display = chatbotPopup.style.display === 'block' ? 'none' : 'block';
+});
 
 // Accounting entries data
 const accountingEntries = {
