@@ -32,6 +32,7 @@ function updateTimer() {
     window.location.href = "index.html"; // Redirect to index or desired action
   }
 }
+
 // Get the chatbot icon and popup elements
 const chatbotIcon = document.getElementById('chatbot-icon');
 const chatbotPopup = document.getElementById('chatbot-popup');
