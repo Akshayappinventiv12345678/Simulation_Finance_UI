@@ -378,5 +378,3 @@ function showModal(option) {
     }
   };
 }
-
-// --- End of new code for modal functionality ---
