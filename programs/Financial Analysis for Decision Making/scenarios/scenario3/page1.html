@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Font Awesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
 
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -17,17 +17,17 @@
 </head>
 
 <body>
-      <!-- Chatbot Widget Container -->
-      <div id="chatbot-widget" class="chatbot-widget">
-        <!-- Chatbot Icon -->
-        <button id="chatbot-icon" class="chatbot-icon">
-          <i class="fa-solid fa-robot"></i> Ask Coach
-        </button>
-        <!-- Chatbot Popup -->
-        <div id="chatbot-popup" class="chatbot-popup">
-          <iframe src="https://coach.zenlearn.ai/" frameborder="0" width="100%" height="100%"></iframe>
-        </div>
-      </div>
+  <!-- Chatbot Widget Container -->
+  <div id="chatbot-widget" class="chatbot-widget">
+    <!-- Chatbot Icon -->
+    <button id="chatbot-icon" class="chatbot-icon">
+      <i class="fa-solid fa-robot"></i> Ask Coach
+    </button>
+    <!-- Chatbot Popup -->
+    <div id="chatbot-popup" class="chatbot-popup">
+      <iframe src="https://coach.zenlearn.ai/" frameborder="0" width="100%" height="100%"></iframe>
+    </div>
+  </div>
   <div class="container">
     <!-- Header with Timer, Title, and Logo -->
     <div class="header">
@@ -116,13 +116,17 @@
           <a href="#" class="next-button" onclick="showModal('submitRFQ')">Submit Competitive RFQ</a>
           <a href="#" class="next-button" onclick="showModal('offerServices')">Offer Value-added Services</a>
         </div>
-        
+
         <!-- Modal Structure -->
         <div id="accounting-modal" class="modal">
           <div class="modal-content">
             <span class="close-button" tabindex="0">&times;</span>
             <h2 id="modal-title">Accounting Entries for</h2>
             <pre id="modal-entries"></pre>
+            <!-- New Proceed Button -->
+            <button id="proceed-button" class="proceed-button">
+              Proceed to Next Page
+            </button>
           </div>
         </div>
       </div>

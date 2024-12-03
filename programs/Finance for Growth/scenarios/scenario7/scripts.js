@@ -126,15 +126,12 @@ const revenueChart = new Chart(ctx, {
   }
 });
 
-// Remove old function to handle option selection (if any)
 
-// --- New code for modal functionality starts here ---
 
 // Accounting entries data
 const accountingEntries = {
   expandSales: `
-Accounting Entries for
-Expand the Sales Team
+Accounting Entries for Expand the Sales Team
 
 Entry 1: Sales Team Expansion and training new hires Costs
 Debit: 60 Salary & Wages INR 5,00,000
@@ -174,8 +171,7 @@ Credit: 50 COGS (P&L) INR 20,00,000
 `,
 
   investDigital: `
-Accounting Entries for
-Investment in Digital Tools for Existing Sales Team
+Accounting Entries for Investment in Digital Tools for Existing Sales Team
 
 Entry 1: CRM and Digital Sales Tools Purchased and capitalized
 Debit: 17 Intangible Assets INR 3,00,000
@@ -219,82 +215,49 @@ function showModal(option) {
   const modalTitle = document.getElementById('modal-title');
   const modalEntries = document.getElementById('modal-entries');
   const closeButton = document.querySelector('.close-button');
-
-  // Clear any existing countdown timer elements
-  modalEntries.parentNode.querySelectorAll('div').forEach(el => {
-    if (el.style && el.style.fontWeight === 'bold') {
-      el.remove();
-    }
-  });
+  const proceedButton = document.getElementById('proceed-button'); // Select the new Proceed button
 
   // Set the modal title and entries based on the option
   if (option === 'expandSales') {
     modalTitle.textContent = 'Accounting Entries for Expand the Sales Team';
     modalEntries.textContent = accountingEntries.expandSales;
-    // Update financials and chart
-    updateFinancials('expandSales');
   } else if (option === 'investDigital') {
     modalTitle.textContent = 'Accounting Entries for Investment in Digital Tools for Existing Sales Team';
     modalEntries.textContent = accountingEntries.investDigital;
-    // Update financials and chart
-    updateFinancials('investDigital');
   }
 
   // Display the modal
   modal.style.display = 'block';
-
-  // Disable scrolling on the body
   document.body.style.overflow = 'hidden';
 
-  // Start a 30-second timer before redirecting
-  const redirectTimer = setTimeout(() => {
-    window.location.href = 'page2.html';
-  }, 30000); // 30000 milliseconds = 30 seconds
-
-  // Optional: Display a countdown timer inside the modal
-  let countdown = 30;
-  const timerElement = document.createElement('div');
-  timerElement.style.marginTop = '20px';
-  timerElement.style.fontWeight = 'bold';
-  timerElement.textContent = `Redirecting in ${countdown} seconds...`;
-  modalEntries.parentNode.appendChild(timerElement);
-
-  const countdownInterval = setInterval(() => {
-    countdown--;
-    timerElement.textContent = `Redirecting in ${countdown} seconds...`;
-    if (countdown <= 0) {
-      clearInterval(countdownInterval);
-    }
-  }, 1000);
+  // Add event listener to the Proceed button
+  proceedButton.onclick = function () {
+    window.location.href = 'page2.html'; // Redirect to the next page
+  };
 
   // Close the modal when the close button is clicked
-  closeButton.onclick = function() {
+  closeButton.onclick = function () {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto'; // Re-enable scrolling
-    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-    clearInterval(countdownInterval);
   };
 
   // Close the modal when the user clicks outside of the modal content
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto'; // Re-enable scrolling
-      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-      clearInterval(countdownInterval);
     }
   };
 
   // Handle Esc key to close the modal
-  document.onkeydown = function(event) {
+  document.onkeydown = function (event) {
     if (event.key === 'Escape') {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto'; // Re-enable scrolling
-      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-      clearInterval(countdownInterval);
     }
   };
 }
+
 
 // Function to update financial tables based on option
 function updateFinancials(option) {
