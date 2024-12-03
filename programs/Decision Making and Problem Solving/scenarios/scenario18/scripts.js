@@ -124,16 +124,10 @@ const revenueChart = new Chart(ctx, {
   }
 });
 
-// Remove old button click event listeners
-// (Comment out or remove the old event listeners since we're using onclick in HTML)
-
-// --- New code for modal functionality starts here ---
-
 // Accounting entries data
 const accountingEntries = {
   buyMachines: `
-Accounting Entries for
-Invest Capital to Buy New Machines
+Accounting Entries for Invest Capital to Buy New Machines
 
 Entry 1: Outright Capital investment for new machinery Purchase
 Debit: 16 Property, Plant & Equipment INR 40,00,000
@@ -149,8 +143,7 @@ Debit: 27 Retained Earnings (Equity) INR 2,00,000
 Credit: 70 Depreciation Expense INR 2,00,000
 `,
   leaseMachines: `
-Accounting Entries for
-Lease Machinery
+Accounting Entries for Lease Machinery
 
 Entry 1: Quarterly Lease Payments for machinery (INR 5 Lakhs per year)
 Debit: 70 Lease Expense INR 1,25,000
@@ -169,75 +162,49 @@ function showModal(option) {
   const modalTitle = document.getElementById('modal-title');
   const modalEntries = document.getElementById('modal-entries');
   const closeButton = document.querySelector('.close-button');
+  const proceedButton = document.getElementById('proceed-button'); // Select the new Proceed button
 
   // Set the modal title and entries based on the option
   if (option === 'buyMachines') {
     modalTitle.textContent = 'Accounting Entries for Invest Capital to Buy New Machines';
     modalEntries.textContent = accountingEntries.buyMachines;
-    // Update financials and chart
-    updateFinancials('buyMachines');
   } else if (option === 'leaseMachines') {
     modalTitle.textContent = 'Accounting Entries for Lease Machinery';
     modalEntries.textContent = accountingEntries.leaseMachines;
-    // Update financials and chart
-    updateFinancials('leaseMachines');
   }
 
   // Display the modal
   modal.style.display = 'block';
-
-  // Disable scrolling on the body
   document.body.style.overflow = 'hidden';
 
-  // Start a 30-second timer before redirecting
-  const redirectTimer = setTimeout(() => {
-    window.location.href = 'page2.html';
-  }, 30000); // 30000 milliseconds = 30 seconds
-
-  // Optional: Display a countdown timer inside the modal
-  let countdown = 30;
-  const timerElement = document.createElement('div');
-  timerElement.style.marginTop = '20px';
-  timerElement.style.fontWeight = 'bold';
-  timerElement.textContent = `Redirecting in ${countdown} seconds...`;
-  modalEntries.parentNode.appendChild(timerElement);
-
-  const countdownInterval = setInterval(() => {
-    countdown--;
-    timerElement.textContent = `Redirecting in ${countdown} seconds...`;
-    if (countdown <= 0) {
-      clearInterval(countdownInterval);
-    }
-  }, 1000);
+  // Add event listener to the Proceed button
+  proceedButton.onclick = function () {
+    window.location.href = 'page2.html'; // Redirect to the next page
+  };
 
   // Close the modal when the close button is clicked
-  closeButton.onclick = function() {
+  closeButton.onclick = function () {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto'; // Re-enable scrolling
-    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-    clearInterval(countdownInterval);
   };
 
   // Close the modal when the user clicks outside of the modal content
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto'; // Re-enable scrolling
-      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-      clearInterval(countdownInterval);
     }
   };
 
   // Handle Esc key to close the modal
-  document.onkeydown = function(event) {
+  document.onkeydown = function (event) {
     if (event.key === 'Escape') {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto'; // Re-enable scrolling
-      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-      clearInterval(countdownInterval);
     }
   };
 }
+
 
 // Function to update financial tables based on option
 function updateFinancials(option) {
@@ -257,5 +224,3 @@ function updateFinancials(option) {
     console.log('Financials updated for option: Lease Machines');
   }
 }
-
-// --- End of new code for modal functionality ---

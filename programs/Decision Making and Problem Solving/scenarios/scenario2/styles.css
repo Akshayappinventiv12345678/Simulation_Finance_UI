@@ -23,6 +23,22 @@ body {
     background-position: 0% 50%;
   }
 }
+.proceed-button {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4E67EB;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.proceed-button:hover {
+  background-color: #3b56c2;
+}
 
 /* Container Styles */
 .container {

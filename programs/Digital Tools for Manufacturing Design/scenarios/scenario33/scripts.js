@@ -126,15 +126,10 @@ const revenueChart = new Chart(ctx, {
   }
 });
 
-// Remove old function to handle option selection (if any)
-
-// --- New code for modal functionality starts here ---
-
 // Accounting entries data
 const accountingEntries = {
   dfm: `
-Accounting Entries for
-Prioritize Aesthetic Design with Enhanced DFM Adjustments
+Accounting Entries for Prioritize Aesthetic Design with Enhanced DFM Adjustments
 
 Entry 1: Advanced CAD/CAM Software Acquisition
 Debit: 17 Intangible Assets - Software INR 10,00,000
@@ -187,8 +182,7 @@ Debit: 27 Retained Earnings INR 14,00,000 (4 + 5 + 3 + 2)
 Credit: 70 Administrative Expenses INR 14,00,000
 `,
   simplify: `
-Accounting Entries for
-Simplify Designs for Manufacturability While Maintaining Essential Aesthetic Features
+Accounting Entries for Simplify Designs for Manufacturability While Maintaining Essential Aesthetic Features
 
 Entry 1: Design Simplification Tools Acquisition
 Debit: 17 Intangible Assets - Software INR 6,00,000
@@ -248,75 +242,49 @@ function showModal(option) {
   const modalTitle = document.getElementById('modal-title');
   const modalEntries = document.getElementById('modal-entries');
   const closeButton = document.querySelector('.close-button');
+  const proceedButton = document.getElementById('proceed-button'); // Select the new Proceed button
 
   // Set the modal title and entries based on the option
   if (option === 'dfm') {
-    modalTitle.textContent = 'Accounting Entries for Enhanced DFM Adjustments';
+    modalTitle.textContent = 'Accounting Entries for Prioritize Aesthetic Design with Enhanced DFM Adjustments';
     modalEntries.textContent = accountingEntries.dfm;
-    // Update financials and chart
-    updateFinancials('dfm');
   } else if (option === 'simplify') {
-    modalTitle.textContent = 'Accounting Entries for Simplify Designs for Manufacturability';
+    modalTitle.textContent = 'Accounting Entries for Simplify Designs for Manufacturability While Maintaining Essential Aesthetic Features';
     modalEntries.textContent = accountingEntries.simplify;
-    // Update financials and chart
-    updateFinancials('simplify');
   }
 
   // Display the modal
   modal.style.display = 'block';
-
-  // Disable scrolling on the body
   document.body.style.overflow = 'hidden';
 
-  // Start a 30-second timer before redirecting
-  const redirectTimer = setTimeout(() => {
-    window.location.href = 'page2.html';
-  }, 30000); // 30000 milliseconds = 30 seconds
-
-  // Optional: Display a countdown timer inside the modal
-  let countdown = 30;
-  const timerElement = document.createElement('div');
-  timerElement.style.marginTop = '20px';
-  timerElement.style.fontWeight = 'bold';
-  timerElement.textContent = `Redirecting in ${countdown} seconds...`;
-  modalEntries.parentNode.appendChild(timerElement);
-
-  const countdownInterval = setInterval(() => {
-    countdown--;
-    timerElement.textContent = `Redirecting in ${countdown} seconds...`;
-    if (countdown <= 0) {
-      clearInterval(countdownInterval);
-    }
-  }, 1000);
+  // Add event listener to the Proceed button
+  proceedButton.onclick = function () {
+    window.location.href = 'page2.html'; // Redirect to the next page
+  };
 
   // Close the modal when the close button is clicked
-  closeButton.onclick = function() {
+  closeButton.onclick = function () {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto'; // Re-enable scrolling
-    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-    clearInterval(countdownInterval);
   };
 
   // Close the modal when the user clicks outside of the modal content
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto'; // Re-enable scrolling
-      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-      clearInterval(countdownInterval);
     }
   };
 
   // Handle Esc key to close the modal
-  document.onkeydown = function(event) {
+  document.onkeydown = function (event) {
     if (event.key === 'Escape') {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto'; // Re-enable scrolling
-      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-      clearInterval(countdownInterval);
     }
   };
 }
+
 
 // Function to update financial tables based on option
 function updateFinancials(option) {
