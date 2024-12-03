@@ -13,17 +13,17 @@
 </head>
 
 <body>
-      <!-- Chatbot Widget Container -->
-      <div id="chatbot-widget" class="chatbot-widget">
-        <!-- Chatbot Icon -->
-        <button id="chatbot-icon" class="chatbot-icon">
-          <i class="fa-solid fa-robot"></i> Ask Coach
-        </button>
-        <!-- Chatbot Popup -->
-        <div id="chatbot-popup" class="chatbot-popup">
-          <iframe src="https://coach.zenlearn.ai/" frameborder="0" width="100%" height="100%"></iframe>
-        </div>
-      </div>
+  <!-- Chatbot Widget Container -->
+  <div id="chatbot-widget" class="chatbot-widget">
+    <!-- Chatbot Icon -->
+    <button id="chatbot-icon" class="chatbot-icon">
+      <i class="fa-solid fa-robot"></i> Ask Coach
+    </button>
+    <!-- Chatbot Popup -->
+    <div id="chatbot-popup" class="chatbot-popup">
+      <iframe src="https://coach.zenlearn.ai/" frameborder="0" width="100%" height="100%"></iframe>
+    </div>
+  </div>
   <div class="container">
     <!-- Header with Timer, Title, and Logo -->
     <div class="header">
@@ -56,26 +56,40 @@
       <div class="left-column">
         <div class="market-condition">
           <p>
-            <strong>Market Situation:</strong> Breakout strives to maintain high product quality standards to meet customer expectations and comply with industry regulations. However, inconsistencies in product quality have been identified, leading to increased returns and customer dissatisfaction. Breakout considers implementing real-time IoT monitoring systems to enhance quality control.
+            <strong>Market Situation:</strong> Breakout strives to maintain high product quality standards to meet
+            customer expectations and comply with industry regulations. However, inconsistencies in product quality have
+            been identified, leading to increased returns and customer dissatisfaction. Breakout considers implementing
+            real-time IoT monitoring systems to enhance quality control.
           </p>
         </div>
 
         <div class="options">
           <p><strong>Change Encountered:</strong></p>
-          <p>Breakout must integrate IoT-based quality monitoring systems into its manufacturing processes to ensure consistent product quality and reduce defects.</p>
+          <p>Breakout must integrate IoT-based quality monitoring systems into its manufacturing processes to ensure
+            consistent product quality and reduce defects.</p>
         </div>
 
         <div class="investment">
           <p><strong>Practical Steps:</strong></p>
           <ul>
-            <li><strong>Quality Metrics Identification:</strong> Define key quality metrics and standards that need to be monitored in real-time to ensure product consistency.</li>
-            <li><strong>IoT Sensor Deployment:</strong> Install IoT sensors at critical points in the manufacturing process to collect data related to quality metrics (e.g., temperature, pressure, material composition).</li>
-            <li><strong>Data Integration:</strong> Integrate sensor data with a centralized quality management system to enable real-time monitoring and analysis.</li>
-            <li><strong>Real-Time Analytics:</strong> Implement real-time analytics tools to process and interpret quality data, identifying deviations and potential defects promptly.</li>
-            <li><strong>Automated Alerts:</strong> Set up automated alert systems to notify operators and managers of any quality deviations, enabling immediate corrective actions.</li>
-            <li><strong>Continuous Improvement:</strong> Use insights from real-time quality data to identify trends, root causes of defects, and opportunities for process improvements.</li>
-            <li><strong>Training and Compliance:</strong> Train staff on using the real-time monitoring system, interpreting data insights, and adhering to quality standards to ensure compliance and consistency.</li>
-            <li><strong>Performance Evaluation:</strong> Regularly evaluate the impact of IoT-based quality monitoring on product quality, defect rates, and customer satisfaction, making adjustments as needed to optimize the system.</li>
+            <li><strong>Quality Metrics Identification:</strong> Define key quality metrics and standards that need to
+              be monitored in real-time to ensure product consistency.</li>
+            <li><strong>IoT Sensor Deployment:</strong> Install IoT sensors at critical points in the manufacturing
+              process to collect data related to quality metrics (e.g., temperature, pressure, material composition).
+            </li>
+            <li><strong>Data Integration:</strong> Integrate sensor data with a centralized quality management system to
+              enable real-time monitoring and analysis.</li>
+            <li><strong>Real-Time Analytics:</strong> Implement real-time analytics tools to process and interpret
+              quality data, identifying deviations and potential defects promptly.</li>
+            <li><strong>Automated Alerts:</strong> Set up automated alert systems to notify operators and managers of
+              any quality deviations, enabling immediate corrective actions.</li>
+            <li><strong>Continuous Improvement:</strong> Use insights from real-time quality data to identify trends,
+              root causes of defects, and opportunities for process improvements.</li>
+            <li><strong>Training and Compliance:</strong> Train staff on using the real-time monitoring system,
+              interpreting data insights, and adhering to quality standards to ensure compliance and consistency.</li>
+            <li><strong>Performance Evaluation:</strong> Regularly evaluate the impact of IoT-based quality monitoring
+              on product quality, defect rates, and customer satisfaction, making adjustments as needed to optimize the
+              system.</li>
           </ul>
         </div>
 
@@ -84,15 +98,19 @@
           <a href="#" class="next-button" onclick="showModal('proceedImplementation')">Proceed with Implementation</a>
           <a href="#" class="next-button" onclick="showModal('delayImplementation')">Delay Implementation</a>
         </div>
-        
+
         <!-- Modal Structure -->
         <div id="accounting-modal" class="modal">
           <div class="modal-content">
             <span class="close-button" tabindex="0">&times;</span>
             <h2 id="modal-title">Accounting Entries for</h2>
             <pre id="modal-entries"></pre>
+            <!-- New Proceed Button -->
+            <button id="proceed-button" class="proceed-button">Proceed to Next Page</button>
           </div>
         </div>
+
+
       </div>
 
       <!-- Right column: Tables and Charts -->

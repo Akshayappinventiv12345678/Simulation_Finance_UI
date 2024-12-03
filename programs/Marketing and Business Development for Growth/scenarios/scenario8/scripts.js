@@ -126,8 +126,6 @@ const revenueChart = new Chart(ctx, {
   }
 });
 
-// --- New code for modal functionality starts here ---
-
 // Accounting entries data
 const accountingEntries = {
   channelReactivation: `
@@ -219,79 +217,45 @@ function showModal(option) {
   const modalTitle = document.getElementById('modal-title');
   const modalEntries = document.getElementById('modal-entries');
   const closeButton = document.querySelector('.close-button');
-
-  // Clear any existing countdown timer elements
-  modalEntries.parentNode.querySelectorAll('div').forEach(el => {
-    if (el.style && el.style.fontWeight === 'bold') {
-      el.remove();
-    }
-  });
+  const proceedButton = document.getElementById('proceed-button'); // Select the new Proceed button
 
   // Set the modal title and entries based on the option
   if (option === 'channelReactivation') {
-    modalTitle.textContent = 'Accounting Entries for Channel Reactivation';
+    modalTitle.textContent = 'Accounting Entries for Channel Reactivation Program';
     modalEntries.textContent = accountingEntries.channelReactivation;
-    // Update financials and chart
-    updateFinancials('channelReactivation');
   } else if (option === 'profitSharing') {
-    modalTitle.textContent = 'Accounting Entries for Profit Sharing';
+    modalTitle.textContent = 'Accounting Entries for Profit-Sharing Incentives';
     modalEntries.textContent = accountingEntries.profitSharing;
-    // Update financials and chart
-    updateFinancials('profitSharing');
   }
 
   // Display the modal
   modal.style.display = 'block';
-
-  // Disable scrolling on the body
   document.body.style.overflow = 'hidden';
 
-  // Start a 30-second timer before redirecting
-  const redirectTimer = setTimeout(() => {
-    window.location.href = 'page2.html';
-  }, 30000); // 30000 milliseconds = 30 seconds
-
-  // Optional: Display a countdown timer inside the modal
-  let countdown = 30;
-  const timerDiv = document.createElement('div');
-  timerDiv.style.marginTop = '20px';
-  timerDiv.style.fontWeight = 'bold';
-  timerDiv.textContent = `Redirecting in ${countdown} seconds...`;
-  modalEntries.parentNode.appendChild(timerDiv);
-
-  const countdownInterval = setInterval(() => {
-    countdown--;
-    timerDiv.textContent = `Redirecting in ${countdown} seconds...`;
-    if (countdown <= 0) {
-      clearInterval(countdownInterval);
-    }
-  }, 1000);
+  // Add event listener to the Proceed button
+  proceedButton.onclick = function () {
+    window.location.href = 'page2.html'; // Redirect to the next page
+  };
 
   // Close the modal when the close button is clicked
-  closeButton.onclick = function() {
+  closeButton.onclick = function () {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto'; // Re-enable scrolling
-    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-    clearInterval(countdownInterval);
   };
 
   // Close the modal when the user clicks outside of the modal content
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto'; // Re-enable scrolling
-      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-      clearInterval(countdownInterval);
     }
   };
 
   // Handle Esc key to close the modal
-  document.onkeydown = function(event) {
+  document.onkeydown = function (event) {
     if (event.key === 'Escape') {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto'; // Re-enable scrolling
-      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-      clearInterval(countdownInterval);
     }
   };
 }
