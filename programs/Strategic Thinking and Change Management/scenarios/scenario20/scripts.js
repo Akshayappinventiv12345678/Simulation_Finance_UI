@@ -126,15 +126,10 @@ const revenueChart = new Chart(ctx, {
   }
 });
 
-// Remove old function to handle option selection (if any)
-
-// --- New code for modal functionality starts here ---
-
 // Accounting entries data
 const accountingEntries = {
   upgradeCompliance: `
-Accounting Entries for
-New Regulations Compliance and Upgrade
+Accounting Entries for New Regulations Compliance and Upgrade
 
 Entry 1: Upgrade Production Processes
 Debit: 16 Property, Plant & Equipment INR 15,00,000
@@ -173,8 +168,7 @@ Credit: 50 COGS (P&L) INR 12,50,000
 `,
 
   phaseOutProducts: `
-Accounting Entries for
-Phase Out Non-Compliant Products
+Accounting Entries for Phase Out Non-Compliant Products
 
 Entry 1: Inventory Write-Down for Non-Compliant Products
 Debit: 50 Cost of Goods Sold (COGS) INR 10,00,000
@@ -194,82 +188,49 @@ function showModal(option) {
   const modalTitle = document.getElementById('modal-title');
   const modalEntries = document.getElementById('modal-entries');
   const closeButton = document.querySelector('.close-button');
-
-  // Clear any existing countdown timer elements
-  modalEntries.parentNode.querySelectorAll('div').forEach(el => {
-    if (el.style && el.style.fontWeight === 'bold') {
-      el.remove();
-    }
-  });
+  const proceedButton = document.getElementById('proceed-button'); // Select the new Proceed button
 
   // Set the modal title and entries based on the option
   if (option === 'upgradeCompliance') {
-    modalTitle.textContent = 'Accounting Entries for Upgrade for Compliance';
+    modalTitle.textContent = 'Accounting Entries for New Regulations Compliance and Upgrade';
     modalEntries.textContent = accountingEntries.upgradeCompliance;
-    // Update financials and chart
-    updateFinancials('upgradeCompliance');
   } else if (option === 'phaseOutProducts') {
-    modalTitle.textContent = 'Accounting Entries for Phase Out Products';
+    modalTitle.textContent = 'Accounting Entries for Phase Out Non-Compliant Products';
     modalEntries.textContent = accountingEntries.phaseOutProducts;
-    // Update financials and chart
-    updateFinancials('phaseOutProducts');
   }
 
   // Display the modal
   modal.style.display = 'block';
-
-  // Disable scrolling on the body
   document.body.style.overflow = 'hidden';
 
-  // Start a 30-second timer before redirecting
-  const redirectTimer = setTimeout(() => {
-    window.location.href = 'page2.html';
-  }, 30000); // 30000 milliseconds = 30 seconds
-
-  // Optional: Display a countdown timer inside the modal
-  let countdown = 30;
-  const timerDiv = document.createElement('div');
-  timerDiv.style.marginTop = '20px';
-  timerDiv.style.fontWeight = 'bold';
-  timerDiv.textContent = `Redirecting in ${countdown} seconds...`;
-  modalEntries.parentNode.appendChild(timerDiv);
-
-  const countdownInterval = setInterval(() => {
-    countdown--;
-    timerDiv.textContent = `Redirecting in ${countdown} seconds...`;
-    if (countdown <= 0) {
-      clearInterval(countdownInterval);
-    }
-  }, 1000);
+  // Add event listener to the Proceed button
+  proceedButton.onclick = function () {
+    window.location.href = 'page2.html'; // Redirect to the next page
+  };
 
   // Close the modal when the close button is clicked
-  closeButton.onclick = function() {
+  closeButton.onclick = function () {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto'; // Re-enable scrolling
-    clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-    clearInterval(countdownInterval);
   };
 
   // Close the modal when the user clicks outside of the modal content
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto'; // Re-enable scrolling
-      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-      clearInterval(countdownInterval);
     }
   };
 
   // Handle Esc key to close the modal
-  document.onkeydown = function(event) {
+  document.onkeydown = function (event) {
     if (event.key === 'Escape') {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto'; // Re-enable scrolling
-      clearTimeout(redirectTimer); // Clear the timer if the modal is closed manually
-      clearInterval(countdownInterval);
     }
   };
 }
+
 
 // Function to update financial tables based on option
 function updateFinancials(option) {
