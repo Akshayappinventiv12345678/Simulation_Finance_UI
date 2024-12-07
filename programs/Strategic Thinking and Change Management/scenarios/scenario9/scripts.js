@@ -1,7 +1,7 @@
 // Accounting entries data
 const accountingEntries = {
-  highValue: `
-Accounting Entries for High-Value Proposal
+  jointMarketing: `
+Accounting Entries for Joint Marketing Agreement
 
 Entry 1: Proposal Preparation Costs for Submission
 Debit: 70 Administrative Expenses INR 2,50,000
@@ -37,8 +37,8 @@ Credit: 70 Administrative Expenses (P&L) INR 2,50,000
 Credit: 50 COGS (P&L) INR 10,00,000
   `,
 
-  valueAdded: `
-Accounting Entries for Value-Added Services Costs
+  jvPartner: `
+Accounting Entries for JV with Partner
 
 Entry 1: Customization cost to augment inventory
 Debit: 14 Inventory INR 3,00,000
@@ -87,12 +87,12 @@ function showModal(option) {
   const proceedButton = document.getElementById('proceed-button'); // Select the new Proceed button
 
   // Set the modal title and entries based on the option
-  if (option === 'highValue') {
+  if (option === 'jointMarketing') {
     modalTitle.textContent = 'Accounting Entries for High-Value Proposal';
-    modalEntries.textContent = accountingEntries.highValue;
-  } else if (option === 'valueAdded') {
+    modalEntries.textContent = accountingEntries.jointMarketing;
+  } else if (option === 'jvPartner') {
     modalTitle.textContent = 'Accounting Entries for Value-Added Services Costs';
-    modalEntries.textContent = accountingEntries.valueAdded;
+    modalEntries.textContent = accountingEntries.jvPartner;
   }
 
   // Display the modal
@@ -138,7 +138,7 @@ chatbotIcon.addEventListener('click', () => {
 });
 // Function to update financial tables based on option
 function updateFinancials(option) {
-  if (option === "highValue") {
+  if (option === "jointMarketing") {
     // Update chart data and financial tables for High-Value Proposal
     revenueChart.data.datasets[0].data[1] = 1000; // Example value after implementation
     revenueChart.options.plugins.title.text =
@@ -150,7 +150,7 @@ function updateFinancials(option) {
       progressBarInner.style.width = "50%";
     }
     console.log("Financials updated for option: High-Value Proposal");
-  } else if (option === "valueAdded") {
+  } else if (option === "jvPartner") {
     // Update chart data and financial tables for Value-Added Services
     revenueChart.data.datasets[0].data[1] = 500; // Example value after implementation
     revenueChart.options.plugins.title.text =
