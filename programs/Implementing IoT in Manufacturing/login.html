@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Screen</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- External CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Your Custom CSS File -->
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body>
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <div class="logo">
+            <img src="../../assets/images/logo.png" alt="Zen Learn Logo">
+        </div>
+        <form id="loginForm" novalidate>
+            <!-- Instruction before Company Name -->
+            <p class="instruction">Your group's chosen company name for this simulation.</p>
+            <div class="input-group">
+                <input type="text" class="input-field" id="company" required placeholder=" " aria-label="Company Name">
+                <label for="company" class="input-label">Company Name</label>
+                <div class="error-message" id="companyError"></div>
+            </div>
+            <!-- Instruction before User ID -->
+            <p class="instruction">Common user ID across the site.</p>
+            <div class="input-group">
+                <input type="text" class="input-field" id="userId" required placeholder=" " aria-label="User ID">
+                <label for="userId" class="input-label">User ID</label>
+                <div class="error-message" id="userIdError"></div>
+            </div>
+            <!-- Instruction before Password -->
+            <p class="instruction">Common password across the site.</p>
+            <div class="input-group">
+                <input type="password" class="input-field" id="password" required placeholder=" " aria-label="Password">
+                <label for="password" class="input-label">Password</label>
+                <button type="button" class="password-toggle" aria-label="Toggle Password Visibility" onclick="togglePassword()">
+                    <i class="fas fa-eye"></i>
+                </button>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+            <button type="submit" class="button">Log In</button>
+        </form>
+    </div>
+
+    <!-- External JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+    <!-- Your Custom JavaScript File -->
+    <script src="../../assets/js/scripts.js"></script>
+</body>
+</html>
