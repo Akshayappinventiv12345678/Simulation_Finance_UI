@@ -4,7 +4,7 @@ let remainingTime = countdownDuration;
 const timerElement = document.getElementById('countdown-timer');
 const progressCircle = document.querySelector('.progress');
 const totalDash = 226.19; // Circumference for r=36 (2 * π * 36 ≈ 226.19)
-
+let loadDataFlag=false;
 function updateTimer() {
   const minutes = Math.floor(remainingTime / 60);
   const seconds = remainingTime % 60;
@@ -78,9 +78,23 @@ expandableRows.forEach(row => {
     if (icon.classList.contains('fa-plus')) {
       icon.classList.remove('fa-plus');
       icon.classList.add('fa-minus');
+      // Show Data
+      if(!loadDataFlag)
+      {
+        loadData();
+        loadDataFlag=true;
+      }
+      else{
+        console.log("Data Already Loaded");
+      }
+      
+
     } else {
       icon.classList.remove('fa-minus');
       icon.classList.add('fa-plus');
+
+      //remove row data
+
     }
   });
 });
@@ -141,3 +155,42 @@ buttons.forEach(button => {
 window.onload = () => {
   document.body.classList.add('loaded');
 };
+
+
+//Load Data
+
+function loadData()
+{
+  //populate data 
+  
+  
+  let data=JSON.parse(getAssetData());
+ 
+
+
+    // Get all rows (including hidden rows) in the table
+    const tableRows = document.querySelectorAll('table tr');
+    console.log(data,data.value.length,tableRows.length);
+    let iterator=0;
+
+    // Iterate through each row and populate the second column
+    tableRows.forEach((row, index) => {
+      // Ensure there's a second column (td)
+      const tds = row.querySelectorAll('td');
+      if (tds.length >= 2) {
+        // Assuming the data has an array of values to populate the second column
+        // For example, if the data has a `value` array, you can use index to match rows
+       
+          if(data.value.length>iterator ){
+
+            console.log(tds,data.value[iterator],iterator,row.classList)
+            tds[1].innerText = data.value[iterator]; // Assuming `value` is the key in your data object
+            iterator++;
+          }
+
+      }
+    });
+
+
+
+}

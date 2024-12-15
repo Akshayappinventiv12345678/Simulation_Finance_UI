@@ -1,3 +1,4 @@
+
 // Countdown Timer with Circular Progress
 const countdownDuration = 5 * 60; // 5 minutes in seconds
 let remainingTime = countdownDuration;
@@ -242,6 +243,7 @@ function showModal(option) {
   const modalEntries = document.getElementById('modal-entries');
   const closeButton = document.querySelector('.close-button');
   const proceedButton = document.getElementById('proceed-button'); // Select the new Proceed button
+  const scenarioTitle=document.querySelector('.scenario');
 
   // Set the modal title and entries based on the option
   if (option === 'competitive') {
@@ -258,7 +260,24 @@ function showModal(option) {
 
   // Add event listener to the Proceed button
   proceedButton.onclick = function () {
-    window.location.href = 'page2.html'; // Redirect to the next page
+
+
+    // window.location.href = 'page2.html'; // Redirect to the next page
+
+     // Call the utility function with the API URL and next page URL
+  // const apiUrl = 'https://example.com/api/validate'; // Replace with your API endpoint
+  const nextPageUrl = 'page2.html'; // Replace with the target page
+  
+
+  let scenarioDetail={
+    option,
+    scenario:scenarioTitle.innerText || "Default Scenario"
+  }
+  console.log("here",scenarioTitle.text);
+
+
+  proceedWithApiCall(1,option, nextPageUrl,scenarioDetail);
+
   };
 
   // Close the modal when the close button is clicked
