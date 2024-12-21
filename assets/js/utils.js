@@ -17,6 +17,8 @@ async function proceedWithApiCall(scenario, option,nextPageUrl,scenariondetails)
       } else if (option === 'joint') {
         apiUrl+="&bidOptionId=2"
       }
+
+      console.log('API ');
   
       // Make the API call
       // const response = await fetch(apiUrl, {
